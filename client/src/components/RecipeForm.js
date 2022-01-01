@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, IconButton, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack, Alert, AlertDescription, AlertTitle, AlertDialogCloseButton, ReactFragment } from "@chakra-ui/react";
 import { useMutation } from '@apollo/client';
 import { MdDragIndicator } from "react-icons/md";
 
 import { ADD_RECIPE } from '../utils/mutations';
+import { setDragging, draggedOver, compare } from '../utils/dragDrop';
 
 import Auth from '../utils/auth';
 
@@ -25,13 +26,23 @@ export default function RecipeForm() {
 
     const handleAddIngredient = (e) => {
         if (ingredientName !== ""){
-          setIngredientName('')
-        setIngredientAmount(1)
-        setIngredientUnit('')
-        setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }])  
+            setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }]) 
+            setIngredientName('')
+            setIngredientAmount(1)
+            setIngredientUnit('')
+            const amountInput = document.getElementById('amountInput')
+            amountInput.setAttribute('aria-valuenow', "1");
+            amountInput.setAttribute('aria-vlauetext', "1");
+            amountInput.setAttribute('value', "1");
         } else {
             setFormError("You must fill out the ingredient name")
         }
+    }
+
+    const ReorderArray = (arr) => {
+        const newArr = arr;
+        setIngredients(newArr)
+        console.log(ingredients)
     }
 
     const handleAddStep = (e) => {
@@ -53,20 +64,7 @@ export default function RecipeForm() {
         setSteps((prevSteps) => prevSteps.filter((item) => item !== step))
     }
 
-    // drag and drop functions
-    const allowDrop = (event) => {
-        event.preventDefault();
-    }
-    
-    const drag = (event) => {
-        event.dataTransfer.setData("text", event.target.id);
-    }
-    
-    const drop = (event) => {
-        event.preventDefault();
-        var data = event.dataTransfer.getData("text");
-        event.target.appendChild(document.getElementById(data));
-    }
+    var dragging, itemDraggedOver;
 
     // empty array to hold final array of step objects
     const finalStepsArray = []
@@ -227,10 +225,15 @@ export default function RecipeForm() {
                                 </div>
                                 <div id="addedIngredients" className='column4'>
                                 <h1 className="ingredientsTitle">Ingredients Added:</h1>
-                                    <UnorderedList styleType='none'>
+                                    <UnorderedList styleType='none' id="ingredientList" 
+                                    onDrop={(e) => { ReorderArray(compare(e, ingredients, dragging, itemDraggedOver)) }}
+                                    onDragOver={(e) => { e.preventDefault()}} >
                                         {ingredients.map((ingrdnt, i) => {
                                             return (
-                                                <ListItem key={i} id='itemStyling' className='ingredientItem' draggable="true"> {ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit} 
+                                                <ListItem key={i} index={i} id='itemStyling' className='ingredientItem' draggable="true" 
+                                                onDragStart={(e) => { dragging = setDragging(e, i, ingrdnt)}} 
+                                                onDragOver={(e) => { itemDraggedOver = draggedOver(e)} } > 
+                                                    {ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit} 
                                                     <IconButton aria-label="drag to reorder" id='dragButton' icon={<MdDragIndicator />}></IconButton>
                                                     <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button>
                                                 </ListItem>
