@@ -4,12 +4,14 @@
       "description":"Delectable mac n cheese",
       "ingredients":[
             {
-                "name":"macaroni",
-                "amount":"8oz"
+                "ingredientName":"macaroni",
+                "ingredientAmount":8,
+                "ingredientUnit":"oz"
             },
             {
-                "name":"cheddar cheese",
-                "amount":"8oz"
+                "ingredientName":"cheddar cheese",
+                "ingredientAmount":8,
+                "ingredientUnit":"oz"
             }
         ]
     },
@@ -19,11 +21,13 @@
       "ingredients":[
             {
                 "name":"chicken",
-                "amount":"2 pounds"
+                "ingredientAmount":2,
+                "ingredientUnit": "pounds"
             },
             {
                 "name":"rice",
-                "amount":"2 pounds"
+                "ingredientAmount":2,
+                "ingredientUnit":"pounds"
             }
         ]
     },
@@ -33,11 +37,13 @@
       "ingredients":[
             {
                 "name":"macaroni",
-                "amount":"8oz"
+                "ingredientAmount":8,
+                "ingredientUnit":"oz"
             },
             {
                 "name":"cheddar cheese",
-                "amount":"8oz"
+                "ingredientAmount":8,
+                "ingredientUnit":"oz"
             }
         ]
     },
@@ -47,11 +53,13 @@
       "ingredients":[
             {
                 "name":"steak",
-                "amount":"8oz"
+                "ingredientAmount":8,
+                "ingredientUnit":"oz"
             },
             {
                 "name":"freshly cracked peppercorn",
-                "amount":"1 TBS"
+                "ingredientAmount":1,
+                "ingredientUnit":"TBS"
             }
         ]
     }
