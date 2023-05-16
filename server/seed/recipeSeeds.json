@@ -1,0 +1,59 @@
+[
+    {
+      "name": "Mac N Cheese",
+      "description":"Delectable mac n cheese",
+      "ingredients":[
+            {
+                "name":"macaroni",
+                "amount":"8oz"
+            },
+            {
+                "name":"cheddar cheese",
+                "amount":"8oz"
+            }
+        ]
+    },
+    {
+      "name": "Chicken Fried Rice",
+      "description":"The best chicken fried rice ever",
+      "ingredients":[
+            {
+                "name":"chicken",
+                "amount":"2 pounds"
+            },
+            {
+                "name":"rice",
+                "amount":"2 pounds"
+            }
+        ]
+    },
+    {
+      "name": "Pho",
+      "description":"This pho will blow your mind",
+      "ingredients":[
+            {
+                "name":"macaroni",
+                "amount":"8oz"
+            },
+            {
+                "name":"cheddar cheese",
+                "amount":"8oz"
+            }
+        ]
+    },
+    {
+      "name": "Steak",
+      "description":"Perfectly cooked steak",
+      "ingredients":[
+            {
+                "name":"steak",
+                "amount":"8oz"
+            },
+            {
+                "name":"freshly cracked peppercorn",
+                "amount":"1 TBS"
+            }
+        ]
+    }
+]
+  
