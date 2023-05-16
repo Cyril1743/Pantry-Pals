@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const userSchema = new Schema({
+const recipeSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -18,11 +18,29 @@ const userSchema = new Schema({
             required: true,
             trim: true
         },
-        ingredientAmmount: {
+        ingredientAmount: {
             type: Number,
             required: true,           
         },
+        ingredientUnit: {
+            type: String,
+            required: true,
         }
+        }
+    ],
+    steps: [
+      {
+        order: {
+          type: Number,
+          required: true,
+        },
+        stepText: {
+          type: String,
+            required: true,
+            minlength: 1,
+            maxlength: 200,
+        }
+      }
     ], 
     comments: [
         {
@@ -53,6 +71,6 @@ const userSchema = new Schema({
     ]
 })
 
-const Recipes = model('Recipes', userSchema);
+const Recipes = model('Recipes', recipeSchema);
 
 module.exports = Recipes;
