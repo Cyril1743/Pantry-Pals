@@ -32,9 +32,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    addRecipe(name: String!, description: String!, ingredientName: String!, ingredientAmount: Number!, ingredientUnit: String!, order: Number!, stepText: String!): Recipes
+    addUser(username: String!, email: String!, password: String!): User
+    login(email: String!, password: String!): User
+    addRecipe(name: String!, description: String!, servings: Int, ingredientName: String!, ingredientAmount: Int!, ingredientUnit: String, order: Int!, stepText: String!): Recipes
     addComment(recipeId: ID!, commentText: String!): Recipes
     removeRecipe(recipeId: ID!): Recipes
     removeComment(recipeId: ID!, commentId: ID!): Recipes
