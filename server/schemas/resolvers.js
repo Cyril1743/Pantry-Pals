@@ -59,7 +59,7 @@ const resolvers = {
                 ingredientUnit,
                 order,
                 stepText,
-                recipeAuthor: context.user.username,
+                recipeAuthor: context.user._id,
               });
       
               await User.findOneAndUpdate(
