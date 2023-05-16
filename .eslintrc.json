@@ -18,5 +18,6 @@
         "react"
     ],
     "rules": {
+        "no-useless-catch": "warn"
     }
 }
