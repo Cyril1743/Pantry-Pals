@@ -65,12 +65,11 @@ const recipeSchema = new Schema({
           },
         },
       ],
-    recipeAuthor: [
-        {
+    recipeAuthor: {
         type: Schema.Types.ObjectId,
         ref: 'User'
         }
-    ]
+    
 })
 
 const Recipes = model('Recipes', recipeSchema);
