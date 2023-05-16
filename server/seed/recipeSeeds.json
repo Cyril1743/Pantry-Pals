@@ -2,64 +2,248 @@
     {
       "name": "Mac N Cheese",
       "description":"Delectable mac n cheese",
+      "servings":2,
       "ingredients":[
             {
                 "ingredientName":"macaroni",
-                "ingredientAmount":8,
-                "ingredientUnit":"oz"
+                "ingredientAmount":2,
+                "ingredientUnit":"cups"
+            },
+            {
+                "ingredientName":"butter",
+                "ingredientAmount":3,
+                "ingredientUnit":"TBS"
+            },
+            {
+                "ingredientName":"flour",
+                "ingredientAmount":2,
+                "ingredientUnit":"TBS"
+            },
+            {
+                "ingredientName":"salt",
+                "ingredientAmount":0.5,
+                "ingredientUnit":"tsp"
+            },
+            {
+                "ingredientName":"whole milk",
+                "ingredientAmount":1.5,
+                "ingredientUnit":"cups"
             },
             {
                 "ingredientName":"cheddar cheese",
-                "ingredientAmount":8,
-                "ingredientUnit":"oz"
+                "ingredientAmount":2.5,
+                "ingredientUnit":"cups"
             }
-        ]
-    },
-    {
-      "name": "Chicken Fried Rice",
-      "description":"The best chicken fried rice ever",
-      "ingredients":[
+        ],
+        "steps": [
             {
-                "name":"chicken",
-                "ingredientAmount":2,
-                "ingredientUnit": "pounds"
+                "order":1,
+                "stepText":"Preheat oven to 350 degrees F and lightly grease a square baking dish."
             },
             {
-                "name":"rice",
-                "ingredientAmount":2,
-                "ingredientUnit":"pounds"
+                "order":2,
+                "stepText":"Add macaroni to boiling water. Cook until al dente (about 10 mins, or according to package instructions)."
+            },
+            {
+                "order":3,
+                "stepText":"Melt butter in a saucepan over medium heat. Blend in flour and salt. Cook for 2 mins."
+            },
+            {
+                "order":4,
+                "stepText":"Reduce heat to medium low and add milk to butter mixture. Stir constantly for 2 mins. Remove from heat and stir in 1 cup of the cheddar cheese."
+            },
+            {
+                "order":5,
+                "stepText":"Stir cooked macaroni in to cheese mixture. Pour in to prepared baking dish. Top with remaining cheese."
+            },
+            {
+                "order":6,
+                "stepText":"Bake for 15 mins. Serve."
             }
         ]
     },
     {
-      "name": "Pho",
-      "description":"This pho will blow your mind",
+      "name": "Egg Fried Rice",
+      "description":"The best egg fried rice ever",
+      "servings":2,
       "ingredients":[
             {
-                "name":"macaroni",
-                "ingredientAmount":8,
+                "ingredientName":"garlic",
+                "ingredientAmount":4,
+                "ingredientUnit": "cloves"
+            },
+            {
+                "ingredientName":"shallot",
+                "ingredientAmount":1,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"wisked egg",
+                "ingredientAmount":1,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"chives",
+                "ingredientAmount":3,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"chili",
+                "ingredientAmount":1,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"cooked rice",
+                "ingredientAmount":1,
+                "ingredientUnit":"cup"
+            },
+            {
+                "ingredientName":"soy sauce",
+                "ingredientAmount":1,
+                "ingredientUnit":"tsp"
+            },
+            {
+                "ingredientName":"asian sesame oil",
+                "ingredientAmount":1,
+                "ingredientUnit":"tsp"
+            },
+            {
+                "ingredientName":"peanut oil",
+                "ingredientAmount":2,
+                "ingredientUnit":"TBS"
+            },
+            {
+                "ingredientName":"MSG",
+                "ingredientAmount":2,
+                "ingredientUnit":"tsp"
+            }
+        ],
+        "steps": [
+            {
+                "order":1,
+                "stepText":"Chop garlic, shallot, chives, and chili. Oil a wok with peanut oil."
+            },
+            {
+                "order":2,
+                "stepText":"Fry garlic and shallot until fragrant."
+            },
+            {
+                "order":3,
+                "stepText":"Add egg. Fry until fluffy."
+            },
+            {
+                "order":4,
+                "stepText":"Add rice. Add soy sauce, sesame oil, and MSG."
+            },
+            {
+                "order":5,
+                "stepText":"add chives and chili. Toss, then serve."
+            }
+        ]
+    },
+    {
+      "name": "Chilaquiles",
+      "description":"Super easy chilaquiles",
+      "servings":2,
+      "ingredients":[
+            {
+                "ingredientName":"corn tortilla chips",
+                "ingredientAmount":3,
+                "ingredientUnit":"cups"
+            },
+            {
+                "ingredientName":"canola oil",
+                "ingredientAmount":2,
+                "ingredientUnit":"TBS"
+            },
+            {
+                "ingredientName":"salt",
+                "ingredientAmount":1,
+                "ingredientUnit":"tsp"
+            },
+            {
+                "ingredientName":"salsa verde",
+                "ingredientAmount":2,
+                "ingredientUnit":"cups"
+            },
+            {
+                "ingredientName":"choppend cilantro",
+                "ingredientAmount":1,
                 "ingredientUnit":"oz"
             },
             {
-                "name":"cheddar cheese",
-                "ingredientAmount":8,
-                "ingredientUnit":"oz"
+                "ingredientName":"avocado",
+                "ingredientAmount":1,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"egg",
+                "ingredientAmount":2,
+                "ingredientUnit":""
+            }
+        ],
+        "steps": [
+            {
+                "order":1,
+                "stepText":"Bring pan to high heat. Add 2 TBS oil. Add salsa and cook for 2 mins."
+            },
+            {
+                "order":2,
+                "stepText":"Add chips to salsa and gentley coat. Cook for 2 mins."
+            },
+            {
+                "order":3,
+                "stepText":"Pour chilaquiles in to bowls to be served. Clean out the pan, then fry the eggs over-easy or over-medium."
+            },
+            {
+                "order":4,
+                "stepText":"Top the chilaquiles with fried egg, sliced avocado, and cilantro. Serve."
             }
         ]
     },
     {
-      "name": "Steak",
+      "name": "Pan Seared Steak",
       "description":"Perfectly cooked steak",
+      "servings":2,
       "ingredients":[
             {
-                "name":"steak",
-                "ingredientAmount":8,
+                "ingredientName":"New York strip steak",
+                "ingredientAmount":12,
                 "ingredientUnit":"oz"
             },
             {
-                "name":"freshly cracked peppercorn",
+                "ingredientName":"freshly cracked black pepper",
+                "ingredientAmount":0.5,
+                "ingredientUnit":"tsp"
+            },
+            {
+                "ingredientName":"salt",
+                "ingredientAmount":0.5,
+                "ingredientUnit":"tsp"
+            },
+            {
+                "ingredientName":"vegetable oil",
+                "ingredientAmount":2,
+                "ingredientUnit":"TBS"
+            },
+            {
+                "ingredientName":"unsalted butter",
                 "ingredientAmount":1,
                 "ingredientUnit":"TBS"
+            }
+        ],
+        "steps": [
+            {
+                "order":1,
+                "stepText":"Season steak with salt and pepper."
+            },
+            {
+                "order":2,
+                "stepText":"Heat pan over medium high heat. Add oil and heat until oil shimmers."
+            },
+            {
+                "order":3,
+                "stepText":"Add steak. Cook for about 3 mins. Flip and cook for about 4 mins. With one minute of cooking remaining, add butter to the pan. Then, serve."
             }
         ]
     }
