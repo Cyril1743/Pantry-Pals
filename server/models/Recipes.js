@@ -13,9 +13,15 @@ const userSchema = new Schema({
     },
     ingredients: [
         {
-        type: String,
-        required: true,
-        trim: true
+        ingredientName: {
+            type: String, 
+            required: true,
+            trim: true
+        },
+        ingredientAmmount: {
+            type: Number,
+            required: true,           
+        },
         }
     ], 
     comments: [
@@ -24,7 +30,7 @@ const userSchema = new Schema({
             type: String,
             required: true,
             minlength: 1,
-            maxlength: 280,
+            maxlength: 1000,
           },
           commentAuthor: [
             {
