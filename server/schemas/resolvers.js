@@ -31,7 +31,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
           },
-          login: async (parent, { email, password }) => {
+        login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
       
             if (!user) {
@@ -48,13 +48,16 @@ const resolvers = {
       
             return { token, user };
         },
-        addRecipe: async (parent, { name, description, ingredients, steps }, context) => {
+        addRecipe: async (parent, { name, description, ingredientName, ingredientAmount, ingredientUnit, order, stepText }, context) => {
             if (context.user) {
               const recipe = await Recipes.create({
                 name,
                 description,
-                ingredients,
-                steps,
+                ingredientName,
+                ingredientAmount,
+                ingredientUnit,
+                order,
+                stepText,
                 recipeAuthor: context.user.username,
               });
       
@@ -67,7 +70,7 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        addComment: async (parent, { recipeId, commentText}, context ) => {
+        addComment: async (parent, { recipeId, commentText }, context ) => {
             if(context.user) {
                 return Recipes.findOneAndUpdate(
                     { _id: recipeId },
