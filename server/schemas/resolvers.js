@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         users: async () => {
-            return User.findOne().populate('Recipes');
+            return User.find().populate('Recipes');
         },
         user: async (parent, { username }) => {
             return User.findOne({ username }).populate('Recipes');
@@ -59,7 +59,7 @@ const resolvers = {
                 ingredientUnit,
                 order,
                 stepText,
-                recipeAuthor: context.user.username,
+                recipeAuthor: context.user._id,
               });
       
               await User.findOneAndUpdate(
