@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useMutation } from '@apollo/client';
 import { Container, FormControl, FormLabel, Input, FormHelperText, FormErrorMessage, Button } from "@chakra-ui/react";
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 export default function Login() {
     const [email, setEmail] = useState('')
@@ -29,12 +32,23 @@ export default function Login() {
         }
     }
 
-    const handleFormSubmit = () => {
+    const [login, { error, data }] = useMutation(LOGIN);
+
+    const handleFormSubmit = async(event) => {
+        event.preventDefault()
         if (email !== '' && password !== '') {
-            //TODO: Use the useMutation hook to validate the form data
+            //Use the useMutation hook to validate the form data
+            try {
+                const { data } = await login({
+                    variables: { email, password },
+                });
+                Auth.login(data.login.token);
+            } catch (error) {
+                alert("Log in failed. Try again.")
+                console.log(error)
+            }
             setEmail('')
             setPassword('')
-            alert("Signed In!")
         }
     }
 
