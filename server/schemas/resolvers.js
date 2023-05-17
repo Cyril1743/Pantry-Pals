@@ -5,14 +5,14 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         users: async () => {
-            return User.find().populate('Recipes');
+            return User.find({}).populate('recipe');
         },
         user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('Recipes');
+            return User.findOne({ username }).populate('recipe');
         },
         recipes: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Recipes.find(params).sort({ createdAt: -1 });
+            return Recipes.find(params).sort({ createdAt: -1 }).populate('recipeAuthor');
         },
         recipe: async (parent, { recipeId }) => {
             return Recipes.findOne({ _id: recipeId });
