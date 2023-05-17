@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink} from "@chakra-ui/react"
 import {CiForkAndKnife} from "react-icons/ci"
 import Auth from '../utils/auth';
 
@@ -29,19 +29,18 @@ export default function NavBar() {
             </BreadcrumbLink>
             </BreadcrumbItem>
             ) : (
-            <Breadcrumb separator={<CiForkAndKnife />}>
+            <React.Fragment>
                 <BreadcrumbItem>
                 <BreadcrumbLink as={Link} to="/login">
                     Login
                 </BreadcrumbLink>
                 </BreadcrumbItem>
-
                 <BreadcrumbItem>
                 <BreadcrumbLink as={Link} to="/signup">
                     Sign Up
                 </BreadcrumbLink>
                 </BreadcrumbItem>    
-            </Breadcrumb>
+            </React.Fragment>
             )}
             
         </Breadcrumb>

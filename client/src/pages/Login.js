@@ -32,7 +32,7 @@ export default function Login() {
         }
     }
 
-    const [login, { error, data }] = useMutation(LOGIN);
+    const [login, { error }] = useMutation(LOGIN);
 
     const handleFormSubmit = async(event) => {
         event.preventDefault()
