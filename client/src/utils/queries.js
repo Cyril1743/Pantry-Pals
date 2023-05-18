@@ -1,13 +1,12 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-  query user($_id: ID!) {
-    user(userId: $_id) {
-      _id
+  query user($username: String!) {
+    user(username: $username) {
       username
     }
   }
-`;
+`
 
 export const QUERY_RECIPE_NAME = gql`
 query suggestRecipe($name: String!) {
@@ -74,3 +73,6 @@ query recipe($recipeId: ID!) {
     }
   }
 }`
+
+}`;
+
