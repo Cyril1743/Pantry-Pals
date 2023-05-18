@@ -23,3 +23,22 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_RECIPE = gql`
+  mutation addRecipe($name: String!, $description: String!, $servings: Int, $ingredientName: String!, $ingredientAmount: Float!, $ingredientUnit: String, $order: Int!, $stepText: String!) {
+    addRecipe(name: $name, description: $description, servings: $servings, ingredientName: $ingredientName, ingredientAmount: $ingredientAmount, ingredientUnit: $ingredientUnit, order: $order, stepText: $stepText) {
+      name
+      description
+      servings
+      ingredients {
+        ingredientName
+        ingredientAmount
+        ingredientUnit
+      }
+      steps {
+        order
+        stepText
+      }
+    }
+  }
+`;
