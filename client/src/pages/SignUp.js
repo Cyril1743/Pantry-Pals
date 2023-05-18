@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Container, FormControl, Input, FormHelperText, FormErrorMessage, Alert, AlertTitle, AlertDescription, FormLabel, Button } from "@chakra-ui/react";
+import { useMutation, useLazyQuery } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+import { QUERY_USER } from '../utils/queries';
+import Auth from '../utils/auth';
 
 export default function SignUp() {
+    const [addUser, { error }] = useMutation(ADD_USER);
+    const [queryUser, { loading, data }] = useLazyQuery(QUERY_USER);
 
     //States to store all the logic
     const [email, setEmail] = useState('')
@@ -42,18 +48,41 @@ export default function SignUp() {
     }
 
     const handleUsernameChange = (e) => {
-        //TODO: Add logic to check if the username has been taken
-        setUsernameError(false)
-        setUsername(e.target.value)
+        // check if the username has been taken
+        if (e.target.value !== '') {
+            const targetUsername = e.target.value;
+            console.log(targetUsername);
+            queryUser({
+                variables: { username: targetUsername },
+            });
+            console.log(data);
+            console.log(data.user.username);
+            const username = data.user?.username || ''
+            if (username !== '') {
+                setUniqueUsernameError(true)
+            }
+            setUsernameError(false)
+            setUsername(e.target.value)
+        }
     }
 
-    const handleFormSubmit = (e) => {
-        //TODO: Use the useMutation hook to process form data
+    const handleFormSubmit = async (e) => {
+        // Use the useMutation hook to process form data
         e.preventDefault()
+
+        try {
+            const { data } = await addUser({
+                variables: { email, username, password },
+            });
+
+            Auth.login(data.addUser.token);
+        } catch (e) {
+            alert("Sign up failed. Please try again.");
+            console.error(e);
+        }
         setEmail('')
         setPassword('')
         setUsername('')
-        alert("New user made")
     }
 
     return (
