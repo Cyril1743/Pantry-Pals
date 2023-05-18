@@ -17,6 +17,12 @@ const resolvers = {
         recipe: async (parent, { recipeId }) => {
             return Recipes.findOne({ _id: recipeId });
         },
+        suggestRecipe: async (parent, { name }) => {
+            const regex = new RegExp(`^${name}`, "i")
+            const recipes = await Recipes.find({name: {$regex: regex}}).populate('recipeAuthor')
+
+            return recipes
+        },
         me: async (parent, args, context) => {
             if (context.user) {
               return User.findOne({ _id: context.user._id }).populate('Recipes');
