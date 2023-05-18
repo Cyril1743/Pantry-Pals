@@ -28,4 +28,51 @@ query suggestRecipe($name: String!) {
       username
     }
   }
+}`
+
+export const QUERY_INGREDIENT_NAME = gql`
+query suggestIngredient($ingredient: String!) {
+  suggestIngredient(ingredient: $ingredient) {
+    _id
+    name
+    description
+    servings
+    ingredients {
+      ingredientName
+      ingredientAmount
+      ingredientUnit
+    }
+    steps {
+      order
+      stepText
+    }
+    recipeAuthor {
+      username
+    }
+  }
+}`
+
+export const QUERY_RECIPE = gql`
+query recipe($recipeId: ID!) {
+  recipe(recipeId: $recipeId) {
+    _id
+    name
+    description
+    servings
+    ingredients {
+      ingredientName
+      ingredientAmount
+      ingredientUnit
+    }
+    steps {
+      order
+      stepText
+    }
+    recipeAuthor {
+      username
+    }
+  }
+}`
+
 }`;
+
