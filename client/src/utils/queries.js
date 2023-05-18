@@ -5,8 +5,12 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      recipe
-      favorites
+      recipe {
+        name
+      }
+      favorites {
+        name
+      }
     }
   }
 `
@@ -16,8 +20,12 @@ export const QUERY_USER = gql`
     user(username: $username) {
       _id
       username
-      recipe
-      favorites
+      recipe {
+        name
+      }
+      favorites {
+        name
+      }
     }
   }
 `

@@ -16,27 +16,24 @@ export default function Profile() {
         {
             variables: { username: username },
         }
-    );
-    
-    console.log(data)
+    )
     const profile = data?.me || data?.user || {};
-    console.log(profile)
 
     if (Auth.loggedIn() && Auth.getUser().data.username === username) {
         return <Navigate to="/profile/me" />;
     }
 
-    if (!profile?.username) {
+    if (!profile.username) {
         return (
           <h4>
-            Log in to see your profile page.
+            Can not find this profile.
           </h4>
         );
     }
 
     return (
         <Container>
-            <h2>{username ? `${profile.name}'s` : 'Your'} Profile</h2>
+            <h2>{username ? `${profile.username}'s` : 'Your'} Profile</h2>
         </Container>
     )
 }
