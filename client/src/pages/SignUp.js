@@ -114,12 +114,22 @@ export default function SignUp() {
                         onBlur={handleUsernameBlur}
                         placeholder="Username"
                     />
-                    {usernameError && (
+                    {usernameError ?
                         <FormErrorMessage>
                             Username is required.
                         </FormErrorMessage>
-                    )
-                    }
+                        :
+                        <FormHelperText>
+                            Enter your username. This will be visable to all users.
+                        </FormHelperText>}
+                    {uniqueUsernameError ?
+                        <FormErrorMessage>
+                            This username is already taken. Try a different one.
+                        </FormErrorMessage>
+                        :
+                        <FormHelperText>
+                            Enter your username. This will be visable to all users.
+                        </FormHelperText>}
                 </FormControl>
                 <FormControl m={2} isInvalid={passwordError}>
                     <FormLabel htmlFor="password">Password:</FormLabel>
