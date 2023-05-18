@@ -47,24 +47,44 @@ export default function SignUp() {
         setPassword(e.target.value)
     }
 
+    // const handleUsernameChange = (e) => {
+    //     // check if the username has been taken
+    //     if (e.target.value !== '') {
+    //         const targetUsername = e.target.value;
+    //         queryUser({
+    //             variables: { username: targetUsername },
+    //         });
+    //         const username = data.user?.username || ''
+    //         if (username !== '') {
+    //             setUniqueUsernameError(true)
+    //         }
+    //         setUsernameError(false)
+    //         setUsername(e.target.value)
+    //     }
+    // }
+
     const handleUsernameChange = (e) => {
-        // check if the username has been taken
         if (e.target.value !== '') {
             const targetUsername = e.target.value;
-            console.log(targetUsername);
             queryUser({
                 variables: { username: targetUsername },
-            });
-            console.log(data);
-            console.log(data.user.username);
-            const username = data.user?.username || ''
-            if (username !== '') {
-                setUniqueUsernameError(true)
-            }
-            setUsernameError(false)
-            setUsername(e.target.value)
+            })
+                .then((response) => {
+                    const userData = response.data && response.data.user;
+                    const username = userData?.username || '';
+                    if (username !== '') {
+                        setUniqueUsernameError(true);
+                    }
+                    setUsernameError(false);
+                    setUsername(targetUsername);
+                })
+                .catch((error) => {
+                    // Handle error from the query
+                    console.error(error);
+                });
         }
-    }
+    };
+    
 
     const handleFormSubmit = async (e) => {
         // Use the useMutation hook to process form data
@@ -114,22 +134,12 @@ export default function SignUp() {
                         onBlur={handleUsernameBlur}
                         placeholder="Username"
                     />
-                    {usernameError ?
+                    {usernameError && (
                         <FormErrorMessage>
                             Username is required.
                         </FormErrorMessage>
-                        :
-                        <FormHelperText>
-                            Enter your username. This will be visable to all users.
-                        </FormHelperText>}
-                    {uniqueUsernameError ?
-                        <FormErrorMessage>
-                            This username is already taken. Try a different one.
-                        </FormErrorMessage>
-                        :
-                        <FormHelperText>
-                            Enter your username. This will be visable to all users.
-                        </FormHelperText>}
+                    )
+                    }
                 </FormControl>
                 <FormControl m={2} isInvalid={passwordError}>
                     <FormLabel htmlFor="password">Password:</FormLabel>

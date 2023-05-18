@@ -6,7 +6,7 @@ export const QUERY_USER = gql`
       username
     }
   }
-`;
+`
 
 export const QUERY_RECIPE_NAME = gql`
 query suggestRecipe($name: String!) {
@@ -28,4 +28,4 @@ query suggestRecipe($name: String!) {
       username
     }
   }
-}`
+}`;
