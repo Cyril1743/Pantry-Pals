@@ -25,7 +25,7 @@ export default function NavBar() {
             </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/profile">
+            <BreadcrumbLink as={Link} to="/profile/me">
                 Profile
             </BreadcrumbLink>
             </BreadcrumbItem>

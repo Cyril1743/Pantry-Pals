@@ -1,5 +1,5 @@
 import React from 'react';
-import {ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client"
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client"
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
@@ -43,11 +43,12 @@ export default function App() {
           <NavBar />
 
           <Routes>
-            <Route path='/' element={<Home />}/>
+            <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/profile/:username' element={<Profile />} />
-           <Route path='/recipe/:recipeId' element={<Recipe />} />
+            <Route path='/profile/me' element={<Profile />} />
+            <Route path='/recipe/:recipeId' element={<Recipe />} />
           </Routes>
           <Footer />
         </Router>

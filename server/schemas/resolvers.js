@@ -31,7 +31,7 @@ const resolvers = {
         },
         me: async (parent, args, context) => {
             if (context.user) {
-              return User.findOne({ _id: context.user._id }).populate('Recipes');
+              return User.findOne({ _id: context.user._id }).populate('recipe');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
