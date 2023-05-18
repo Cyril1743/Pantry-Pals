@@ -47,22 +47,6 @@ export default function SignUp() {
         setPassword(e.target.value)
     }
 
-    // const handleUsernameChange = (e) => {
-    //     // check if the username has been taken
-    //     if (e.target.value !== '') {
-    //         const targetUsername = e.target.value;
-    //         queryUser({
-    //             variables: { username: targetUsername },
-    //         });
-    //         const username = data.user?.username || ''
-    //         if (username !== '') {
-    //             setUniqueUsernameError(true)
-    //         }
-    //         setUsernameError(false)
-    //         setUsername(e.target.value)
-    //     }
-    // }
-
     const handleUsernameChange = (e) => {
         if (e.target.value !== '') {
             const targetUsername = e.target.value;
