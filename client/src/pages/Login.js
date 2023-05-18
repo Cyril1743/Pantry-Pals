@@ -53,8 +53,8 @@ export default function Login() {
     }
 
     return (
-        <Container>
-            <FormControl isInvalid={emailError} isRequired>
+        <Container className="loginContainer">
+            <FormControl m={2} isInvalid={emailError}>
                 <FormLabel htmlFor="email">Email:</FormLabel>
                 <Input
                     id="email"
@@ -64,17 +64,14 @@ export default function Login() {
                     onChange={handleEmailChange}
                     onBlur={handleEmailBlur}
                 />
-                {emailError ?
+                {emailError && (
                     <FormErrorMessage>
                         Email is required
                     </FormErrorMessage>
-                    :
-                    <FormHelperText>
-                        Enter the email you used to sign up
-                    </FormHelperText>
+                )
                 }
             </FormControl>
-            <FormControl isInvalid={passwordError} isRequired>
+            <FormControl m={2} isInvalid={passwordError}>
                 <FormLabel htmlFor="password">Password:</FormLabel>
                 <Input
                     id="password"
@@ -84,14 +81,11 @@ export default function Login() {
                     onBlur={handlePasswordBlur}
                     placeholder="Password"
                 />
-                {passwordError ?
+                {passwordError && (
                     <FormErrorMessage>
                         Password is required
                     </FormErrorMessage>
-                    :
-                    <FormHelperText>
-                        Enter your password
-                    </FormHelperText>
+                )
                 }
             </FormControl>
             <Button onClick={handleFormSubmit}> Submit </Button>

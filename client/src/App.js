@@ -6,6 +6,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import Home from './pages/Home';
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import SignUp from "./pages/SignUp"
@@ -48,6 +49,7 @@ export default function App() {
             <Route path='/profile/:username' element={<Profile />} />
            <Route path='/recipe/:recipeId' element={<Recipe />} />
           </Routes>
+          <Footer />
         </Router>
       </ChakraProvider>
     </ApolloProvider>
