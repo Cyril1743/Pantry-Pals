@@ -15,11 +15,17 @@ const resolvers = {
             return Recipes.find(params).sort({ createdAt: -1 }).populate('recipeAuthor');
         },
         recipe: async (parent, { recipeId }) => {
-            return Recipes.findOne({ _id: recipeId });
+            return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor');
         },
         suggestRecipe: async (parent, { name }) => {
             const regex = new RegExp(`^${name}`, "i")
             const recipes = await Recipes.find({name: {$regex: regex}}).populate('recipeAuthor')
+
+            return recipes
+        },
+        suggestIngredient: async (parent, { ingredient }) => {
+            console.log(ingredient)
+            const recipes = await Recipes.find({'ingredients.ingredientName' : {$regex: ingredient, $options: 'i'}}).populate('recipeAuthor')
 
             return recipes
         },
