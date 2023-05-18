@@ -8,3 +8,17 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const QUERY_RECIPE = gql`
+query recipe($name: String!) {
+  recipe(name: $name) {
+    name
+    description
+    servings
+    ingredients,
+    steps,
+    recipeAuthor {
+      username
+    }
+  }
+}`
