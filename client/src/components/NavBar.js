@@ -58,7 +58,7 @@ export default function NavBar() {
             </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/singUp">
+            <BreadcrumbLink as={Link} to="/signUp">
                 Sign Up
             </BreadcrumbLink>
             </BreadcrumbItem>

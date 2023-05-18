@@ -57,9 +57,8 @@ export default function SignUp() {
     }
 
     return (
-        <Container>
-            <form onSubmit={handleFormSubmit}>
-                <FormControl isInvalid={emailError} isRequired>
+        <Container className="signUpContainer">
+                <FormControl m={2} isInvalid={emailError}>
                     <FormLabel htmlFor="email">Email:</FormLabel>
                     <Input
                         id="email"
@@ -69,16 +68,14 @@ export default function SignUp() {
                         onBlur={handleEmailBlur}
                         placeholder="Email"
                     />
-                    {emailError ?
+                    {emailError && (
                         <FormErrorMessage>
                             Email is required.
                         </FormErrorMessage>
-                        :
-                        <FormHelperText>
-                            Enter your email here.
-                        </FormHelperText>}
+                    )
+                    }
                 </FormControl>
-                <FormControl isInvalid={usernameError} isRequired>
+                <FormControl m={2} isInvalid={usernameError}>
                     <FormLabel htmlFor="username">Username:</FormLabel>
                     <Input
                         id="username"
@@ -88,16 +85,14 @@ export default function SignUp() {
                         onBlur={handleUsernameBlur}
                         placeholder="Username"
                     />
-                    {usernameError ?
+                    {usernameError && (
                         <FormErrorMessage>
                             Username is required.
                         </FormErrorMessage>
-                        :
-                        <FormHelperText>
-                            Enter your username. This will be visable to all users.
-                        </FormHelperText>}
+                    )
+                    }
                 </FormControl>
-                <FormControl isInvalid={passwordError} isRequired>
+                <FormControl m={2} isInvalid={passwordError}>
                     <FormLabel htmlFor="password">Password:</FormLabel>
                     <Input
                         id="password"
@@ -107,17 +102,14 @@ export default function SignUp() {
                         onBlur={handlePasswordBlur}
                         placeholder="Password"
                     />
-                    {passwordError ?
+                    {passwordError && (
                         <FormErrorMessage>
                             Password is required.
                         </FormErrorMessage>
-                        :
-                        <FormHelperText>
-                            Enter your password.
-                        </FormHelperText>}
+                    )
+                    }
                 </FormControl>
-                <Button type="submit">Submit</Button>
-            </form>
+                <Button m={2} onClick={handleFormSubmit}>Submit</Button>
         </Container>
     )
 }
