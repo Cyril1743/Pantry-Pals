@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Input, Container, UnorderedList, ListItem, Button } from '@chakra-ui/react'
+import { QUERY_RECIPE_NAME } from '../utils/queries'
+import { useLazyQuery } from '@apollo/client'
 
 export default function Home() {
     const [expanded, makeExpanded] = useState(false)
@@ -7,6 +9,12 @@ export default function Home() {
     const [searchIngrdnts, setSearchIngrdnts] = useState([])
     const [currentIngrdnt, setCurrentIngrdnt] = useState('')
     const inputRef = useRef(null)
+    const [searchRecipes, { loading, data}] = useLazyQuery(QUERY_RECIPE_NAME, {
+        onCompleted: (result) => {
+            setSuggestions(result.suggestRecipe)
+        }
+    })
+    const [suggestions, setSuggestions] = useState([])
 
     useEffect(() => {
         if (expanded) {
@@ -14,7 +22,18 @@ export default function Home() {
         }
     }, [expanded])
 
+    useEffect(() => {
+        if (searchName.trim().length > 0) {
+            searchRecipes({variables: {name: searchName}})
+        } else {
+            setSuggestions([])
+        }
+    }, [searchRecipes, searchName])
+
     const searchNameChange = (e) => {
+        if (searchName.trim().length === 0){
+            
+        }
         return setSearchName(e.target.value)
     }
 
@@ -24,8 +43,7 @@ export default function Home() {
     }
 
     const removeIngrdnt = (ingrdnt) => {
-        const index = searchIngrdnts.indexOf(ingrdnt)
-        setSearchIngrdnts(searchIngrdnts.slice(0, index).concat(searchIngrdnts.slice(index + 1)))
+       setSearchIngrdnts((prevIngrdnts) => prevIngrdnts.filter((item) => item !== ingrdnt))
     }
 
     const currentIngrdntChange = (e) => {
@@ -42,6 +60,9 @@ export default function Home() {
             {expanded ?
                 <Container>
                     <Input ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
+                    <UnorderedList listStyleType='none'>
+                        {suggestions.map((recipe) => <ListItem key={recipe._id}>{recipe.name}</ListItem>)}
+                    </UnorderedList>
                     <Input placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
                     <Button onClick={searchIngrdntsChange}>
                         <span role='img' aria-label='add'>
@@ -66,7 +87,7 @@ export default function Home() {
 
                 :
                 <Container>
-                    <Input placeholder='Your next craving' onClick={() => makeExpanded(!expanded)} />
+                    <Input placeholder='Your next craving' value={searchName} readOnly onClick={() => makeExpanded(!expanded)} />
                 </Container>
             }
         </div>
