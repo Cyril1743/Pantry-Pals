@@ -50,6 +50,7 @@ const typeDefs = gql`
     user(_id: ID!): User
     recipes(username: String): [Recipes]
     recipe(recipeId: ID!): Recipes
+    suggestRecipe(name: String!): [Recipes]
     me: User
   }
 

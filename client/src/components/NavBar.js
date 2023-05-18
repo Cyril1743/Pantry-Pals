@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, Heading} from "@chakra-ui/react"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Heading} from "@chakra-ui/react"
 import {CiForkAndKnife} from "react-icons/ci"
 import Auth from '../utils/auth';
 
