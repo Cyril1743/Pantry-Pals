@@ -46,11 +46,6 @@ export default function NavBar() {
                 Home
             </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbItem>
-            <BreadcrumbLink as={Link} to="/profile">
-                Profile
-            </BreadcrumbLink>
-            </BreadcrumbItem>
             {/* contitional rendering to render login when not logged in */}
             <BreadcrumbItem>
             <BreadcrumbLink as={Link} to="/login">
