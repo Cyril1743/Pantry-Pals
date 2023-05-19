@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 
+
 import Home from './pages/Home';
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
