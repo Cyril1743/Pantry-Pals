@@ -56,10 +56,8 @@ export default function Home() {
     useEffect(() => {
         if (searchIngrdnts.length > 0) {
             setIngrdntsSuggestions([])
-            searchIngrdnts.forEach((ingredient) => {
-                console.log(ingredient)
-                searchRecipeIngredients({ variables: { ingredient: ingredient } })
-            })
+            console.log(searchIngrdnts)
+                searchRecipeIngredients({ variables: { ingredients: searchIngrdnts } })
 
         } else {
             setIngrdntsSuggestions([])

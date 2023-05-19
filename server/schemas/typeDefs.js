@@ -51,7 +51,7 @@ const typeDefs = gql`
     recipes(username: String): [Recipes]
     recipe(recipeId: ID!): Recipes
     suggestRecipe(name: String!): [Recipes]
-    suggestIngredient(ingredient: String!): [Recipes]
+    suggestIngredient(ingredients: [String!]): [Recipes]
     me: User
   }
 

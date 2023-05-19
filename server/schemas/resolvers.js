@@ -19,15 +19,26 @@ const resolvers = {
         },
         suggestRecipe: async (parent, { name }) => {
             const regex = new RegExp(`^${name}`, "i")
-            const recipes = await Recipes.find({name: {$regex: regex}}).populate('recipeAuthor')
+            const recipes = await Recipes.find({ name: { $regex: regex } }).populate('recipeAuthor')
 
             return recipes
         },
-        suggestIngredient: async (parent, { ingredient }) => {
-            console.log(ingredient)
-            const recipes = await Recipes.find({'ingredients.ingredientName' : {$regex: ingredient, $options: 'i'}}).populate('recipeAuthor')
+        suggestIngredient: async (parent, { ingredients }) => {
+            console.log(ingredients)
+            const recipes = await Promise.all(ingredients.map(async ingredient => {
+                return await Recipes.find({ 'ingredients.ingredientName': { $regex: ingredient, $options: 'i' } }).populate('recipeAuthor')
+            }))
+            //console.log(recipes[0])
+            const matchedRecipes = recipes.filter((recipe, index) => {
+                 console.log(JSON.stringify(recipe[index].ingredients, null, 2))
+                if (!recipe[index].ingredients){
+                    return false
+                }
+                const recipeIngredients = recipe[index].ingredients.map(ingredient => ingredient.ingredientName)
+                return ingredients.every(ingredient => recipeIngredients.includes(ingredient))
+            })
 
-            return recipes
+            return matchedRecipes
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -42,49 +53,49 @@ const resolvers = {
             const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
-          },
+        },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-      
+
             if (!user) {
-              throw new AuthenticationError('No user found with this email address');
+                throw new AuthenticationError('No user found with this email address');
             }
-      
+
             const correctPw = await user.isCorrectPassword(password);
-      
+
             if (!correctPw) {
-              throw new AuthenticationError('Incorrect credentials');
+                throw new AuthenticationError('Incorrect credentials');
             }
-      
+
             const token = signToken(user);
-      
+
             return { token, user };
         },
         addRecipe: async (parent, { name, description, servings, ingredientName, ingredientAmount, ingredientUnit, order, stepText }, context) => {
             if (context.user) {
-              const recipe = await Recipes.create({
-                name,
-                description,
-                servings,
-                ingredientName,
-                ingredientAmount,
-                ingredientUnit,
-                order,
-                stepText,
-                recipeAuthor: context.user._id,
-              });
-      
-              await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { recipes: recipe._id } }
-              );
-      
-              return recipe;
+                const recipe = await Recipes.create({
+                    name,
+                    description,
+                    servings,
+                    ingredientName,
+                    ingredientAmount,
+                    ingredientUnit,
+                    order,
+                    stepText,
+                    recipeAuthor: context.user._id,
+                });
+
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { recipes: recipe._id } }
+                );
+
+                return recipe;
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        addComment: async (parent, { recipeId, commentText }, context ) => {
-            if(context.user) {
+        addComment: async (parent, { recipeId, commentText }, context) => {
+            if (context.user) {
                 return Recipes.findOneAndUpdate(
                     { _id: recipeId },
                     {
@@ -100,8 +111,8 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        removeRecipe: async ( parent, { recipeId }, context) => {
-            if(context.user) {
+        removeRecipe: async (parent, { recipeId }, context) => {
+            if (context.user) {
                 const recipe = await Recipes.findOneAndDelete({
                     _id: recipeId,
                     recipeAuthor: context.user.username,
@@ -115,7 +126,7 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        removeComment: async ( parent, { recipeId, commentId }, context) => {
+        removeComment: async (parent, { recipeId, commentId }, context) => {
             if (context.user) {
                 return Recipes.findOneAndUpdate(
                     { _id: recipeId },
