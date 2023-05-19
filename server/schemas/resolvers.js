@@ -24,25 +24,30 @@ const resolvers = {
             return recipes
         },
         suggestIngredient: async (parent, { ingredients }) => {
-            console.log(ingredients)
-            const recipes = await Promise.all(ingredients.map(async ingredient => {
+            const recipesData = await Promise.all(ingredients.map(async ingredient => {
                 return await Recipes.find({ 'ingredients.ingredientName': { $regex: ingredient, $options: 'i' } }).populate('recipeAuthor')
             }))
-            //console.log(recipes[0])
-            const matchedRecipes = recipes.filter((recipe, index) => {
-                 console.log(JSON.stringify(recipe[index].ingredients, null, 2))
-                if (!recipe[index].ingredients){
+
+            const recipes = recipesData[0]
+
+            const matchedRecipes = recipes.filter((recipe) => {
+
+                if (!recipe.ingredients) {
                     return false
                 }
-                const recipeIngredients = recipe[index].ingredients.map(ingredient => ingredient.ingredientName)
-                return ingredients.every(ingredient => recipeIngredients.includes(ingredient))
+
+                const recipeIngredients = recipe.ingredients.map(ingredient => ingredient.ingredientName)
+                return ingredients.every(ingredient => {
+                    const regex = new RegExp(ingredient, 'i')
+                    return recipeIngredients.some(recipeIngredient => regex.test(recipeIngredient))
+                })
             })
 
             return matchedRecipes
         },
         me: async (parent, args, context) => {
             if (context.user) {
-              return User.findOne({ _id: context.user._id }).populate('recipe');
+                return User.findOne({ _id: context.user._id }).populate('recipe');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
