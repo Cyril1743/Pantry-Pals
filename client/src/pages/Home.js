@@ -56,8 +56,7 @@ export default function Home() {
     useEffect(() => {
         if (searchIngrdnts.length > 0) {
             setIngrdntsSuggestions([])
-            console.log(searchIngrdnts)
-                searchRecipeIngredients({ variables: { ingredients: searchIngrdnts } })
+            searchRecipeIngredients({ variables: { ingredients: searchIngrdnts } })
 
         } else {
             setIngrdntsSuggestions([])
