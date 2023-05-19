@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Container, FormControl, Input, FormHelperText, FormErrorMessage, Alert, AlertTitle, AlertDescription, FormLabel, Button } from "@chakra-ui/react";
+import { Container, FormControl, Input, FormErrorMessage, Alert, AlertTitle, AlertDescription, FormLabel, Button } from "@chakra-ui/react";
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
 
 export default function SignUp() {
-    const [addUser, { error }] = useMutation(ADD_USER);
-    const [queryUser, { loading, data }] = useLazyQuery(QUERY_USER);
+    const [addUser] = useMutation(ADD_USER);
+    const [queryUser] = useLazyQuery(QUERY_USER);
 
     //States to store all the logic
     const [email, setEmail] = useState('')
@@ -91,6 +91,12 @@ export default function SignUp() {
 
     return (
         <Container className="signUpContainer">
+            {uniqueUsernameError && 
+            <Alert>
+                <AlertTitle>Invalid Username</AlertTitle>
+                <AlertDescription>We're sorry, but the username you selected is taken!</AlertDescription>
+            </Alert>
+            }
                 <FormControl m={2} isInvalid={emailError}>
                     <FormLabel htmlFor="email">Email:</FormLabel>
                     <Input

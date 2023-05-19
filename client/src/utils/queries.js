@@ -53,8 +53,8 @@ query suggestRecipe($name: String!) {
 }`
 
 export const QUERY_INGREDIENT_NAME = gql`
-query suggestIngredient($ingredient: String!) {
-  suggestIngredient(ingredient: $ingredient) {
+query suggestIngredient($ingredients: [String!]) {
+  suggestIngredient(ingredients: $ingredients) {
     _id
     name
     description
@@ -94,5 +94,4 @@ query recipe($recipeId: ID!) {
       username
     }
   }
-}`;
-
+}`
