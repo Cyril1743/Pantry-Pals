@@ -4,6 +4,7 @@ import { useMutation, useLazyQuery } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
+import '../styles/style.css'
 
 export default function SignUp() {
     const [addUser] = useMutation(ADD_USER);
@@ -97,10 +98,11 @@ export default function SignUp() {
                 <AlertDescription>We're sorry, but the username you selected is taken!</AlertDescription>
             </Alert>
             }
+                <h1 className="loginTitle">Sign Up!</h1>
                 <FormControl m={2} isInvalid={emailError}>
-                    <FormLabel htmlFor="email">Email:</FormLabel>
+                    <FormLabel id="signupLabel" htmlFor="email">Email:</FormLabel>
                     <Input
-                        id="email"
+                        id="signupForm"
                         type="email"
                         value={email}
                         onChange={handleEmailChange}
@@ -115,9 +117,9 @@ export default function SignUp() {
                     }
                 </FormControl>
                 <FormControl m={2} isInvalid={usernameError}>
-                    <FormLabel htmlFor="username">Username:</FormLabel>
+                    <FormLabel id="signupLabel" htmlFor="username">Username:</FormLabel>
                     <Input
-                        id="username"
+                        id="signupForm"
                         type="text"
                         value={username}
                         onChange={handleUsernameChange}
@@ -132,9 +134,9 @@ export default function SignUp() {
                     }
                 </FormControl>
                 <FormControl m={2} isInvalid={passwordError}>
-                    <FormLabel htmlFor="password">Password:</FormLabel>
+                    <FormLabel id="signupLabel" htmlFor="password">Password:</FormLabel>
                     <Input
-                        id="password"
+                        id="signupForm"
                         type="password"
                         value={password}
                         onChange={handlePasswordChange}
@@ -148,7 +150,7 @@ export default function SignUp() {
                     )
                     }
                 </FormControl>
-                <Button m={2} onClick={handleFormSubmit}>Submit</Button>
+                <Button id="signupButton" my={6} onClick={handleFormSubmit}>Sign Up</Button>
         </Container>
     )
 }

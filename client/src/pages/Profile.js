@@ -2,6 +2,7 @@ import React from 'react'
 import { Container } from '@chakra-ui/react'
 import { Navigate, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
+import '../styles/style.css'
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 

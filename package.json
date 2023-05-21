@@ -26,5 +26,8 @@
     "concurrently": "^8.0.1",
     "eslint": "^8.40.0",
     "eslint-plugin-react": "^7.32.2"
+  },
+  "dependencies": {
+    "react-icons": "^4.8.0"
   }
 }
