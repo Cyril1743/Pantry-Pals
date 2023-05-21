@@ -76,23 +76,20 @@ const resolvers = {
 
             return { token, user };
         },
-        addRecipe: async (parent, { name, description, servings, ingredientName, ingredientAmount, ingredientUnit, order, stepText }, context) => {
+        addRecipe: async (parent, { name, description, servings, ingredients, steps }, context) => {
             if (context.user) {
                 const recipe = await Recipes.create({
                     name,
                     description,
                     servings,
-                    ingredientName,
-                    ingredientAmount,
-                    ingredientUnit,
-                    order,
-                    stepText,
+                    ingredients,
+                    steps,
                     recipeAuthor: context.user._id,
                 });
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { recipes: recipe._id } }
+                    { $addToSet: { recipe: recipe._id } }
                 );
 
                 return recipe;
@@ -125,7 +122,7 @@ const resolvers = {
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { recipes: recipe._id } }
+                    { $pull: { recipe: recipe._id } }
                 );
                 return recipe;
             }
