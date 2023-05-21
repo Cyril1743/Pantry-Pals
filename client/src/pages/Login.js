@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
-import { Container, FormControl, FormLabel, Input, FormHelperText, FormErrorMessage, Button} from "@chakra-ui/react";
+import { Container, FormControl, FormLabel, Input, FormErrorMessage, Button} from "@chakra-ui/react";
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 import '../styles/style.css';

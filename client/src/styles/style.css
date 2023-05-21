@@ -3,7 +3,7 @@ div, h1, h2, h3, h4 , h5 {
     font-family: 'Lobster', cursive;
 }
 
-.Brand, .footerLink {
+.Brand, .footerLink, .stepsHeader, .recipeHeader {
     padding-top: 2px;
     background-image: linear-gradient(
           34deg,
@@ -21,11 +21,12 @@ div, h1, h2, h3, h4 , h5 {
           #FF9191 80%,
           #FF9191 90%
         );
+    text-shadow: 1px 2px 2px #ef856569 ;
     background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textclip 2.0s alternate-reverse infinite;
+    animation: textclip 25s reverse infinite;
 }
 
 .background {
@@ -33,8 +34,21 @@ div, h1, h2, h3, h4 , h5 {
     height: 100vh;
 }
 
+.measurementStyling {
+    color: #FF9191;
+    background-color: #f1e1e16a;
+    border-radius: 20px;
+    font-weight: bolder;
+}
+
+.measurementFields {
+    border-radius: 20px;
+    background-color: #f86a6a;
+}
+
 .navBar {
     color: #FF9191;
+    background-color: #FFFDCA;
 }
 
 #navLink {
@@ -76,6 +90,7 @@ div, h1, h2, h3, h4 , h5 {
 #loginLabel, #signupLabel {
     color: #FF9191;
     font-size:25px;
+    text-shadow: 1px 1px 1px #000a0b3c
 }
 
 .footer {
@@ -89,6 +104,7 @@ div, h1, h2, h3, h4 , h5 {
 .loginTitle, .signupTitle {
     font-size: 45px;
     color: #FF9191;
+    text-shadow: 1px 2px 2px #000a0b3c ;
 }
 
 
@@ -116,8 +132,48 @@ div, h1, h2, h3, h4 , h5 {
     margin-left: 5px;
     margin-right: 5px;
   }
+
+  .recipeHeader {
+    color: #ff9191;
+    margin-top:100px;
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+    font-size:3.0em;
+    text-shadow: 1px 2px 2px #f556567b;
+  }
+
+  .ingredientsContainer {
+    width: 100%;
+  }
+
+  .stepsHeader {
+    font-size:6.0em;
+    text-align: center;
+  }
+
+  .stepsList {
+    font-size:1.2em;
+  }
+
+  .stepsContainer {
+    margin-top:50px;
+    max-width: 50%;
+    font-family: 'Lobster', cursive;
+    color:#FF9191;
+    font-size:1.3em;
+    justify-content: center;
+    align-items: center;
+  }
+
   
-  /* Media query for responsive layout */
+
+
+
+
+
+  
+
   @media (max-width: 768px) {
     .navbar-container {
       flex-wrap: wrap;
@@ -170,5 +226,11 @@ div, h1, h2, h3, h4 , h5 {
     }
     100% {
         background-position: 100% center;
+    }
+  }
+
+  @media (max-width: 770px) {
+    .footer {
+      display: none;
     }
   }

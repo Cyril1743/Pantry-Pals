@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client"
 import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 
 
@@ -35,6 +35,17 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+function FooterWrapper() {
+  const location = useLocation();
+  
+  if (!location.pathname.startsWith('/recipe/')) {
+    return <Footer />;
+  }
+  
+  return null;
+}
+
+
 export default function App() {
 
   return (
@@ -52,7 +63,7 @@ export default function App() {
             <Route path='/profile/me' element={<Profile />} />
             <Route path='/recipe/:recipeId' element={<Recipe />} />
           </Routes>
-          <Footer />
+          <FooterWrapper />
         </Router>
       </ChakraProvider>
     </ApolloProvider>
