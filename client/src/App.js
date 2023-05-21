@@ -38,12 +38,13 @@ const client = new ApolloClient({
 export default function App() {
 
   return (
+    <div className='background'>
     <ApolloProvider client={client}>
       <ChakraProvider>
-        <Router>
+        <Router >
           <NavBar />
 
-          <Routes>
+          <Routes >
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
@@ -55,5 +56,6 @@ export default function App() {
         </Router>
       </ChakraProvider>
     </ApolloProvider>
+    </div>
   );
 }

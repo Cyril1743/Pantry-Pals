@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
-import { Container, FormControl, FormLabel, Input, FormHelperText, FormErrorMessage, Button } from "@chakra-ui/react";
+import { Container, FormControl, FormLabel, Input, FormHelperText, FormErrorMessage, Button} from "@chakra-ui/react";
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
+import '../styles/style.css';
+
 
 export default function Login() {
     const [email, setEmail] = useState('')
@@ -14,6 +16,7 @@ export default function Login() {
         setEmailError(false)
         setEmail(e.target.value)
     }
+    
 
     const handlePasswordChange = (e) => {
         setPasswordError(false)
@@ -54,10 +57,11 @@ export default function Login() {
 
     return (
         <Container className="loginContainer">
+            <h1 className="loginTitle">Welcome back!</h1>
             <FormControl m={2} isInvalid={emailError}>
-                <FormLabel htmlFor="email">Email:</FormLabel>
+                <FormLabel id="loginLabel" htmlFor="email">Email:</FormLabel>
                 <Input
-                    id="email"
+                    id="loginForm"
                     type="email"
                     value={email}
                     placeholder="Email"
@@ -72,9 +76,9 @@ export default function Login() {
                 }
             </FormControl>
             <FormControl m={2} isInvalid={passwordError}>
-                <FormLabel htmlFor="password">Password:</FormLabel>
+                <FormLabel id="loginLabel" htmlFor="password">Password:</FormLabel>
                 <Input
-                    id="password"
+                    id="loginForm"
                     type="password"
                     value={password}
                     onChange={handlePasswordChange}
@@ -88,7 +92,7 @@ export default function Login() {
                 )
                 }
             </FormControl>
-            <Button onClick={handleFormSubmit}> Submit </Button>
+            <Button id="loginButton" my={6} onClick={handleFormSubmit}> Login </Button>
         </Container>
     )
 }

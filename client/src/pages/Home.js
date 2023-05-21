@@ -3,6 +3,7 @@ import { Input, Container, UnorderedList, ListItem, Button } from '@chakra-ui/re
 import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries'
 import { useLazyQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
+import '../styles/style.css'
 
 export default function Home() {
     const [expanded, makeExpanded] = useState(false)
@@ -84,7 +85,7 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div className="background">
             {expanded ?
                 <Container>
                     <Input ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />

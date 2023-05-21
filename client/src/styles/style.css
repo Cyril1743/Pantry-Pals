@@ -3,11 +3,94 @@ div, h1, h2, h3, h4 , h5 {
     font-family: 'Lobster', cursive;
 }
 
+.Brand, .footerLink {
+    padding-top: 2px;
+    background-image: linear-gradient(
+          34deg,
+          #FF9191 5%,
+          #FF9191 10%,
+          #FF9191 15%,
+          #FF9191 20%,
+          #FF9191 25%,
+          #FF9191 30%,
+          #f86a6a 40%,
+          #f86a6a 50%,
+          #f86a6a 55%,
+          #FF9191 60%,
+          #FF9191 70%,
+          #FF9191 80%,
+          #FF9191 90%
+        );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2.0s alternate-reverse infinite;
+}
+
+.background {
+    background-color: #FFFDCA;
+    height: 100vh;
+}
+
+.navBar {
+    color: #FF9191;
+}
+
+#navLink {
+    font-size: 22px;
+    margin:5px;
+    
+}
+
+#navLink, #loginButton, #signupButton {
+    border-color: #FF9191;
+    color: #FF9191;
+  }
+  #navLink:hover, #loginButton:hover, #signupButton:hover {
+    box-shadow: 0 0.25em 0.25em -0.1em #FF9191;
+    transform: translateY(-0.25em);
+    border-color: #FFFDCA;
+    color: #5E2BFF;
+    background-color: #FFFDCA;
+  }
+  
+
+.footerLink {
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: #FFFDCA 0px 0px 0px 2px,#FF9191 0px 4px 6px -1px;
+}
+
+#loginForm, #loginButton, #navLink, #signupForm, #signupButton {
+    border-radius: 10px;
+    box-shadow: #FFFDCA 0px 0px 0px 2px,#FF9191 0px 4px 6px -1px;
+}
+
+#loginButton, #signupButton {
+    background-color: #FFFDCA;
+    width: 200px; 
+    font-size: 24px;
+}
+
+#loginLabel, #signupLabel {
+    color: #FF9191;
+    font-size:25px;
+}
+
 .footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: #FF9191;
+    font-size:22px;
 }
+
+.loginTitle, .signupTitle {
+    font-size: 45px;
+    color: #FF9191;
+}
+
 
 .loginContainer, .signUpContainer {
     display:flex; 
@@ -16,3 +99,76 @@ div, h1, h2, h3, h4 , h5 {
     justify-content: center;
     height:100vh;
 }
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .navbar-heading {
+    margin-right: auto; /* Pushes the heading to the left */
+  }
+  
+  .navbar-icon {
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  /* Media query for responsive layout */
+  @media (max-width: 768px) {
+    .navbar-container {
+      flex-wrap: wrap;
+    }
+  
+    .navbar-heading {
+      margin-bottom: 10px;
+    }
+  
+    .navbar-icon {
+      display: none;
+    }
+  
+    .chakra-breadcrumb {
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+
+  @keyframes textclip {
+    0% {
+      background-position: 0% center;
+    }
+    10% {
+        background-position: 10% center;
+    }
+    20% {
+        background-position: 20% center;
+    }
+    30% {
+      background-position: 30% center;
+    }
+    40% {
+      background-position: 40% center;
+    }
+    50% {
+        background-position: 50% center;
+    }
+    60% {
+        background-position: 60% center;
+    }
+    70% {
+        background-position: 70% center;
+    }
+    80% {
+        background-position: 80% center;
+    }
+    90% {
+        background-position: 90% center;
+    }
+    100% {
+        background-position: 100% center;
+    }
+  }
