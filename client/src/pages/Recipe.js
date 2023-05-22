@@ -1,37 +1,44 @@
 import React, { useState } from "react";
-import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input} from "@chakra-ui/react";
+import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input, Button} from "@chakra-ui/react";
 import { useParams, Link } from 'react-router-dom'
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_RECIPE } from "../utils/queries";
 import '../styles/style.css'
 import auth from "../utils/auth";
+import { ADD_COMMENT } from "../utils/mutations";
 
 export default function Recipe() {
   const { recipeId } = useParams()
   const [comment, setComment] = useState('')
 
+const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}})
+    const [addComment] = useMutation(ADD_COMMENT)
 
-  const { loading, data } = useQuery(QUERY_RECIPE, {
-    variables: { recipeId },
-    onError: (error) => console.log(error)
-  })
+    //TODO: Use a mutation hook to push the comment into the database
+    const handleCommentChange = (e) => {
+        setComment(e.target.value)
+    }
 
-  const handleCommentChange = (e) => {
-    setComment(e.target.value)
-  }
+    const handleCommentSubmit = (e) => {
+        e.preventDefault()
+        if (comment.length > 1) {
+            addComment({ variables: { recipeId: recipeId, commentText: comment } })
+            setComment('')
+            refetch().then(() => {console.log("Data refetched")})
+        }
 
-  if (loading) {
-    return <Spinner />
-  }
+    }
+
+    if (loading) {
+        return <Spinner />
+    }
 
   const recipe = data?.recipe || null
+  
   console.log(recipe)
-
   if (!recipe) {
     return <p>Something went wrong</p>
   }
-
-  console.log(data)
 
   return (
     <div>
@@ -77,14 +84,15 @@ export default function Recipe() {
         </OrderedList>
       </Container>
       <Container>
+        <h1 className="stepList">Comments:</h1>
         {recipe?.comments ? (
           <Container>
-            <UnorderedList>
-              {recipe.comments.map((comment) => (
-                <ListItem key={comment.createdAt}>
-                  <UnorderedList>
+            <UnorderedList listStyleType="none">
+              {recipe.comments.map((comment, index) => (
+                <ListItem key={index}>
+                  <UnorderedList listStyleType="none">
                     <ListItem>
-                      {comment.commentAuthor} said this at {comment.createdAt}
+                      {comment.commentAuthor.username} said this at {comment.createdAt}
                     </ListItem>
                     <ListItem>{comment.commentText}</ListItem>
                   </UnorderedList>
@@ -98,6 +106,7 @@ export default function Recipe() {
           </Container>
         )}
         {auth.loggedIn() ? (
+          <React.Fragment>
           <FormControl>
             <Input
               type="textarea"
@@ -106,6 +115,8 @@ export default function Recipe() {
               onChange={handleCommentChange}
             />
           </FormControl>
+          <Button onClick={handleCommentSubmit}>Submit</Button>
+          </React.Fragment>
         ) : (
           <Text>
             You must be logged in to post. <Link to="/login">Log in</Link> or{" "}

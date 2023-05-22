@@ -15,11 +15,18 @@ const resolvers = {
             return Recipes.find(params).sort({ createdAt: -1 }).populate('recipeAuthor');
         },
         recipe: async (parent, { recipeId }) => {
-            return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor');
+            return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor').populate({path: 'comments.commentAuthor', model: "User"});
         },
         suggestRecipe: async (parent, { name }) => {
-            const regex = new RegExp(`^${name}`, "i")
-            const recipes = await Recipes.find({ name: { $regex: regex } }).populate('recipeAuthor')
+            const regexStarting = new RegExp(`^${name}`, "i")
+            const recipes = await Recipes.find({ name: { $regex: regexStarting } }).populate('recipeAuthor')
+
+            if (recipes.length == 0){
+                const regexAnywhere = new RegExp(name, 'i')
+                const recipes = await Recipes.find({name: { $regex: regexAnywhere}}).populate('recipeAuthor')
+
+                return recipes
+            }
 
             return recipes
         },
@@ -97,12 +104,13 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         addComment: async (parent, { recipeId, commentText }, context) => {
+            console.log(context.user._id)
             if (context.user) {
                 return Recipes.findOneAndUpdate(
                     { _id: recipeId },
                     {
-                        $addToSet: {
-                            comments: { commentText, commentAuthor: context.user.username },
+                        $push: {
+                            comments: { commentText, commentAuthor: context.user._id },
                         },
                     },
                     {
