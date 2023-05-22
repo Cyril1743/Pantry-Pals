@@ -23,6 +23,7 @@ const typeDefs = gql`
     ingredients: [Ingredients]
     steps: [Steps]
     recipeAuthor: User
+    comments: [Comments]
   }
 
   type Ingredients {

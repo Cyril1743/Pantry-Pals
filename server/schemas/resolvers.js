@@ -18,8 +18,15 @@ const resolvers = {
             return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor');
         },
         suggestRecipe: async (parent, { name }) => {
-            const regex = new RegExp(`^${name}`, "i")
-            const recipes = await Recipes.find({ name: { $regex: regex } }).populate('recipeAuthor')
+            const regexStarting = new RegExp(`^${name}`, "i")
+            const recipes = await Recipes.find({ name: { $regex: regexStarting } }).populate('recipeAuthor')
+
+            if (recipes.length == 0){
+                const regexAnywhere = new RegExp(name, 'i')
+                const recipes = await Recipes.find({name: { $regex: regexAnywhere}}).populate('recipeAuthor')
+
+                return recipes
+            }
 
             return recipes
         },
