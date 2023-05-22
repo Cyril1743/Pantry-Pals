@@ -52,12 +52,10 @@ const recipeSchema = new Schema({
             minlength: 1,
             maxlength: 1000,
           },
-          commentAuthor: [
-            {
+          commentAuthor: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-            }
-        ],
+            },
           createdAt: {
             type: Date,
             default: Date.now,

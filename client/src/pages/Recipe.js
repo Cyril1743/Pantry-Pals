@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-<<<<<<< Updated upstream
-import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input} from "@chakra-ui/react";
-=======
-import { Container, Heading, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, Divider, UnorderedList, FormControl, Input, Button } from "@chakra-ui/react";
->>>>>>> Stashed changes
+import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input, Button} from "@chakra-ui/react";
 import { useParams, Link } from 'react-router-dom'
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_RECIPE } from "../utils/queries";
@@ -12,31 +8,11 @@ import auth from "../utils/auth";
 import { ADD_COMMENT } from "../utils/mutations";
 
 export default function Recipe() {
-<<<<<<< Updated upstream
   const { recipeId } = useParams()
   const [comment, setComment] = useState('')
-=======
-    const { recipeId } = useParams()
-    const [comment, setComment] = useState('')
 
->>>>>>> Stashed changes
-
-
-<<<<<<< Updated upstream
-  const { loading, data } = useQuery(QUERY_RECIPE, {
-    variables: { recipeId },
-    onError: (error) => console.log(error)
-  })
-
-  const handleCommentChange = (e) => {
-    setComment(e.target.value)
-  }
-
-  if (loading) {
-    return <Spinner />
-  }
-=======
-    const [addComment, { error }] = useMutation(ADD_COMMENT)
+const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}})
+    const [addComment] = useMutation(ADD_COMMENT)
 
     //TODO: Use a mutation hook to push the comment into the database
     const handleCommentChange = (e) => {
@@ -47,6 +23,8 @@ export default function Recipe() {
         e.preventDefault()
         if (comment.length > 1) {
             addComment({ variables: { recipeId: recipeId, commentText: comment } })
+            setComment('')
+            refetch().then(() => {console.log("Data refetched")})
         }
 
     }
@@ -55,18 +33,12 @@ export default function Recipe() {
         return <Spinner />
     }
 
-    const recipe = data?.recipe || null
->>>>>>> Stashed changes
-
   const recipe = data?.recipe || null
+  
   console.log(recipe)
-
-<<<<<<< Updated upstream
   if (!recipe) {
     return <p>Something went wrong</p>
   }
-
-  console.log(data)
 
   return (
     <div>
@@ -74,80 +46,6 @@ export default function Recipe() {
           <h1>{recipe.name}</h1>
           <Text>{recipe.description}</Text>
           <p>By: {recipe.recipeAuthor.username}</p>
-=======
-    return (
-        <Container>
-            <Heading size="md">{recipe.name}</Heading>
-            <p>by: {recipe.recipeAuthor.username}</p>
-            <Text>{recipe.description}</Text>
-            <TableContainer>
-                <Table variant="simple">
-                    <Thead>
-                        <Tr>
-                            <Th>
-                                Name:
-                            </Th>
-                            <Th>
-                                Amount:
-                            </Th>
-                            <Th>
-                                Measurement:
-                            </Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {recipe.ingredients.map((ingredient, index) => {
-                            return (<Tr key={index}>
-                                <Td>{ingredient.ingredientName}</Td>
-                                <Td>{ingredient.ingredientAmount}</Td>
-                                <Td>{ingredient.ingredientUnit}</Td>
-                            </Tr>
-                            )
-                        })}
-                    </Tbody>
-                </Table>
-            </TableContainer>
-            <Divider />
-            <Heading size="sm">Steps:</Heading>
-            <OrderedList>
-                {recipe.steps.map(step => <ListItem key={step.order}>{step.stepText}</ListItem>)}
-            </OrderedList>
-            <Heading size="md">Comments:</Heading>
-            {recipe?.comments ? (
-                <Container>
-                    <UnorderedList>
-                        {recipe.comments.map((comment) => {
-                            return (<ListItem key={comment._id}>
-                                <UnorderedList>
-                                    <ListItem>{comment.commentAuthor} said this at {comment.createdAt}</ListItem>
-                                    <ListItem>{comment.commentText}</ListItem>
-                                </UnorderedList>
-                            </ListItem>
-                            )
-                        })}
-                    </UnorderedList>
-                </Container>
-            ) : (
-                <Container>
-                    <Text>No comments yet. Add yours below</Text>
-                </Container>
-            )
-            }{auth.loggedIn() ? (
-                <Container>
-                <FormControl>
-                    <Input
-                        type="textarea"
-                        value={comment}
-                        placeholder="Thoughts?"
-                        onChange={handleCommentChange}
-                    />
-                </FormControl>
-                <Button onClick={handleCommentSubmit}>Submit</Button>
-                </Container>
-            ) : (
-                <Text>You must be logged in to post. <Link to="/login">Log in</Link> or <Link to='/signUp'>Sign up</Link></Text>
-            )}
->>>>>>> Stashed changes
         </Container>
             <Container className="ingredientsContainer">
               <TableContainer className="measurementStyling">
@@ -186,14 +84,15 @@ export default function Recipe() {
         </OrderedList>
       </Container>
       <Container>
+        <h1 className="stepList">Comments:</h1>
         {recipe?.comments ? (
           <Container>
-            <UnorderedList>
-              {recipe.comments.map((comment) => (
-                <ListItem key={comment.createdAt}>
-                  <UnorderedList>
+            <UnorderedList listStyleType="none">
+              {recipe.comments.map((comment, index) => (
+                <ListItem key={index}>
+                  <UnorderedList listStyleType="none">
                     <ListItem>
-                      {comment.commentAuthor} said this at {comment.createdAt}
+                      {comment.commentAuthor.username} said this at {comment.createdAt}
                     </ListItem>
                     <ListItem>{comment.commentText}</ListItem>
                   </UnorderedList>
@@ -207,6 +106,7 @@ export default function Recipe() {
           </Container>
         )}
         {auth.loggedIn() ? (
+          <React.Fragment>
           <FormControl>
             <Input
               type="textarea"
@@ -215,6 +115,8 @@ export default function Recipe() {
               onChange={handleCommentChange}
             />
           </FormControl>
+          <Button onClick={handleCommentSubmit}>Submit</Button>
+          </React.Fragment>
         ) : (
           <Text>
             You must be logged in to post. <Link to="/login">Log in</Link> or{" "}

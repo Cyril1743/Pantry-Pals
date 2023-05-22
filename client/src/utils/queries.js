@@ -93,5 +93,12 @@ query recipe($recipeId: ID!) {
     recipeAuthor {
       username
     }
+    comments {
+      commentAuthor {
+        username
+      }
+      commentText
+      createdAt
+    }
   }
 }`

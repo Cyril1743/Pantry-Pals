@@ -3,7 +3,7 @@ div, h1, h2, h3, h4 , h5 {
     font-family: 'Lobster', cursive;
 }
 
-.Brand, .footerLink, .stepsHeader, .recipeHeader {
+.Brand, .footerLink, .stepsHeader, .recipeHeader, .commentHeader {
     padding-top: 2px;
     background-image: linear-gradient(
           34deg,

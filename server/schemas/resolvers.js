@@ -15,7 +15,7 @@ const resolvers = {
             return Recipes.find(params).sort({ createdAt: -1 }).populate('recipeAuthor');
         },
         recipe: async (parent, { recipeId }) => {
-            return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor');
+            return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor').populate({path: 'comments.commentAuthor', model: "User"});
         },
         suggestRecipe: async (parent, { name }) => {
             const regexStarting = new RegExp(`^${name}`, "i")
@@ -104,12 +104,13 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         addComment: async (parent, { recipeId, commentText }, context) => {
+            console.log(context.user._id)
             if (context.user) {
                 return Recipes.findOneAndUpdate(
                     { _id: recipeId },
                     {
-                        $addToSet: {
-                            comments: { commentText, commentAuthor: context.user.username },
+                        $push: {
+                            comments: { commentText, commentAuthor: context.user._id },
                         },
                     },
                     {
