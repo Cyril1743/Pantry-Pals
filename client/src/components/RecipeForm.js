@@ -16,8 +16,10 @@ export default function RecipeForm() {
     const [ingredientAmount, setIngredientAmount] = useState('');
     const [ingredientUnit, setIngredientUnit] = useState('');
     const [ingredients, setIngredients] = useState([]);
-    const [steps, setSteps] = useState([]);
+    const [stepsArray, setSteps] = useState([]);
     const [stepText, setStepText] = useState('');
+    const [stepOrder, setStepOrder] = useState('');
+    const [steps, setFinalSteps] = useState([]);
 
     const [addRecipe, { error }] = useMutation(ADD_RECIPE);
 
@@ -30,7 +32,7 @@ export default function RecipeForm() {
     
     const handleAddStep = (e) => {
         setStepText('')
-        setSteps([...steps, {stepText}])
+        setSteps([...stepsArray, {stepText}])
     }
 
     const removeIngrdnt = (ingrdnt) => {
@@ -45,6 +47,17 @@ export default function RecipeForm() {
         event.preventDefault();
 
         try {
+            const finalSteps = () => {
+                stepsArray.forEach((step, i) => {
+                setStepOrder(i+1)
+                setStepText(step.stepText)
+                setFinalSteps([...steps, {stepText, stepOrder}])
+                setStepOrder('')
+                setStepText('')
+            })} 
+
+            finalSteps()
+
             const data = await addRecipe({
                 variables: { name, description, servings, ingredients, steps },
             });
@@ -58,6 +71,7 @@ export default function RecipeForm() {
             setIngredientUnit('');
             setSteps([]);
             setStepText('');
+            setStepOrder('');
 
         } catch (err) {
             console.error(err);
@@ -113,9 +127,9 @@ export default function RecipeForm() {
 
                     <Stack direction='column'>
                         <UnorderedList styleType='none'>
-                            {ingredients.map((ingrdnt) => {
+                            {ingredients.map((ingrdnt, i) => {
                                 return (
-                                    <React.Fragment key={ingrdnt}>
+                                    <React.Fragment key={i}>
                                         <ListItem>{ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit}</ListItem>
                                         <Button onClick={() => removeIngrdnt(ingrdnt)}>
                                             <span role='img' aria-label='delete'>
@@ -153,9 +167,9 @@ export default function RecipeForm() {
 
                     <Stack direction='column'>
                         <OrderedList styleType='none'>
-                            {steps.map((step, i) => {
+                            {stepsArray.map((step, i) => {
                                 return (
-                                    <React.Fragment key={step}>
+                                    <React.Fragment key={i}>
                                         <ListItem>Step {i+1} - {step.stepText}</ListItem>
                                         <Button onClick={() => removeStep(step)}>
                                             <span role='img' aria-label='delete'>
@@ -178,7 +192,7 @@ export default function RecipeForm() {
                         </Button>
                     </Stack>
 
-                    <Button mb={10} onClick={handleFormSubmit}>Publish</Button>
+                    <Button mt={10} mb={50} onClick={handleFormSubmit}>Publish</Button>
 
                 </React.Fragment>
             ) : (
@@ -187,8 +201,3 @@ export default function RecipeForm() {
         </Container>
     )
 };
-
-// TODO: add these lines to the Profile.js in the pages folder
-// import RecipeForm from '../components/RecipeForm'
-/* <div>{username ? `List of Recipes` : <RecipeForm />}</div> */
-
