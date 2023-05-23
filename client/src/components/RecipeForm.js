@@ -207,7 +207,7 @@ export default function RecipeForm() {
                         </div>
                     </div>
 
-                    <Button id="publishRecipe" mb={50} onClick={handleFormSubmit}>Publish Recipe</Button>
+                    <Button id="publishRecipe" mb={1} onClick={handleFormSubmit}>Publish Recipe</Button>
                 </>
             ) : (
                 <h2>Something went wrong. Please log in to create a recipe.</h2>
