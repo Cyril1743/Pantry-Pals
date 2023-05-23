@@ -43,23 +43,25 @@ export default function RecipeForm() {
         setSteps((prevSteps) => prevSteps.filter((item) => item !== step))
     }
 
+    const finalStepsArray = []
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
             const finalSteps = () => {
                 stepsArray.forEach((step, i) => {
-                setStepOrder(i+1)
-                setStepText(step.stepText)
-                setFinalSteps([...steps, {stepText, stepOrder}])
-                setStepOrder('')
-                setStepText('')
+                console.log(i)
+                console.log(step.stepText)
+                finalStepsArray.push({stepText: step.stepText, order: i+1})
             })} 
 
             finalSteps()
 
+            console.log(name, description, servings, ingredients, finalStepsArray)
+
             const data = await addRecipe({
-                variables: { name, description, servings, ingredients, steps },
+                variables: { name, description, servings, ingredients, steps: finalStepsArray },
             });
 
             setName('');
@@ -71,7 +73,7 @@ export default function RecipeForm() {
             setIngredientUnit('');
             setSteps([]);
             setStepText('');
-            setStepOrder('');
+            setFinalSteps([]);
 
         } catch (err) {
             console.error(err);
@@ -87,7 +89,7 @@ export default function RecipeForm() {
     }
 
     const servingsChange = (e) => {
-        setServings(e.target.value)
+        setServings(parseInt(e.target.value))
     }
 
     const ingredientNameChange = (e) => {
@@ -95,7 +97,7 @@ export default function RecipeForm() {
     }
 
     const ingredientAmountChange = (e) => {
-        setIngredientAmount(e.target.value)
+        setIngredientAmount(parseFloat(e.target.value))
     }
 
     const ingredientUnitChange = (e) => {

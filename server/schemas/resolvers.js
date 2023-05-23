@@ -78,6 +78,7 @@ const resolvers = {
         },
         addRecipe: async (parent, { name, description, servings, ingredients, steps }, context) => {
             if (context.user) {
+
                 const recipe = await Recipes.create({
                     name,
                     description,
