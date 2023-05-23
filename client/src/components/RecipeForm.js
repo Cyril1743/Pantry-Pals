@@ -18,8 +18,6 @@ export default function RecipeForm() {
     const [ingredients, setIngredients] = useState([]);
     const [stepsArray, setSteps] = useState([]);
     const [stepText, setStepText] = useState('');
-    const [stepOrder, setStepOrder] = useState('');
-    const [steps, setFinalSteps] = useState([]);
 
     const [addRecipe, { error }] = useMutation(ADD_RECIPE);
 
@@ -43,23 +41,22 @@ export default function RecipeForm() {
         setSteps((prevSteps) => prevSteps.filter((item) => item !== step))
     }
 
+    // empty array to hold final array of step objects
+    const finalStepsArray = []
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
             const finalSteps = () => {
                 stepsArray.forEach((step, i) => {
-                setStepOrder(i+1)
-                setStepText(step.stepText)
-                setFinalSteps([...steps, {stepText, stepOrder}])
-                setStepOrder('')
-                setStepText('')
+                finalStepsArray.push({stepText: step.stepText, order: i+1})
             })} 
 
             finalSteps()
 
             const data = await addRecipe({
-                variables: { name, description, servings, ingredients, steps },
+                variables: { name, description, servings, ingredients, steps: finalStepsArray },
             });
 
             setName('');
@@ -71,7 +68,6 @@ export default function RecipeForm() {
             setIngredientUnit('');
             setSteps([]);
             setStepText('');
-            setStepOrder('');
 
         } catch (err) {
             console.error(err);
@@ -87,7 +83,7 @@ export default function RecipeForm() {
     }
 
     const servingsChange = (e) => {
-        setServings(e.target.value)
+        setServings(parseInt(e.target.value))
     }
 
     const ingredientNameChange = (e) => {
@@ -95,7 +91,7 @@ export default function RecipeForm() {
     }
 
     const ingredientAmountChange = (e) => {
-        setIngredientAmount(e.target.value)
+        setIngredientAmount(parseFloat(e.target.value))
     }
 
     const ingredientUnitChange = (e) => {

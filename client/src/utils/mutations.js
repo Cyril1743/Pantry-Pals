@@ -25,7 +25,8 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_RECIPE = gql`
-  mutation addRecipe($name: String!, $description: String!, $servings: Int, $ingredients: [String!], $steps: [String!]) {
+
+  mutation addRecipe($name: String!, $description: String!, $servings: Int, $ingredients: [IngredientsInput!]!, $steps: [StepsInput!]!) {
     addRecipe(name: $name, description: $description, servings: $servings, ingredients: $ingredients, steps: $steps) {
       name
       description
