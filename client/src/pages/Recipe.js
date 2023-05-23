@@ -35,7 +35,6 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
 
   const recipe = data?.recipe || null
   
-  console.log(recipe)
   if (!recipe) {
     return <p>Something went wrong</p>
   }
