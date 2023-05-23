@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormErrorMessage, Alert, AlertTitle, AlertDescription, FormLabel, Button, NumberInput, NumberInputField, Stack } from "@chakra-ui/react";
+import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack } from "@chakra-ui/react";
 import { useMutation } from '@apollo/client';
 
 import { ADD_RECIPE } from '../utils/mutations';
@@ -25,12 +25,12 @@ export default function RecipeForm() {
         setIngredientName('')
         setIngredientAmount('')
         setIngredientUnit('')
-        setIngredients([...ingredients, {ingredientName, ingredientAmount, ingredientUnit}])
+        setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }])
     }
-    
+
     const handleAddStep = (e) => {
         setStepText('')
-        setSteps([...stepsArray, {stepText}])
+        setSteps([...stepsArray, { stepText }])
     }
 
     const removeIngrdnt = (ingrdnt) => {
@@ -50,8 +50,9 @@ export default function RecipeForm() {
         try {
             const finalSteps = () => {
                 stepsArray.forEach((step, i) => {
-                finalStepsArray.push({stepText: step.stepText, order: i+1})
-            })} 
+                    finalStepsArray.push({ stepText: step.stepText, order: i + 1 })
+                })
+            }
 
             finalSteps()
 
@@ -101,99 +102,119 @@ export default function RecipeForm() {
     const stepChange = (e) => {
         setStepText(e.target.value)
     }
-    
+
     return (
-        <Container className="recipeFormContainer">
+        <>
             {Auth.loggedIn() ? (
-                <React.Fragment>
-                    <FormControl isRequired>
-                        <FormLabel>Recipe name</FormLabel>
-                        <Input placeholder='Recipe name' onChange={nameChange} value={name}/>
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel>Description</FormLabel>
-                        <Input placeholder='Short recipe description' onChange={descriptionChange} value={description}/>
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel>Servings</FormLabel>
-                        <NumberInput min={1}>
-                            <NumberInputField onChange={servingsChange} value={servings}/>
-                        </NumberInput>
-                    </FormControl>
+                <>
+                    <div className="row">
+                        <div className='column'>
+                            <FormControl id="recipeStyling" isRequired>
+                                <FormLabel id='recipeLabel'>Recipe name</FormLabel>
+                                <Input placeholder='Recipe name' onChange={nameChange} value={name} />
+                            </FormControl>
+                        </div>
+                        <div className='column'>
+                            <FormControl id="recipeStyling" isRequired>
+                                <FormLabel id='recipeLabel'>Description</FormLabel>
+                                <Input placeholder='Short recipe description' onChange={descriptionChange} value={description} />
+                            </FormControl>
+                        </div>
+                        <div className='column'>
+                            <FormControl id="recipeStyling" isRequired>
+                                <FormLabel id='recipeLabel'>Servings</FormLabel>
+                                <NumberInput max={1000} min={1}>
+                                    <NumberInputField onChange={servingsChange} value={servings} />
+                                    <NumberInputStepper>
+                                        <NumberIncrementStepper />
+                                        <NumberDecrementStepper />
+                                    </NumberInputStepper>
+                                </NumberInput>
+                            </FormControl>
+                        </div>
+                    </div>
 
                     <Stack direction='column'>
-                        <UnorderedList styleType='none'>
-                            {ingredients.map((ingrdnt, i) => {
-                                return (
-                                    <React.Fragment key={i}>
-                                        <ListItem>{ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit}</ListItem>
-                                        <Button onClick={() => removeIngrdnt(ingrdnt)}>
-                                            <span role='img' aria-label='delete'>
-                                                ✖️
-                                            </span>
-                                        </Button>
-                                    </React.Fragment>)
-                            })}
-                        </UnorderedList>
-                        <Box className='IngredientBox'>
-                            <FormControl isRequired>
-                                <FormLabel>Ingredient Name</FormLabel>
-                                <Input placeholder='Ingredient Name' onChange={ingredientNameChange} value={ingredientName}/>
-                            </FormControl>
-                            <FormControl isRequired>
-                                <FormLabel>Ingredient Amount</FormLabel>
-                                <Input placeholder='Ingredient Amount' onChange={ingredientAmountChange} value={ingredientAmount}/>
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Units</FormLabel>
-                                <Input onChange={ingredientUnitChange} value={ingredientUnit}/>
-                                <FormHelperText>
-                                    Leave blank if units are not applicable to this ingredient
-                                </FormHelperText>
-                            </FormControl>
-                        </Box>
-                        <Button onClick={handleAddIngredient} >
-                            <span role='img' aria-label='add'>
-                                &#10133;
-                            </span>
-                        </Button>
-                        
+                        <div className="row">
+                            <div className='column'>
+                                <FormControl id='recipeStyling' isRequired>
+                                    <FormLabel id='recipeLabel'>Ingredient Name</FormLabel>
+                                    <Input placeholder='Ingredient Name' onChange={ingredientNameChange} value={ingredientName} />
+                                </FormControl>
+                            </div>
+                            <div className='column'>
+                                <FormControl id='recipeStyling' isRequired>
+                                    <FormLabel id='recipeLabel'>Ingredient Amount</FormLabel>
+                                    <NumberInput max={1000} min={1}>
+                                        <NumberInputField placeholder='Ingredient Amount' onChange={ingredientAmountChange} value={ingredientAmount} />
+                                        <NumberInputStepper>
+                                            <NumberIncrementStepper />
+                                            <NumberDecrementStepper />
+                                        </NumberInputStepper>
+                                    </NumberInput>
+                                </FormControl>
+                            </div>
+                            <div className='column'>
+                                <FormControl id='recipeStyling'>
+                                    <FormLabel id='recipeLabel'>Units</FormLabel>
+                                    <Input onChange={ingredientUnitChange} value={ingredientUnit} />
+                                    <FormHelperText>
+                                        Leave blank if units are not applicable to this ingredient
+                                    </FormHelperText>
+                                </FormControl>
+                            </div>
+                            <div className='row2'>
+                                <div className='column'>
+                                    <Button id='addIngredientButton' onClick={handleAddIngredient}>Add Ingredient</Button>
+                                </div>
+                                <div className='column'>
+                                <h1 className="ingredientsTitle">Ingredients Added:</h1>
+                                    <UnorderedList styleType='none'>
+                                        {ingredients.map((ingrdnt, i) => {
+                                            return (
+                                                <div key={i} className='ingredientItem'>
+                                                    <ListItem className='buttonContainer'>{ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit}</ListItem>
+                                                    <Button className='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button>
+                                                </div>)
+                                        })}
+                                    </UnorderedList>
+                                </div>
+                            </div>
+                        </div>
                     </Stack>
+                    <div className="row2">
+                        <div className='column'>
+                                <FormControl id="recipeStyling" isRequired>
+                                    <FormLabel id='recipeLabel'>Step</FormLabel>
+                                    <Input onChange={stepChange} value={stepText} />
+                                    <FormHelperText>
+                                        Break down each step of the process then click 'Add Step'
+                                    </FormHelperText>
+                                </FormControl>
+                                <Button id="addIngredientButton" mt={3} onClick={handleAddStep}>Add Step</Button>
+                        </div>
+                        <div className='column'>
+                        <h1 className='ingredientsTitle'>Steps Added:</h1>
+                            <OrderedList styleType='none'>
+                                {stepsArray.map((step, i) => {
+                                    return (
+                                        <div key={i} className='ingredientItem'>
+                                            <ListItem className='buttonContainer'>Step {i + 1} - {step.stepText}</ListItem>
+                                            <Button className='deleteButton' onClick={() => removeStep(step)}>✖️</Button>
+                                        </div>)
+                                })}
+                            </OrderedList>
+                        </div>
+                    </div>
 
-
-                    <Stack direction='column'>
-                        <OrderedList styleType='none'>
-                            {stepsArray.map((step, i) => {
-                                return (
-                                    <React.Fragment key={i}>
-                                        <ListItem>Step {i+1} - {step.stepText}</ListItem>
-                                        <Button onClick={() => removeStep(step)}>
-                                            <span role='img' aria-label='delete'>
-                                                ✖️
-                                            </span>
-                                        </Button>
-                                    </React.Fragment>)
-                            })}
-                        </OrderedList>
-                        <Box className='stepBox'>
-                        <FormControl isRequired>
-                            <FormLabel>Step</FormLabel>
-                            <Input onChange={stepChange} value={stepText}/>
-                        </FormControl>
-                        </Box>
-                        <Button onClick={handleAddStep}>
-                            <span role='img' aria-label='add'>
-                                &#10133;
-                            </span>
-                        </Button>
-                    </Stack>
-
-                    <Button mt={10} mb={50} onClick={handleFormSubmit}>Publish</Button>
-
-                </React.Fragment>
+                    <Button id="publishRecipe" mb={50} onClick={handleFormSubmit}>Publish Recipe</Button>
+                </>
             ) : (
                 <h2>Something went wrong. Please log in to create a recipe.</h2>
             )}
-        </Container>
+        </>
     )
 };
+
+
+

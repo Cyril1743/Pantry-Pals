@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container } from '@chakra-ui/react'
 import { Navigate, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import RecipeForm from '../components/RecipeForm'
@@ -34,9 +33,10 @@ export default function Profile() {
     }
 
     return (
-        <Container className='pageContent'>
-            <h2>{username ? `${profile.username}'s` : 'Your'} Profile</h2>
+        <>
+        <div className='profileContainer'>
             <div>{username ? `List of Recipes` : <RecipeForm />}</div>
-        </Container>
+        </div>
+        </>
     )
 }
