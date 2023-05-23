@@ -42,3 +42,21 @@ export const ADD_RECIPE = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+mutation addComment($recipeId: ID!, $commentText: String!) {
+  addComment(recipeId: $recipeId, commentText: $commentText) {
+    name,
+    description,
+    servings,
+    ingredients {
+      ingredientName
+      ingredientAmount
+      ingredientUnit
+    }
+    steps {
+      order
+      stepText
+    }
+  }
+}`
