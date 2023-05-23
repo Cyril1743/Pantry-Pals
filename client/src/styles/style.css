@@ -3,7 +3,7 @@ div, h1, h2, h3, h4 , h5 {
     font-family: 'Lobster', cursive;
 }
 
-.Brand, .footerLink, .stepsHeader, .recipeHeader, .commentHeader {
+.Brand, .footerLink, .stepsHeader, .recipeHeader, .Comments {
     padding-top: 2px;
     background-image: linear-gradient(
           34deg,
@@ -76,7 +76,7 @@ div, h1, h2, h3, h4 , h5 {
     box-shadow: #FFFDCA 0px 0px 0px 2px,#FF9191 0px 4px 6px -1px;
 }
 
-#loginForm, #loginButton, #navLink, #signupForm, #signupButton {
+#loginForm, #loginButton, #navLink, #signupForm, #signupButton, #recipeSearch, #ingredientSearch {
     border-radius: 10px;
     box-shadow: #FFFDCA 0px 0px 0px 2px,#FF9191 0px 4px 6px -1px;
 }
@@ -148,7 +148,7 @@ div, h1, h2, h3, h4 , h5 {
   }
 
   .stepsHeader {
-    font-size:6.0em;
+    font-size:5.0em;
     text-align: center;
   }
 
@@ -157,8 +157,7 @@ div, h1, h2, h3, h4 , h5 {
   }
 
   .stepsContainer {
-    margin-top:50px;
-    max-width: 50%;
+    margin-top:10px;
     font-family: 'Lobster', cursive;
     color:#FF9191;
     font-size:1.3em;
@@ -166,11 +165,39 @@ div, h1, h2, h3, h4 , h5 {
     align-items: center;
   }
 
-  
-  .pageContent {
-    margin-top: 100px;
-    color: #f556567b;
+  #homeForms {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height:100vh;
   }
+
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh
+  }
+
+  .Comments {
+    text-align: center;
+    color: #FF9191;
+    font-size: 35px;
+    padding: 20px;
+  }
+
+  .loginMessage {
+    text-align: center;
+    font-size:35px;
+    color: #ff9191;
+    padding-bottom: 30px;
+  }
+
+  .loginLink {
+    color: #5E2BFF;
+  }
+  
+
 
 
 

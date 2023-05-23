@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import '../styles/style.css'
 
 export default function Home() {
-    const [expanded, makeExpanded] = useState(false)
     const [searchName, setSearchName] = useState('')
     const [searchIngrdnts, setSearchIngrdnts] = useState([])
     const [currentIngrdnt, setCurrentIngrdnt] = useState('')
@@ -37,12 +36,6 @@ export default function Home() {
     })
     const [ingrdntsSuggestions, setIngrdntsSuggestions] = useState([])
 
-    //UseEffect to handle the click on the initial search
-    useEffect(() => {
-        if (expanded) {
-            inputRef.current.focus()
-        }
-    }, [expanded])
 
     //UseEffect for searching by name
     useEffect(() => {
@@ -85,51 +78,48 @@ export default function Home() {
     }
 
     return (
-        <div className="background">
-            {expanded ?
-                <Container>
-                    <Input ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
-                    <UnorderedList listStyleType='none'>
-                        {suggestions.map((recipe) => <ListItem key={recipe._id}><Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link></ListItem>)}
-                    </UnorderedList>
-                    <Input placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
-                    <Button onClick={searchIngrdntsChange}>
-                        <span role='img' aria-label='add'>
-                            &#10133;
-                        </span>
-                    </Button>
-                    <UnorderedList styleType='none'>
-                        {searchIngrdnts.map((ingrdnt) => {
-                            return (
-                                <React.Fragment key={ingrdnt}>
-                                    <ListItem>{ingrdnt}</ListItem>
-                                    <Button onClick={() => removeIngrdnt(ingrdnt)}>
-                                        <span role='img' aria-label='delete'>
-                                            ✖️
-                                        </span>
-                                    </Button>
-                                </React.Fragment>)
-                        })}
-                    </UnorderedList>
-                    <UnorderedList styleType='none'>
-                        {ingrdntsSuggestions.map((recipe) => {
-                            return (
-                                <ListItem key={recipe._id}>
-                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
-                                    <UnorderedList styleType="none">
-                                        {recipe.ingredients.map((ingredient) => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName}</ListItem>)}
-                                    </UnorderedList>
-                                </ListItem>
-                            )
-                        })}
-                    </UnorderedList>
-                </Container>
-
-                :
-                <Container>
-                    <Input placeholder='Your next craving' value={searchName} readOnly onClick={() => makeExpanded(!expanded)} />
-                </Container>
-            }
-        </div>
+        <div>
+        <Container id="homeForms">
+          <div id="formContainer">
+            <form>
+              <Input id="recipeSearch" ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
+            </form>
+            <form>
+              <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
+              <Button onClick={searchIngrdntsChange}>
+                <span role='img' aria-label='add'>
+                  &#10133;
+                </span>
+              </Button>
+            </form>
+          </div>
+          <UnorderedList>
+            {suggestions.map((recipe) => (
+              <ListItem key={recipe._id}>
+                <Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
+              </ListItem>
+            ))}
+          </UnorderedList>
+          <UnorderedList styleType='none'>
+            {searchIngrdnts.map((ingrdnt) => (
+              <React.Fragment key={ingrdnt}>
+                <ListItem>{ingrdnt}</ListItem>
+                <Button onClick={() => removeIngrdnt(ingrdnt)}>
+                  <span role='img' aria-label='delete'>
+                    ✖️
+                  </span>
+                </Button>
+              </React.Fragment>
+            ))}
+          </UnorderedList>
+          <UnorderedList styleType='none'>
+            {ingrdntsSuggestions.map((recipe) => (
+              <ListItem key={recipe._id}>
+                <Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
+              </ListItem>
+            ))}
+          </UnorderedList>
+        </Container>
+      </div>
     )
 }

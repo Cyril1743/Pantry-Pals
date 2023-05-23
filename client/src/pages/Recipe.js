@@ -76,7 +76,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
               </TableContainer>
             </Container>
       <Container className="stepsContainer">
-        <h1 className="stepsHeader">Steps:</h1>
+        <h1 className="stepsHeader">Steps</h1>
         <OrderedList className="stepsList">
           {recipe.steps.map((step) => (
             <ListItem key={step.order}>{step.stepText}</ListItem>
@@ -101,8 +101,8 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
             </UnorderedList>
           </Container>
         ) : (
-          <Container>
-            <Text>No comments yet. Add yours below</Text>
+          <Container className="Comments">
+            <Text>No comments yet. </Text>
           </Container>
         )}
         {auth.loggedIn() ? (
@@ -118,9 +118,9 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
           <Button onClick={handleCommentSubmit}>Submit</Button>
           </React.Fragment>
         ) : (
-          <Text>
-            You must be logged in to post. <Link to="/login">Log in</Link> or{" "}
-            <Link to="/signUp">Sign up</Link>
+          <Text className="loginMessage">
+            You must be logged in to post or comment.<Link className="loginLink" to="/login"> Log in</Link> or{" "}
+            <Link className="loginLink" to="/signUp">Sign up</Link>
           </Text>
         )}
       </Container>
