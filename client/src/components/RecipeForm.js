@@ -18,8 +18,6 @@ export default function RecipeForm() {
     const [ingredients, setIngredients] = useState([]);
     const [stepsArray, setSteps] = useState([]);
     const [stepText, setStepText] = useState('');
-    const [stepOrder, setStepOrder] = useState('');
-    const [steps, setFinalSteps] = useState([]);
 
     const [addRecipe, { error }] = useMutation(ADD_RECIPE);
 
@@ -43,6 +41,7 @@ export default function RecipeForm() {
         setSteps((prevSteps) => prevSteps.filter((item) => item !== step))
     }
 
+    // empty array to hold final array of step objects
     const finalStepsArray = []
 
     const handleFormSubmit = async (event) => {
@@ -51,14 +50,10 @@ export default function RecipeForm() {
         try {
             const finalSteps = () => {
                 stepsArray.forEach((step, i) => {
-                console.log(i)
-                console.log(step.stepText)
                 finalStepsArray.push({stepText: step.stepText, order: i+1})
             })} 
 
             finalSteps()
-
-            console.log(name, description, servings, ingredients, finalStepsArray)
 
             const data = await addRecipe({
                 variables: { name, description, servings, ingredients, steps: finalStepsArray },
@@ -73,7 +68,6 @@ export default function RecipeForm() {
             setIngredientUnit('');
             setSteps([]);
             setStepText('');
-            setFinalSteps([]);
 
         } catch (err) {
             console.error(err);
