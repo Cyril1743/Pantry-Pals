@@ -3,28 +3,28 @@ import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, 
 import { useParams, Link } from 'react-router-dom'
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_RECIPE } from "../utils/queries";
-import '../styles/style.css'
+import '../styles/style.css';
 import auth from "../utils/auth";
 import { ADD_COMMENT } from "../utils/mutations";
 
 export default function Recipe() {
-  const { recipeId } = useParams()
-  const [comment, setComment] = useState('')
+  const { recipeId } = useParams();
+  const [comment, setComment] = useState('');
 
-const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}})
-    const [addComment] = useMutation(ADD_COMMENT)
+const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}});
+    const [addComment] = useMutation(ADD_COMMENT);
 
     //TODO: Use a mutation hook to push the comment into the database
     const handleCommentChange = (e) => {
-        setComment(e.target.value)
+        setComment(e.target.value);
     }
 
     const handleCommentSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (comment.length > 1) {
-            addComment({ variables: { recipeId: recipeId, commentText: comment } })
-            setComment('')
-            refetch().then(() => {console.log("Data refetched")})
+            addComment({ variables: { recipeId: recipeId, commentText: comment } });
+            setComment('');
+            refetch().then(() => {console.log("Data refetched")});
         }
 
     }

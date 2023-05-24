@@ -18,39 +18,39 @@ const resolvers = {
             return Recipes.findOne({ _id: recipeId }).populate('recipeAuthor').populate({path: 'comments.commentAuthor', model: "User"});
         },
         suggestRecipe: async (parent, { name }) => {
-            const regexStarting = new RegExp(`^${name}`, "i")
-            const recipes = await Recipes.find({ name: { $regex: regexStarting } }).populate('recipeAuthor')
+            const regexStarting = new RegExp(`^${name}`, "i");
+            const recipes = await Recipes.find({ name: { $regex: regexStarting } }).populate('recipeAuthor');
 
             if (recipes.length == 0){
-                const regexAnywhere = new RegExp(name, 'i')
-                const recipes = await Recipes.find({name: { $regex: regexAnywhere}}).populate('recipeAuthor')
+                const regexAnywhere = new RegExp(name, 'i');
+                const recipes = await Recipes.find({name: { $regex: regexAnywhere}}).populate('recipeAuthor');
 
-                return recipes
+                return recipes;
             }
 
-            return recipes
+            return recipes;
         },
         suggestIngredient: async (parent, { ingredients }) => {
             const recipesData = await Promise.all(ingredients.map(async ingredient => {
-                return await Recipes.find({ 'ingredients.ingredientName': { $regex: ingredient, $options: 'i' } }).populate('recipeAuthor')
-            }))
+                return await Recipes.find({ 'ingredients.ingredientName': { $regex: ingredient, $options: 'i' } }).populate('recipeAuthor');
+            }));
 
-            const recipes = recipesData[0]
+            const recipes = recipesData[0];
 
             const matchedRecipes = recipes.filter((recipe) => {
 
                 if (!recipe.ingredients) {
-                    return false
+                    return false;
                 }
 
                 const recipeIngredients = recipe.ingredients.map(ingredient => ingredient.ingredientName)
                 return ingredients.every(ingredient => {
-                    const regex = new RegExp(ingredient, 'i')
-                    return recipeIngredients.some(recipeIngredient => regex.test(recipeIngredient))
-                })
-            })
+                    const regex = new RegExp(ingredient, 'i');
+                    return recipeIngredients.some(recipeIngredient => regex.test(recipeIngredient));
+                });
+            });
 
-            return matchedRecipes
+            return matchedRecipes;
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -105,7 +105,6 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         addComment: async (parent, { recipeId, commentText }, context) => {
-            console.log(context.user._id)
             if (context.user) {
                 return Recipes.findOneAndUpdate(
                     { _id: recipeId },

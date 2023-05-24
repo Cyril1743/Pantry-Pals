@@ -13,32 +13,32 @@ export default function Login() {
     const [passwordError, setPasswordError] = useState(false)
 
     const handleEmailChange = (e) => {
-        setEmailError(false)
-        setEmail(e.target.value)
+        setEmailError(false);
+        setEmail(e.target.value);
     }
     
 
     const handlePasswordChange = (e) => {
-        setPasswordError(false)
-        setPassword(e.target.value)
+        setPasswordError(false);
+        setPassword(e.target.value);
     }
 
     const handleEmailBlur = (e) => {
         if (e.target.value === ''){
-            return setEmailError(true)
+            return setEmailError(true);
         }
     }
 
     const handlePasswordBlur = (e) => {
         if (e.target.value === ''){
-            return setPasswordError(true)
+            return setPasswordError(true);
         }
     }
 
-    const [login, { error }] = useMutation(LOGIN);
+    const [login] = useMutation(LOGIN);
 
     const handleFormSubmit = async(event) => {
-        event.preventDefault()
+        event.preventDefault();
         if (email !== '' && password !== '') {
             //Use the useMutation hook to validate the form data
             try {
@@ -47,11 +47,11 @@ export default function Login() {
                 });
                 Auth.login(data.login.token);
             } catch (error) {
-                alert("Log in failed. Try again.")
-                console.log(error)
+                alert("Log in failed. Try again.");
+                console.log(error);
             }
-            setEmail('')
-            setPassword('')
+            setEmail('');
+            setPassword('');
         }
     }
 
@@ -94,5 +94,5 @@ export default function Login() {
             </FormControl>
             <Button id="loginButton" my={6} onClick={handleFormSubmit}> Login </Button>
         </Container>
-    )
+    );
 }

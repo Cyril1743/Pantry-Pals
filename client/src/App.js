@@ -1,13 +1,13 @@
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client"
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 
 
 import Home from './pages/Home';
-import NavBar from './components/NavBar'
-import Footer from './components/Footer'
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import SignUp from "./pages/SignUp"
