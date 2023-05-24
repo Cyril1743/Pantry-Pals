@@ -192,20 +192,17 @@ export default function RecipeForm() {
                                 </FormControl>
                                 <Button id="addIngredientButton" mt={3} onClick={handleAddStep}>Add Step</Button>
                         </div>
-                        <div className='column4'>
-                          <div id='addedSteps'>
+                        <div id='addedSteps' className='column4'>
                             <h1 className='ingredientsTitle'>Steps Added:</h1>
                             <OrderedList styleType='none'>
                                 {stepsArray.map((step, i) => {
                                     return (
                                         <div key={i}>
-                                            <ListItem className='buttonContainer'>Step {i + 1} - {step.stepText}</ListItem>
-                                            <Button className='deleteButton' onClick={() => removeStep(step)}>✖️</Button>
+                                            <ListItem id='itemStyling' className='buttonContainer'>Step {i + 1} - {step.stepText} <Button id='deleteButton' onClick={() => removeStep(step)}>✖️</Button></ListItem>
                                         </div>)
                                 })}
                             </OrderedList>
                             </div>
-                        </div>
                     </div>
 
                     <Button id="publishRecipe" mb={1} onClick={handleFormSubmit}>Publish Recipe</Button>
