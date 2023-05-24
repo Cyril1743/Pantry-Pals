@@ -48,8 +48,6 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
       } 
     }
 
-  }
-
   if (loading) {
     return <Spinner />
   }
