@@ -79,20 +79,21 @@ export default function Home() {
 
     return (
         <div>
-        <Container id="homeForms">
-          <div id="formContainer">
+        <div className='row' id='homePage'>
+          <div className='column3'>
             <form>
               <Input id="recipeSearch" ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
             </form>
-            <form>
+          </div>
+          <div className='column3'>
               <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
+          </div>
               <Button onClick={searchIngrdntsChange}>
                 <span role='img' aria-label='add'>
                   &#10133;
                 </span>
               </Button>
-            </form>
-          </div>
+            
           <UnorderedList>
             {suggestions.map((recipe) => (
               <ListItem key={recipe._id}>
@@ -119,7 +120,7 @@ export default function Home() {
               </ListItem>
             ))}
           </UnorderedList>
-        </Container>
+        </div>
       </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input, Button} from "@chakra-ui/react";
+import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input, Button, Center, Divider} from "@chakra-ui/react";
 import { useParams, Link } from 'react-router-dom'
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_RECIPE } from "../utils/queries";
@@ -84,17 +84,17 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
         </OrderedList>
       </Container>
       <Container>
-        <h1 className="stepList">Comments:</h1>
+        <h1 className='stepsHeader'>Comments</h1>
         {recipe?.comments ? (
           <Container>
-            <UnorderedList listStyleType="none">
+            <UnorderedList className="stepsList"  listStyleType="none">
               {recipe.comments.map((comment, index) => (
                 <ListItem key={index}>
                   <UnorderedList listStyleType="none">
-                    <ListItem>
-                      {comment.commentAuthor.username} said this at {comment.createdAt}
+                    <ListItem id='commentStyling'>
+                      {comment.commentAuthor.username} at {comment.createdAt}
                     </ListItem>
-                    <ListItem>{comment.commentText}</ListItem>
+                    <ListItem color={'#FF9191'}>{comment.commentText}</ListItem>
                   </UnorderedList>
                 </ListItem>
               ))}
@@ -106,19 +106,21 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
           </Container>
         )}
         {auth.loggedIn() ? (
-          <React.Fragment>
-          <FormControl>
+          <React.Fragment id='commentContainer'>
+          <FormControl mt={3} id='commentForm'>
             <Input
               type="textarea"
               value={comment}
-              placeholder="Thoughts?"
+              placeholder="Let them know if you loved their recipe!"
               onChange={handleCommentChange}
             />
           </FormControl>
-          <Button onClick={handleCommentSubmit}>Submit</Button>
+          <Center >
+          <Button id='commentButton' onClick={handleCommentSubmit}>Comment</Button>
+          </Center>
           </React.Fragment>
         ) : (
-          <Text className="loginMessage">
+          <Text mt={6} className="loginMessage">
             You must be logged in to post or comment.<Link className="loginLink" to="/login"> Log in</Link> or{" "}
             <Link className="loginLink" to="/signUp">Sign up</Link>
           </Text>
