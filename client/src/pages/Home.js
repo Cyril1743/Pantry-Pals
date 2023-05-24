@@ -144,14 +144,15 @@ export default function Home() {
         </div>
       </div >
     ) : (
-      <Container id="homeForms">
-        <div id='formContainer'>
-          <form>
-            <Input id='loginForm' type='text' readOnly onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' />
+      <div>
+        <div className='row' id='homePage'>
+          <div className='column3'>
+            <form>
+            <Input id="homeInput" type='text' readOnly onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' value={searchName} />
           </form>
+          </div>
         </div>
-      </Container>
-
+      </div>
     )
   );
 }
