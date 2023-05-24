@@ -27,9 +27,9 @@ export default function Profile() {
 
     if (!profile.username) {
         return (
-          <h4>
-            Can not find this profile.
-          </h4>
+            <h4>
+                Can not find this profile.
+            </h4>
         );
     }
 
@@ -60,11 +60,12 @@ export default function Profile() {
                             ))}
                         </UnorderedList>
 
-                        <RecipeForm />
-                    </Container>     
-                }
+
+                            <RecipeForm />
+                        </Container>
+                    }
+                </div>
             </div>
-        </div>
         </>
     );
 }

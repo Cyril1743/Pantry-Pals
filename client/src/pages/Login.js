@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from '@apollo/client';
-import { Container, FormControl, FormLabel, Input, FormErrorMessage, Button} from "@chakra-ui/react";
+import { Container, FormControl, FormLabel, Input, FormErrorMessage, Button } from "@chakra-ui/react";
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 import '../styles/style.css';
@@ -16,7 +16,7 @@ export default function Login() {
         setEmailError(false);
         setEmail(e.target.value);
     }
-    
+
 
     const handlePasswordChange = (e) => {
         setPasswordError(false);
@@ -24,20 +24,20 @@ export default function Login() {
     }
 
     const handleEmailBlur = (e) => {
-        if (e.target.value === ''){
+        if (e.target.value === '') {
             return setEmailError(true);
         }
     }
 
     const handlePasswordBlur = (e) => {
-        if (e.target.value === ''){
+        if (e.target.value === '') {
             return setPasswordError(true);
         }
     }
 
     const [login] = useMutation(LOGIN);
 
-    const handleFormSubmit = async(event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
         if (email !== '' && password !== '') {
             //Use the useMutation hook to validate the form data

@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Input, Container, UnorderedList, ListItem, Button, Text } from '@chakra-ui/react';
+import { Input, Container, UnorderedList, ListItem, Button } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../utils/actions';
+import { useIngredientContext } from '../utils/ingredientContext';
 import '../styles/style.css';
 
 export default function Home() {
@@ -13,6 +15,9 @@ export default function Home() {
   const [currentIngrdnt, setCurrentIngrdnt] = useState('');
   const [expanded, setExpanded] = useState(false)
   const inputRef = useRef(null)
+
+  //Initialize the context variable
+  const { state, dispatch } = useIngredientContext()
 
   //Query for searching by name
   const [searchRecipes] = useLazyQuery(QUERY_RECIPE_NAME, {
@@ -38,6 +43,12 @@ export default function Home() {
     }
   })
   const [ingrdntsSuggestions, setIngrdntsSuggestions] = useState([]);
+
+  useEffect(() => {
+    if (state.length > 0){
+      setSearchIngrdnts(state)
+    }
+  }, [state])
 
   useEffect(() => {
     if (inputRef.current && expanded) {
@@ -72,10 +83,12 @@ export default function Home() {
   const searchIngrdntsChange = () => {
     setCurrentIngrdnt('');
     setSearchIngrdnts([...searchIngrdnts, currentIngrdnt]);
+    dispatch({type: ADD_INGREDIENT, payload: currentIngrdnt})
   }
 
   const removeIngrdnt = (ingrdnt) => {
     setSearchIngrdnts((prevIngrdnts) => prevIngrdnts.filter((item) => item !== ingrdnt));
+    dispatch({type: REMOVE_INGREDIENT, payload: ingrdnt})
   }
 
   const currentIngrdntChange = (e) => {
@@ -96,7 +109,7 @@ export default function Home() {
               <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
               <Button onClick={searchIngrdntsChange}>
                 <span role='img' aria-label='add'>
-                <FaPlus />
+                  <FaPlus />
                 </span>
               </Button>
             </form>
@@ -128,17 +141,18 @@ export default function Home() {
               </ListItem>
             ))}
           </UnorderedList>
-          </div>
+        </div>
       </div >
     ) : (
-    <Container id="homeForms">
-      <div id='formContainer'>
-        <form>
-          <Input id='loginForm' type='text' readOnly onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' />
-        </form>
+      <div>
+        <div className='row' id='homePage'>
+          <div className='column3'>
+            <form>
+            <Input id="homeInput" type='text' readOnly onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' value={searchName} />
+          </form>
+          </div>
+        </div>
       </div>
-    </Container>
-
-  )
+    )
   );
 }

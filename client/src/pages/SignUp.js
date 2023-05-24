@@ -69,7 +69,7 @@ export default function SignUp() {
                 });
         }
     };
-    
+
 
     const handleFormSubmit = async (e) => {
         // Use the useMutation hook to process form data
@@ -92,65 +92,65 @@ export default function SignUp() {
 
     return (
         <Container className="signUpContainer">
-            {uniqueUsernameError && 
-            <Alert>
-                <AlertTitle>Invalid Username</AlertTitle>
-                <AlertDescription>We're sorry, but the username you selected is taken!</AlertDescription>
-            </Alert>
+            {uniqueUsernameError &&
+                <Alert>
+                    <AlertTitle>Invalid Username</AlertTitle>
+                    <AlertDescription>We're sorry, but the username you selected is taken!</AlertDescription>
+                </Alert>
             }
-                <h1 className="loginTitle">Sign Up!</h1>
-                <FormControl m={2} isInvalid={emailError}>
-                    <FormLabel id="signupLabel" htmlFor="email">Email:</FormLabel>
-                    <Input
-                        id="signupForm"
-                        type="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                        onBlur={handleEmailBlur}
-                        placeholder="Email"
-                    />
-                    {emailError && (
-                        <FormErrorMessage>
-                            Email is required.
-                        </FormErrorMessage>
-                    )
-                    }
-                </FormControl>
-                <FormControl m={2} isInvalid={usernameError}>
-                    <FormLabel id="signupLabel" htmlFor="username">Username:</FormLabel>
-                    <Input
-                        id="signupForm"
-                        type="text"
-                        value={username}
-                        onChange={handleUsernameChange}
-                        onBlur={handleUsernameBlur}
-                        placeholder="Username"
-                    />
-                    {usernameError && (
-                        <FormErrorMessage>
-                            Username is required.
-                        </FormErrorMessage>
-                    )
-                    }
-                </FormControl>
-                <FormControl m={2} isInvalid={passwordError}>
-                    <FormLabel id="signupLabel" htmlFor="password">Password:</FormLabel>
-                    <Input
-                        id="signupForm"
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        onBlur={handlePasswordBlur}
-                        placeholder="Password"
-                    />
-                    {passwordError && (
-                        <FormErrorMessage>
-                            Password is required.
-                        </FormErrorMessage>
-                    )
-                    }
-                </FormControl>
-                <Button id="signupButton" my={6} onClick={handleFormSubmit}>Sign Up</Button>
+            <h1 className="loginTitle">Sign Up!</h1>
+            <FormControl m={2} isInvalid={emailError}>
+                <FormLabel id="signupLabel" htmlFor="email">Email:</FormLabel>
+                <Input
+                    id="signupForm"
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    onBlur={handleEmailBlur}
+                    placeholder="Email"
+                />
+                {emailError && (
+                    <FormErrorMessage>
+                        Email is required.
+                    </FormErrorMessage>
+                )
+                }
+            </FormControl>
+            <FormControl m={2} isInvalid={usernameError}>
+                <FormLabel id="signupLabel" htmlFor="username">Username:</FormLabel>
+                <Input
+                    id="signupForm"
+                    type="text"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    onBlur={handleUsernameBlur}
+                    placeholder="Username"
+                />
+                {usernameError && (
+                    <FormErrorMessage>
+                        Username is required.
+                    </FormErrorMessage>
+                )
+                }
+            </FormControl>
+            <FormControl m={2} isInvalid={passwordError}>
+                <FormLabel id="signupLabel" htmlFor="password">Password:</FormLabel>
+                <Input
+                    id="signupForm"
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    onBlur={handlePasswordBlur}
+                    placeholder="Password"
+                />
+                {passwordError && (
+                    <FormErrorMessage>
+                        Password is required.
+                    </FormErrorMessage>
+                )
+                }
+            </FormControl>
+            <Button id="signupButton" my={6} onClick={handleFormSubmit}>Sign Up</Button>
         </Container>
     )
 }

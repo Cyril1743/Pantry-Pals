@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input, Button, Center, Divider} from "@chakra-ui/react";
+import { Container, Spinner, Table, TableContainer, Tbody, Text, Th, Thead, Tr, Td, OrderedList, ListItem, UnorderedList, FormControl, Input, Button, Center } from "@chakra-ui/react";
 import { useParams, Link } from 'react-router-dom'
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_RECIPE } from "../utils/queries";
@@ -48,12 +48,12 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
       } 
     }
 
-    if (loading) {
-        return <Spinner />
-    }
+  if (loading) {
+    return <Spinner />
+  }
 
   const recipe = data?.recipe || null
-  
+
   if (!recipe) {
     return <p>Something went wrong</p>
   }
@@ -110,7 +110,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
         <h1 className='stepsHeader'>Comments</h1>
         {recipe.comments.length>0 ? (
           <Container>
-            <UnorderedList className="stepsList"  listStyleType="none">
+            <UnorderedList className="stepsList" listStyleType="none">
               {recipe.comments.map((comment, index) => (
                 <ListItem key={index}>
                   <UnorderedList listStyleType="none">
