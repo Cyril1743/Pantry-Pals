@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormErrorMessage, Alert, AlertTitle, AlertDescription, FormLabel, Button, NumberInput, NumberInputField, Stack } from "@chakra-ui/react";
+import { Box, Container, FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, Stack } from "@chakra-ui/react";
 import { useMutation } from '@apollo/client';
 
 import { ADD_RECIPE } from '../utils/mutations';
@@ -19,7 +19,7 @@ export default function RecipeForm() {
     const [stepsArray, setSteps] = useState([]);
     const [stepText, setStepText] = useState('');
 
-    const [addRecipe, { error }] = useMutation(ADD_RECIPE);
+    const [addRecipe] = useMutation(ADD_RECIPE);
 
     const handleAddIngredient = (e) => {
         setIngredientName('')

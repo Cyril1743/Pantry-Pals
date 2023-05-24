@@ -54,7 +54,6 @@ export default function App() {
       <ChakraProvider>
         <Router >
           <NavBar />
-
           <Routes >
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
