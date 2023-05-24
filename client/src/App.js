@@ -38,7 +38,7 @@ const client = new ApolloClient({
 function FooterWrapper() {
   const location = useLocation();
   
-  if (!location.pathname.startsWith('/recipe/')) {
+  if (!location.pathname.startsWith('/recipe/') && !location.pathname.startsWith('/profile/')) {
     return <Footer />;
   }
   
