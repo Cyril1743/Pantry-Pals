@@ -92,6 +92,7 @@ mutation addComment($recipeId: ID!, $commentText: String!) {
     }
     comments {
       commentAuthor {
+        _id
         username
       }
       commentText
@@ -102,7 +103,7 @@ mutation addComment($recipeId: ID!, $commentText: String!) {
 
 export const REMOVE_COMMENT = gql`
 mutation removeComment($recipeId: ID!, $commentId: ID!){
-  removeComment(recipeId: $recipeId, commentId: $commentText){
+  removeComment(recipeId: $recipeId, commentId: $commentId){
     name,
     description,
     servings,
@@ -120,6 +121,7 @@ mutation removeComment($recipeId: ID!, $commentId: ID!){
     }
     comments {
       commentAuthor {
+        _id
         username
       }
       commentText
