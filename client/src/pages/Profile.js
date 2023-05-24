@@ -1,6 +1,7 @@
 import React from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams, Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
+import { Container, UnorderedList, ListItem } from '@chakra-ui/react'
 import RecipeForm from '../components/RecipeForm'
 import '../styles/style.css'
 
@@ -35,7 +36,33 @@ export default function Profile() {
     return (
         <>
         <div className='profileContainer'>
-            <div>{username ? `List of Recipes` : <RecipeForm />}</div>
+            <div>
+                {username && profile.recipe.length>0 ? 
+                    <Container>
+                        <h1>{username}'s Recipes</h1>
+                        <UnorderedList styleType='none'>
+                            {profile.recipe.map((recipe) => (
+                                <ListItem key={recipe._id}>
+                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
+                                </ListItem>
+                            ))}
+                        </UnorderedList>
+                    </Container>
+                : 
+                    <Container>
+                        <h1>My Recipes</h1>
+                        <UnorderedList styleType='none'>
+                            {profile.recipe.map((recipe) => (
+                                <ListItem key={recipe._id}>
+                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
+                                </ListItem>
+                            ))}
+                        </UnorderedList>
+
+                        <RecipeForm />
+                    </Container>     
+                }
+            </div>
         </div>
         </>
     )

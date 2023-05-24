@@ -3,7 +3,7 @@ div, h1, h2, h3, h4 , h5 {
     font-family: 'Lobster', cursive;
 }
 
-.Brand, .footerLink, .stepsHeader, .recipeHeader, .Comments, .ingredientsTitle, #recipeLabel {
+.Brand, .footerLink, .stepsHeader, .recipeHeader, .Comments, .ingredientsTitle, #recipeLabel, #commentStyling, .loginTitle, .signupTitle, #loginLabel, #signupLabel {
     padding-top: 2px;
     background-image: linear-gradient(
           34deg,
@@ -58,15 +58,15 @@ div, h1, h2, h3, h4 , h5 {
     
 }
 
-#navLink, #loginButton, #signupButton, #recipeButton, #addIngredientButton, #publishRecipe {
+#navLink, #loginButton, #signupButton, #recipeButton, #addIngredientButton, #publishRecipe, #commentButton {
     border-color: #FF9191;
     color: #FF9191;
   }
-  #navLink:hover, #loginButton:hover, #signupButton:hover, #recipeButton:hover, #addIngredientButton:hover, #publishRecipe:hover {
+  #navLink:hover, #loginButton:hover, #signupButton:hover, #recipeButton:hover, #addIngredientButton:hover, #publishRecipe:hover, #commentButton:hover {
     box-shadow: 0 0.25em 0.25em -0.1em #FF9191;
     transform: translateY(-0.25em);
     border-color: #FFFDCA;
-    color: #5E2BFF;
+    color: #02a8fa;
     background-color: #FFFDCA;
   }
   
@@ -77,21 +77,20 @@ div, h1, h2, h3, h4 , h5 {
     box-shadow: #FFFDCA 0px 0px 0px 2px,#FF9191 0px 4px 6px -1px;
 }
 
-#loginForm, #loginButton, #navLink, #signupForm, #signupButton, #recipeSearch, #ingredientSearch, #recipeStyling, #addIngredientButton, #publishRecipe {
+#loginForm, #loginButton, #navLink, #signupForm, #signupButton, #recipeSearch, #ingredientSearch, #recipeStyling, #addIngredientButton, #publishRecipe, #commentForm, #commentButton {
     border-radius: 10px;
     box-shadow: #FFFDCA 0px 0px 0px 2px,#FF9191 0px 4px 6px -1px;
+    padding:10px;
 }
 
-#loginButton, #signupButton, #addIngredientButton, #recipeButton {
+#loginButton, #signupButton, #addIngredientButton, #recipeButton, #commentButton {
     background-color: #FFFDCA;
     width:80%; 
     font-size: 24px;
 }
 
 #loginLabel, #signupLabel {
-    color: #FF9191;
     font-size:25px;
-    text-shadow: 1px 1px 1px #000a0b3c
 }
 
 .footer {
@@ -104,8 +103,6 @@ div, h1, h2, h3, h4 , h5 {
 
 .loginTitle, .signupTitle {
     font-size: 45px;
-    color: #FF9191;
-    text-shadow: 1px 2px 2px #000a0b3c ;
 }
 
 
@@ -148,6 +145,19 @@ div, h1, h2, h3, h4 , h5 {
     width: 100%;
   }
 
+  #commentStyling {
+    font-size:20px;
+  }
+
+  #deleteButton {
+    border-radius: 50%;
+    background-color: #FFFDCA;
+  }
+
+  #itemStyling {
+    color: #f86a6a;
+  }
+
   .stepsHeader {
     font-size:5.0em;
     text-align: center;
@@ -156,6 +166,21 @@ div, h1, h2, h3, h4 , h5 {
   .stepsList {
     font-size:1.2em;
   }
+  
+  #commentButton {
+    margin-top:40px;
+    margin-bottom:60px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #commentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
 
   .stepsContainer {
     margin-top:10px;
@@ -164,13 +189,6 @@ div, h1, h2, h3, h4 , h5 {
     font-size:1.3em;
     justify-content: center;
     align-items: center;
-  }
-
-  #homeForms {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height:100vh;
   }
 
   .centered {
@@ -221,6 +239,19 @@ div, h1, h2, h3, h4 , h5 {
     
   }
 
+  .column3 {
+    float: left;
+    width: 50%;
+    padding: 50px;
+    align-items:center;
+  }
+
+  .column4 {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
+
   .row:after {
     content: "";
     display: table;
@@ -259,13 +290,38 @@ div, h1, h2, h3, h4 , h5 {
     margin-right:5px;
   }
 
-  #publishRecipe, #addIngredientButton {
+  #publishRecipe {
     justify-content: center;
     background-color: #FF9191;
     color:#FFFDCA;
-    width:100%
+    width:100%;
+    height:100px;
   }
-  
+
+  #addIngredientButton {
+    justify-content: center;
+    background-color: #FF9191;
+    color:#FFFDCA;
+    width:100%;
+    height:100px;
+  }
+
+  #addedIngredients, #addedSteps {
+    background-color: #faf8bd;
+    border-radius: 5%;
+    height:300px;
+  }
+ 
+  #homePage {
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+  }
+
+  #commentForm {
+    margin-top:10px;
+    padding:10px;
+  }
 
   @media (max-width: 768px) {
     .navbar-container {
@@ -323,7 +379,7 @@ div, h1, h2, h3, h4 , h5 {
   }
 
   @media screen and (max-width: 600px) {
-    .column {
+    .column, .column2, .column3, .column4 {
       width: 100%;
     }
   }

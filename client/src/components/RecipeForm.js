@@ -164,17 +164,16 @@ export default function RecipeForm() {
                                 </FormControl>
                             </div>
                             <div className='row2'>
-                                <div className='column'>
+                                <div className='column4'>
                                     <Button id='addIngredientButton' onClick={handleAddIngredient}>Add Ingredient</Button>
                                 </div>
-                                <div className='column'>
+                                <div id="addedIngredients" className='column4'>
                                 <h1 className="ingredientsTitle">Ingredients Added:</h1>
                                     <UnorderedList styleType='none'>
                                         {ingredients.map((ingrdnt, i) => {
                                             return (
                                                 <div key={i} className='ingredientItem'>
-                                                    <ListItem className='buttonContainer'>{ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit}</ListItem>
-                                                    <Button className='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button>
+                                                    <ListItem id='itemStyling' className='buttonContainer'> {ingrdnt.ingredientAmount} {ingrdnt.ingredientName} {ingrdnt.ingredientUnit} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
                                                 </div>)
                                         })}
                                     </UnorderedList>
@@ -183,7 +182,7 @@ export default function RecipeForm() {
                         </div>
                     </Stack>
                     <div className="row2">
-                        <div className='column'>
+                        <div className='column4'>
                                 <FormControl id="recipeStyling" isRequired>
                                     <FormLabel id='recipeLabel'>Step</FormLabel>
                                     <Input onChange={stepChange} value={stepText} />
@@ -193,17 +192,19 @@ export default function RecipeForm() {
                                 </FormControl>
                                 <Button id="addIngredientButton" mt={3} onClick={handleAddStep}>Add Step</Button>
                         </div>
-                        <div className='column'>
-                        <h1 className='ingredientsTitle'>Steps Added:</h1>
+                        <div className='column4'>
+                          <div id='addedSteps'>
+                            <h1 className='ingredientsTitle'>Steps Added:</h1>
                             <OrderedList styleType='none'>
                                 {stepsArray.map((step, i) => {
                                     return (
-                                        <div key={i} className='ingredientItem'>
+                                        <div key={i}>
                                             <ListItem className='buttonContainer'>Step {i + 1} - {step.stepText}</ListItem>
                                             <Button className='deleteButton' onClick={() => removeStep(step)}>✖️</Button>
                                         </div>)
                                 })}
                             </OrderedList>
+                            </div>
                         </div>
                     </div>
 
