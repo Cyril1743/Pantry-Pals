@@ -11,7 +11,7 @@ import Auth from '../utils/auth';
 
 export default function Profile() {
 
-    const { username } = useParams()
+    const { username } = useParams();
 
     const { data } = useQuery(
         username ? QUERY_USER : QUERY_ME,
@@ -65,5 +65,5 @@ export default function Profile() {
             </div>
         </div>
         </>
-    )
+    );
 }

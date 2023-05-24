@@ -11,41 +11,41 @@ export default function SignUp() {
     const [queryUser] = useLazyQuery(QUERY_USER);
 
     //States to store all the logic
-    const [email, setEmail] = useState('')
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [emailError, setEmailError] = useState(false)
-    const [usernameError, setUsernameError] = useState(false)
-    const [uniqueUsernameError, setUniqueUsernameError] = useState(false)
-    const [passwordError, setPasswordError] = useState(false)
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [emailError, setEmailError] = useState(false);
+    const [usernameError, setUsernameError] = useState(false);
+    const [uniqueUsernameError, setUniqueUsernameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
 
     //Handling the form input logic
     const handleEmailBlur = (e) => {
         if (e.target.value === '') {
-            setEmailError(true)
+            setEmailError(true);
         }
     }
 
     const handlePasswordBlur = (e) => {
         if (e.target.value === '') {
-            setPasswordError(true)
+            setPasswordError(true);
         }
     }
 
     const handleUsernameBlur = (e) => {
         if (e.target.value === '') {
-            setUsernameError(true)
+            setUsernameError(true);
         }
     }
 
     const handleEmailChange = (e) => {
-        setEmailError(false)
-        setEmail(e.target.value)
+        setEmailError(false);
+        setEmail(e.target.value);
     }
 
     const handlePasswordChange = (e) => {
-        setPasswordError(false)
-        setPassword(e.target.value)
+        setPasswordError(false);
+        setPassword(e.target.value);
     }
 
     const handleUsernameChange = (e) => {
@@ -73,7 +73,7 @@ export default function SignUp() {
 
     const handleFormSubmit = async (e) => {
         // Use the useMutation hook to process form data
-        e.preventDefault()
+        e.preventDefault();
 
         try {
             const { data } = await addUser({
@@ -85,9 +85,9 @@ export default function SignUp() {
             alert("Sign up failed. Please try again.");
             console.error(e);
         }
-        setEmail('')
-        setPassword('')
-        setUsername('')
+        setEmail('');
+        setPassword('');
+        setUsername('');
     }
 
     return (

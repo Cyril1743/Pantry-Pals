@@ -1,84 +1,90 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Input, Container, UnorderedList, ListItem, Button } from '@chakra-ui/react'
-import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries'
-import { useLazyQuery } from '@apollo/client'
-import { Link } from 'react-router-dom'
-import '../styles/style.css'
+import React, { useState, useRef, useEffect } from 'react';
+import { Input, Container, UnorderedList, ListItem, Button, Text } from '@chakra-ui/react';
+import { FaPlus } from 'react-icons/fa'
+import { TiDeleteOutline } from 'react-icons/ti'
+import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries';
+import { useLazyQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
+import '../styles/style.css';
 
 export default function Home() {
-    const [searchName, setSearchName] = useState('')
-    const [searchIngrdnts, setSearchIngrdnts] = useState([])
-    const [currentIngrdnt, setCurrentIngrdnt] = useState('')
-    const inputRef = useRef(null)
+  const [searchName, setSearchName] = useState('');
+  const [searchIngrdnts, setSearchIngrdnts] = useState([]);
+  const [currentIngrdnt, setCurrentIngrdnt] = useState('');
+  const [expanded, setExpanded] = useState(false)
+  const inputRef = useRef(null)
 
-    //Query for searching by name
-    const [searchRecipes] = useLazyQuery(QUERY_RECIPE_NAME, {
-        onCompleted: (result) => {
-            setSuggestions(result.suggestRecipe)
-        }
-    })
-    const [suggestions, setSuggestions] = useState([])
-
-    //Query for searching by ingredients
-    const [searchRecipeIngredients] = useLazyQuery(QUERY_INGREDIENT_NAME, {
-        onCompleted: (result) => {
-            const { suggestIngredient } = result
-            const resultArray = []
-            suggestIngredient.forEach((recipe) => {
-                resultArray.push(recipe)
-            })
-            ingrdntsSuggestions.forEach((recipe) => {
-                resultArray.push(recipe)
-            })
-
-            setIngrdntsSuggestions(resultArray)
-        }
-    })
-    const [ingrdntsSuggestions, setIngrdntsSuggestions] = useState([])
-
-
-    //UseEffect for searching by name
-    useEffect(() => {
-        if (searchName.trim().length > 0) {
-            searchRecipes({ variables: { name: searchName } })
-        } else {
-            setSuggestions([])
-        }
-    }, [searchRecipes, searchName])
-
-    //UseEffect for searching by ingredient
-    useEffect(() => {
-        if (searchIngrdnts.length > 0) {
-            setIngrdntsSuggestions([])
-            searchRecipeIngredients({ variables: { ingredients: searchIngrdnts } })
-
-        } else {
-            setIngrdntsSuggestions([])
-        }
-    }, [searchIngrdnts, searchRecipeIngredients])
-
-    const searchNameChange = (e) => {
-        if (searchName.trim().length === 0) {
-
-        }
-        return setSearchName(e.target.value)
+  //Query for searching by name
+  const [searchRecipes] = useLazyQuery(QUERY_RECIPE_NAME, {
+    onCompleted: (result) => {
+      setSuggestions(result.suggestRecipe);
     }
+  })
+  const [suggestions, setSuggestions] = useState([]);
 
-    const searchIngrdntsChange = () => {
-        setCurrentIngrdnt('')
-        setSearchIngrdnts([...searchIngrdnts, currentIngrdnt])
+  //Query for searching by ingredients
+  const [searchRecipeIngredients] = useLazyQuery(QUERY_INGREDIENT_NAME, {
+    onCompleted: (result) => {
+      const { suggestIngredient } = result;
+      const resultArray = [];
+      suggestIngredient.forEach((recipe) => {
+        resultArray.push(recipe);
+      })
+      ingrdntsSuggestions.forEach((recipe) => {
+        resultArray.push(recipe);
+      })
+
+      setIngrdntsSuggestions(resultArray);
     }
+  })
+  const [ingrdntsSuggestions, setIngrdntsSuggestions] = useState([]);
 
-    const removeIngrdnt = (ingrdnt) => {
-        setSearchIngrdnts((prevIngrdnts) => prevIngrdnts.filter((item) => item !== ingrdnt))
+  useEffect(() => {
+    if (inputRef.current && expanded) {
+      inputRef.current.focus()
     }
+  }, [expanded])
 
-    const currentIngrdntChange = (e) => {
-        setCurrentIngrdnt(e.target.value)
+  //UseEffect for searching by name
+  useEffect(() => {
+    if (searchName.trim().length > 0) {
+      searchRecipes({ variables: { name: searchName } });
+    } else {
+      setSuggestions([]);
     }
+  }, [searchRecipes, searchName]);
 
-    return (
-        <div>
+  //UseEffect for searching by ingredient
+  useEffect(() => {
+    if (searchIngrdnts.length > 0) {
+      setIngrdntsSuggestions([]);
+      searchRecipeIngredients({ variables: { ingredients: searchIngrdnts } });
+
+    } else {
+      setIngrdntsSuggestions([]);
+    }
+  }, [searchIngrdnts, searchRecipeIngredients]);
+
+  const searchNameChange = (e) => {
+    return setSearchName(e.target.value);
+  }
+
+  const searchIngrdntsChange = () => {
+    setCurrentIngrdnt('');
+    setSearchIngrdnts([...searchIngrdnts, currentIngrdnt]);
+  }
+
+  const removeIngrdnt = (ingrdnt) => {
+    setSearchIngrdnts((prevIngrdnts) => prevIngrdnts.filter((item) => item !== ingrdnt));
+  }
+
+  const currentIngrdntChange = (e) => {
+    setCurrentIngrdnt(e.target.value);
+  }
+
+  return (
+    expanded ? (
+      <div>
         <div className='row' id='homePage'>
           <div className='column3'>
             <form>
@@ -86,18 +92,19 @@ export default function Home() {
             </form>
           </div>
           <div className='column3'>
+            <form>
               <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
-          </div>
               <Button onClick={searchIngrdntsChange}>
                 <span role='img' aria-label='add'>
-                  &#10133;
+                <FaPlus />
                 </span>
               </Button>
-            
-          <UnorderedList>
+            </form>
+          </div>
+          <UnorderedList id='ingrdntsRecipes'>
             {suggestions.map((recipe) => (
               <ListItem key={recipe._id}>
-                <Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
+                <Link to={`/recipe/${recipe._id}`} id='navLink'>{recipe.name} by {recipe.recipeAuthor.username}</Link>
               </ListItem>
             ))}
           </UnorderedList>
@@ -107,7 +114,7 @@ export default function Home() {
                 <ListItem>{ingrdnt}</ListItem>
                 <Button onClick={() => removeIngrdnt(ingrdnt)}>
                   <span role='img' aria-label='delete'>
-                    ✖️
+                    <TiDeleteOutline />
                   </span>
                 </Button>
               </React.Fragment>
@@ -116,11 +123,22 @@ export default function Home() {
           <UnorderedList styleType='none'>
             {ingrdntsSuggestions.map((recipe) => (
               <ListItem key={recipe._id}>
-                <Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
+                <Link to={`/recipe/${recipe._id}`} id='navLink'>{recipe.name} </Link>
+                <p> by {recipe.recipeAuthor.username}</p>
               </ListItem>
             ))}
           </UnorderedList>
-        </div>
+          </div>
+      </div >
+    ) : (
+    <Container id="homeForms">
+      <div id='formContainer'>
+        <form>
+          <Input id='loginForm' type='text' readOnly onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' />
+        </form>
       </div>
-    )
+    </Container>
+
+  )
+  );
 }
