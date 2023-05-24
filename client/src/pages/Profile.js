@@ -50,6 +50,7 @@ export default function Profile() {
                     </Container>
                 : 
                     <Container>
+                        {console.log(profile)}
                         <h1>My Recipes</h1>
                         <UnorderedList styleType='none'>
                             {profile.recipe.map((recipe) => (

@@ -84,7 +84,8 @@ export default function RecipeForm() {
     }
 
     const servingsChange = (e) => {
-        setServings(parseInt(e.target.value))
+        const recipeServings = parseInt(document.getElementById('servingsInput').getAttribute("value"))
+        setServings(recipeServings)
     }
 
     const ingredientNameChange = (e) => {
@@ -92,7 +93,8 @@ export default function RecipeForm() {
     }
 
     const ingredientAmountChange = (e) => {
-        setIngredientAmount(parseFloat(e.target.value))
+        const recipeIngAmnt = parseInt(document.getElementById('amountInput').getAttribute("value"))
+        setIngredientAmount(recipeIngAmnt)
     }
 
     const ingredientUnitChange = (e) => {
@@ -124,10 +126,10 @@ export default function RecipeForm() {
                             <FormControl id="recipeStyling" isRequired>
                                 <FormLabel id='recipeLabel'>Servings</FormLabel>
                                 <NumberInput max={1000} min={1}>
-                                    <NumberInputField onChange={servingsChange} value={servings} />
+                                    <NumberInputField id="servingsInput" value={servings}/>
                                     <NumberInputStepper>
-                                        <NumberIncrementStepper />
-                                        <NumberDecrementStepper />
+                                        <NumberIncrementStepper onClick={servingsChange} />
+                                        <NumberDecrementStepper onClick={servingsChange} />
                                     </NumberInputStepper>
                                 </NumberInput>
                             </FormControl>
@@ -146,10 +148,10 @@ export default function RecipeForm() {
                                 <FormControl id='recipeStyling' isRequired>
                                     <FormLabel id='recipeLabel'>Ingredient Amount</FormLabel>
                                     <NumberInput max={1000} min={1}>
-                                        <NumberInputField placeholder='Ingredient Amount' onChange={ingredientAmountChange} value={ingredientAmount} />
-                                        <NumberInputStepper>
-                                            <NumberIncrementStepper />
-                                            <NumberDecrementStepper />
+                                        <NumberInputField id="amountInput" placeholder='Ingredient Amount' value={ingredientAmount} />
+                                        <NumberInputStepper >
+                                            <NumberIncrementStepper onClick={ingredientAmountChange} />
+                                            <NumberDecrementStepper onClick={ingredientAmountChange} />
                                         </NumberInputStepper>
                                     </NumberInput>
                                 </FormControl>
@@ -173,7 +175,7 @@ export default function RecipeForm() {
                                         {ingredients.map((ingrdnt, i) => {
                                             return (
                                                 <div key={i} className='ingredientItem'>
-                                                    <ListItem id='itemStyling' className='buttonContainer'> {ingrdnt.ingredientAmount} {ingrdnt.ingredientName} {ingrdnt.ingredientUnit} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
+                                                    <ListItem id='itemStyling' className='buttonContainer'> {ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
                                                 </div>)
                                         })}
                                     </UnorderedList>

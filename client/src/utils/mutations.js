@@ -45,7 +45,7 @@ export const ADD_RECIPE = gql`
 
 export const REMOVE_RECIPE = gql`
   mutation removeRecipe($recipeId: ID!) {
-    removeRecipe(recipeID: $recipeId) {
+    removeRecipe(recipeId: $recipeId) {
       name
       description
       servings
@@ -60,10 +60,12 @@ export const REMOVE_RECIPE = gql`
       }
       recipeAuthor {
         username
+        _id
       }
       comments {
         commentAuthor {
           username
+          _id
         }
         commentText
         createdAt
@@ -75,21 +77,6 @@ export const REMOVE_RECIPE = gql`
 export const ADD_COMMENT = gql`
 mutation addComment($recipeId: ID!, $commentText: String!) {
   addComment(recipeId: $recipeId, commentText: $commentText) {
-    name,
-    description,
-    servings,
-    ingredients {
-      ingredientName
-      ingredientAmount
-      ingredientUnit
-    }
-    steps {
-      order
-      stepText
-    }
-    recipeAuthor {
-      username
-    }
     comments {
       commentAuthor {
         _id
@@ -104,26 +91,12 @@ mutation addComment($recipeId: ID!, $commentText: String!) {
 export const REMOVE_COMMENT = gql`
 mutation removeComment($recipeId: ID!, $commentId: ID!){
   removeComment(recipeId: $recipeId, commentId: $commentId){
-    name,
-    description,
-    servings,
-    ingredients {
-      ingredientName
-      ingredientAmount
-      ingredientUnit
-    }
-    steps {
-      order
-      stepText
-    }
-    recipeAuthor {
-      username
-    }
     comments {
       commentAuthor {
         _id
         username
       }
+      _id
       commentText
       createdAt
     }
