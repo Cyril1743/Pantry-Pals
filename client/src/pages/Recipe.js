@@ -6,10 +6,13 @@ import { QUERY_RECIPE } from "../utils/queries";
 import '../styles/style.css'
 import auth from "../utils/auth";
 import { ADD_COMMENT } from "../utils/mutations";
+import { useIngredientContext } from "../utils/ingredientsContext";
+import { encode } from 'base-64'
 
 export default function Recipe() {
   const { recipeId } = useParams()
   const [comment, setComment] = useState('')
+  const { state } = useIngredientContext()
 
 const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}})
     const [addComment] = useMutation(ADD_COMMENT)
@@ -29,11 +32,44 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
 
     }
 
+    const handleLocationClick =  () => {
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const lat = position.coords.latitude
+          const lon = position.coords.longitude
+          console.log(process.env.REACT_APP_KROGER_API_KEY)
+          try {
+            const credentials = encode(process.env.REACT_APP_KROGER_API_KEY)
+            const response = await fetch(`https://api.kroger.com/v1/locations?filter.lat=${lat}&filter.lon=${lon}`, {
+            headers: {
+              'Authorization': `Bearer ${credentials}`,
+              'Content-Type': 'application/json'
+            }
+          })
+          console.log(response)
+          // .then(response => response.json())
+          // .then(data => console.log(data))
+          } catch (error) {
+            console.log(error)
+          }
+          
+
+        })
+      }
+    }
+
     if (loading) {
         return <Spinner />
     }
 
   const recipe = data?.recipe || null
+
+  //Filter to get the ingredients that the user is missing
+  const missingIngredients = recipe.ingredients.filter((ingredient) => {
+    return !state.some(searchingredient => {
+      const regex = new RegExp(searchingredient, "i")
+    return regex.test(ingredient.ingredientName)})})
+  
   
   if (!recipe) {
     return <p>Something went wrong</p>
@@ -74,6 +110,13 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
                 </Table>
               </TableContainer>
             </Container>
+              {missingIngredients.length > 0 &&
+              <Container> 
+              <Text>Find your missing ingredients below:</Text>
+              <Button onClick={handleLocationClick}>Locate me</Button>
+              </Container>
+            }
+            
       <Container className="stepsContainer">
         <h1 className="stepsHeader">Steps</h1>
         <OrderedList className="stepsList">

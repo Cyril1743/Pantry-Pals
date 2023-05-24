@@ -3,6 +3,8 @@ import { Input, Container, UnorderedList, ListItem, Button } from '@chakra-ui/re
 import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries'
 import { useLazyQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../utils/actions'
+import { useIngredientContext } from '../utils/ingredientsContext'
 import '../styles/style.css'
 
 export default function Home() {
@@ -10,6 +12,10 @@ export default function Home() {
     const [searchIngrdnts, setSearchIngrdnts] = useState([])
     const [currentIngrdnt, setCurrentIngrdnt] = useState('')
     const inputRef = useRef(null)
+
+    //Initialize the context variables
+    const {state, dispatch } = useIngredientContext()
+    
 
     //Query for searching by name
     const [searchRecipes] = useLazyQuery(QUERY_RECIPE_NAME, {
@@ -36,6 +42,11 @@ export default function Home() {
     })
     const [ingrdntsSuggestions, setIngrdntsSuggestions] = useState([])
 
+    useEffect(() => {
+      if (state.length > 0){
+        setSearchIngrdnts(state)
+      }
+    }, [state])
 
     //UseEffect for searching by name
     useEffect(() => {
@@ -67,10 +78,12 @@ export default function Home() {
     const searchIngrdntsChange = () => {
         setCurrentIngrdnt('')
         setSearchIngrdnts([...searchIngrdnts, currentIngrdnt])
+        dispatch({type: ADD_INGREDIENT, payload: currentIngrdnt})
     }
 
     const removeIngrdnt = (ingrdnt) => {
         setSearchIngrdnts((prevIngrdnts) => prevIngrdnts.filter((item) => item !== ingrdnt))
+        dispatch({type: REMOVE_INGREDIENT, payload: ingrdnt})
     }
 
     const currentIngrdntChange = (e) => {
