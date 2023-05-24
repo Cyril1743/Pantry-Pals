@@ -5,7 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_RECIPE } from "../utils/queries";
 import '../styles/style.css';
 import auth from "../utils/auth";
-import { ADD_COMMENT } from "../utils/mutations";
+import { ADD_COMMENT, REMOVE_RECIPE, REMOVE_COMMENT } from "../utils/mutations";
 
 export default function Recipe() {
   const { recipeId } = useParams();
@@ -13,12 +13,14 @@ export default function Recipe() {
 
 const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}});
     const [addComment] = useMutation(ADD_COMMENT);
+    const [removeComment] = useMutation(REMOVE_COMMENT);
+    const [removeRecipe] = useMutation(REMOVE_RECIPE);
 
-    //TODO: Use a mutation hook to push the comment into the database
     const handleCommentChange = (e) => {
         setComment(e.target.value);
     }
 
+    // mutation hook to push the comment into the database
     const handleCommentSubmit = (e) => {
         e.preventDefault();
         if (comment.length > 1) {
@@ -26,7 +28,24 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
             setComment('');
             refetch().then(() => {console.log("Data refetched")});
         }
+    }
 
+    const handleRemoveComment = async (e) => {
+      e.preventDefault()
+      try {
+        await removeComment({ variables: { recipeId: recipe._id, commentId: comment._id } })
+      } catch (err) {
+        console.log(err)
+      } 
+    }
+
+    const handleRemoveRecipe = async (e) => {
+      e.preventDefault()
+      try {
+        await removeRecipe({ variables: { recipeId: recipe._id } })
+      } catch (err) {
+        console.log(err)
+      } 
     }
 
     if (loading) {
@@ -45,7 +64,11 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
           <h1>{recipe.name}</h1>
           <Text>{recipe.description}</Text>
           <p>By: {recipe.recipeAuthor.username}</p>
-          <Link to={'/profile/'+ recipe.recipeAuthor.username}>See more recipes by this author</Link>
+          {auth.loggedIn() && auth.getUser().data.username === recipe.recipeAuthor.username ? (
+            <Button className='deleteButton' onClick={() => handleRemoveRecipe(recipe._id)}>✖️</Button>
+          ) : (
+            <Link to={'/profile/'+ recipe.recipeAuthor.username}>See more recipes by this author</Link>
+          )}
         </Container>
             <Container className="ingredientsContainer">
               <TableContainer className="measurementStyling">
@@ -95,6 +118,9 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
                       {comment.commentAuthor.username} at {comment.createdAt}
                     </ListItem>
                     <ListItem color={'#FF9191'}>{comment.commentText}</ListItem>
+                    {auth.loggedIn() && auth.getUser().data.username === comment.commentAuthor.username} ? (
+                      <Button className='deleteButton' onClick={() => handleRemoveComment(recipe._id, comment._id)}>✖️</Button>
+                    )
                   </UnorderedList>
                 </ListItem>
               ))}
