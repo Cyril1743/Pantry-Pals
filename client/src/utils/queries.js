@@ -6,6 +6,7 @@ export const QUERY_ME = gql`
       _id
       username
       recipe {
+        _id
         name
       }
       favorites {
@@ -21,6 +22,7 @@ export const QUERY_USER = gql`
       _id
       username
       recipe {
+        _id
         name
       }
       favorites {

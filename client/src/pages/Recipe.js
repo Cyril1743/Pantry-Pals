@@ -45,6 +45,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
           <h1>{recipe.name}</h1>
           <Text>{recipe.description}</Text>
           <p>By: {recipe.recipeAuthor.username}</p>
+          <Link to={'/profile/'+ recipe.recipeAuthor.username}>See more recipes by this author</Link>
         </Container>
             <Container className="ingredientsContainer">
               <TableContainer className="measurementStyling">
