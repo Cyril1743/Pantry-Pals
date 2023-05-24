@@ -96,8 +96,10 @@ query recipe($recipeId: ID!) {
       username
     }
     comments {
+      _id
       commentAuthor {
         username
+        _id
       }
       commentText
       createdAt

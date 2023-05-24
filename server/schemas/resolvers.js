@@ -117,7 +117,7 @@ const resolvers = {
                         new: true,
                         runValidators: true,
                     }
-                );
+                ).populate('comments.commentAuthor');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -125,13 +125,13 @@ const resolvers = {
             if (context.user) {
                 const recipe = await Recipes.findOneAndDelete({
                     _id: recipeId,
-                    recipeAuthor: context.user.username,
-                });
+                    recipeAuthor: context.user._id,
+                }).populate('recipeAuthor');
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $pull: { recipe: recipe._id } }
-                );
+                ).populate('recipe');
                 return recipe;
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -144,12 +144,12 @@ const resolvers = {
                         $pull: {
                             comments: {
                                 _id: commentId,
-                                commentAuthor: context.user.username,
+                                commentAuthor: context.user._id,
                             },
                         },
                     },
                     { new: true }
-                );
+                ).populate('comments.commentAuthor');
             }
             throw new AuthenticationError('You need to be logged in!');
         },

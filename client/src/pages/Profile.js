@@ -35,29 +35,31 @@ export default function Profile() {
 
     return (
         <>
-            <div className='profileContainer'>
-                <div>
-                    {username && profile.recipe.length > 0 ?
-                        <Container>
-                            <h1>{username}'s Recipes</h1>
-                            <UnorderedList styleType='none'>
-                                {profile.recipe.map((recipe) => (
-                                    <ListItem key={recipe._id}>
-                                        <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
-                                    </ListItem>
-                                ))}
-                            </UnorderedList>
-                        </Container>
-                        :
-                        <Container>
-                            <h1>My Recipes</h1>
-                            <UnorderedList styleType='none'>
-                                {profile.recipe.map((recipe) => (
-                                    <ListItem key={recipe._id}>
-                                        <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
-                                    </ListItem>
-                                ))}
-                            </UnorderedList>
+        <div className='profileContainer'>
+            <div>
+                {username && profile.recipe.length>0 ? 
+                    <Container>
+                        <h1>{username}'s Recipes</h1>
+                        <UnorderedList styleType='none'>
+                            {profile.recipe.map((recipe) => (
+                                <ListItem key={recipe._id}>
+                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
+                                </ListItem>
+                            ))}
+                        </UnorderedList>
+                    </Container>
+                : 
+                    <Container>
+                        {console.log(profile)}
+                        <h1>My Recipes</h1>
+                        <UnorderedList styleType='none'>
+                            {profile.recipe.map((recipe) => (
+                                <ListItem key={recipe._id}>
+                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
+                                </ListItem>
+                            ))}
+                        </UnorderedList>
+
 
                             <RecipeForm />
                         </Container>

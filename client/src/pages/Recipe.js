@@ -31,16 +31,16 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
     }
 
     const handleRemoveComment = async (e) => {
-      e.preventDefault()
+      const commentId = e.target.getAttribute("id");
       try {
-        await removeComment({ variables: { recipeId: recipe._id, commentId: comment._id } })
+        await removeComment({ variables: { recipeId: recipe._id, commentId: commentId } })
+        refetch().then(() => {console.log("Data refetched")});
       } catch (err) {
         console.log(err)
       } 
     }
 
-    const handleRemoveRecipe = async (e) => {
-      e.preventDefault()
+    const handleRemoveRecipe = async () => {
       try {
         await removeRecipe({ variables: { recipeId: recipe._id } })
       } catch (err) {
@@ -108,7 +108,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
       </Container>
       <Container>
         <h1 className='stepsHeader'>Comments</h1>
-        {recipe?.comments ? (
+        {recipe.comments.length>0 ? (
           <Container>
             <UnorderedList className="stepsList" listStyleType="none">
               {recipe.comments.map((comment, index) => (
@@ -119,7 +119,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
                     </ListItem>
                     <ListItem color={'#FF9191'}>{comment.commentText}</ListItem>
                     {auth.loggedIn() && auth.getUser().data.username === comment.commentAuthor.username} ? (
-                      <Button className='deleteButton' onClick={() => handleRemoveComment(recipe._id, comment._id)}>✖️</Button>
+                      <Button className='deleteButton' id={comment._id} onClick={handleRemoveComment}>✖️</Button>
                     )
                   </UnorderedList>
                 </ListItem>
@@ -132,19 +132,19 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
           </Container>
         )}
         {auth.loggedIn() ? (
-          <React.Fragment id='commentContainer'>
-            <FormControl mt={3} id='commentForm'>
-              <Input
-                type="textarea"
-                value={comment}
-                placeholder="Let them know if you loved their recipe!"
-                onChange={handleCommentChange}
-              />
-            </FormControl>
-            <Center >
-              <Button id='commentButton' onClick={handleCommentSubmit}>Comment</Button>
-            </Center>
-          </React.Fragment>
+          <Container id='commentContainer'>
+          <FormControl mt={3} id='commentForm'>
+            <Input
+              type="textarea"
+              value={comment}
+              placeholder="Let them know if you loved their recipe!"
+              onChange={handleCommentChange}
+            />
+          </FormControl>
+          <Center >
+          <Button id='commentButton' onClick={handleCommentSubmit}>Comment</Button>
+          </Center>
+          </Container>
         ) : (
           <Text mt={6} className="loginMessage">
             You must be logged in to post or comment.<Link className="loginLink" to="/login"> Log in</Link> or{" "}
