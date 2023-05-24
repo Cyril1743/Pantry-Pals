@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorkerRegistration"
-
+import { IngredientProvider } from "./utils/ingredientContext";
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <IngredientProvider>
+            <App />
+        </IngredientProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
