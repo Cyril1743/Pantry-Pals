@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack } from "@chakra-ui/react";
+import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack, Alert, AlertDescription, AlertTitle, AlertDialogCloseButton } from "@chakra-ui/react";
 import { useMutation } from '@apollo/client';
 
 import { ADD_RECIPE } from '../utils/mutations';
@@ -11,26 +11,37 @@ export default function RecipeForm() {
     //States to store all the logic
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [servings, setServings] = useState('');
+    const [servings, setServings] = useState(1);
     const [ingredientName, setIngredientName] = useState('')
-    const [ingredientAmount, setIngredientAmount] = useState('');
+    const [ingredientAmount, setIngredientAmount] = useState(1);
     const [ingredientUnit, setIngredientUnit] = useState('');
     const [ingredients, setIngredients] = useState([]);
     const [stepsArray, setSteps] = useState([]);
     const [stepText, setStepText] = useState('');
+    const [formError, setFormError] = useState('')
 
-    const [addRecipe, { error }] = useMutation(ADD_RECIPE);
+    const [addRecipe] = useMutation(ADD_RECIPE);
 
     const handleAddIngredient = (e) => {
-        setIngredientName('')
-        setIngredientAmount('')
+        if (ingredientName !== ""){
+          setIngredientName('')
+        setIngredientAmount(1)
         setIngredientUnit('')
-        setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }])
+        setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }])  
+        } else {
+            setFormError("You must fill out the ingredient name")
+        }
     }
 
     const handleAddStep = (e) => {
+        if(stepText === ""){
+            return setFormError("You must fill out the step description")
+        }
         setStepText('')
         setSteps([...stepsArray, { stepText }])
+        if (formError === "You must have at least one step!"){
+            setFormError("")
+        }
     }
 
     const removeIngrdnt = (ingrdnt) => {
@@ -46,7 +57,18 @@ export default function RecipeForm() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
+        if(name === ""){
+           return setFormError("You must enter a recipe name!")
+        }
+        if(description === ""){
+            return setFormError("You must enter a recipe description!")
+        }
+        if(ingredients.length === 0){
+           return setFormError("You must enter at least one ingredient!")
+        }
+        if(stepsArray.length === 0){
+            return setFormError("You must have at least one step!")
+        }
         try {
             const finalSteps = () => {
                 stepsArray.forEach((step, i) => {
@@ -62,10 +84,10 @@ export default function RecipeForm() {
 
             setName('');
             setDescription('');
-            setServings('')
+            setServings(1)
             setIngredients([]);
             setIngredientName('')
-            setIngredientAmount('');
+            setIngredientAmount(1);
             setIngredientUnit('');
             setSteps([]);
             setStepText('');
@@ -77,10 +99,16 @@ export default function RecipeForm() {
 
     const nameChange = (e) => {
         setName(e.target.value)
+        if(formError === "You must enter a recipe name!"){
+            setFormError("")
+        }
     }
 
     const descriptionChange = (e) => {
         setDescription(e.target.value)
+        if(formError === "You must enter a recipe description!"){
+            setFormError("")
+        }
     }
 
     const servingsChange = (e) => {
@@ -90,6 +118,9 @@ export default function RecipeForm() {
 
     const ingredientNameChange = (e) => {
         setIngredientName(e.target.value)
+        if (formError === "You must fill out the ingredient name"){
+            setFormError('')
+        }
     }
 
     const ingredientAmountChange = (e) => {
@@ -103,12 +134,21 @@ export default function RecipeForm() {
 
     const stepChange = (e) => {
         setStepText(e.target.value)
+        if(formError === "You must fill out the step description"){
+            setFormError("")
+        }
     }
 
     return (
         <>
             {Auth.loggedIn() ? (
                 <>
+                {formError !== "" && 
+                    <Alert status='error'>
+                        <AlertTitle>Invalid input</AlertTitle>
+                        <AlertDescription>{formError}</AlertDescription>
+                    </Alert>
+                }
                     <div className="row">
                         <div className='column'>
                             <FormControl id="recipeStyling" isRequired>
@@ -125,8 +165,8 @@ export default function RecipeForm() {
                         <div className='column'>
                             <FormControl id="recipeStyling" isRequired>
                                 <FormLabel id='recipeLabel'>Servings</FormLabel>
-                                <NumberInput max={1000} min={1}>
-                                    <NumberInputField id="servingsInput" value={servings}/>
+                                <NumberInput max={1000} min={1} defaultValue={1}>
+                                    <NumberInputField id="servingsInput" value={servings} readOnly />
                                     <NumberInputStepper>
                                         <NumberIncrementStepper onClick={servingsChange} />
                                         <NumberDecrementStepper onClick={servingsChange} />
@@ -147,8 +187,8 @@ export default function RecipeForm() {
                             <div className='column'>
                                 <FormControl isRequired>
                                     <FormLabel id='recipeLabel'>Ingredient Amount</FormLabel>
-                                    <NumberInput max={1000} min={1}>
-                                        <NumberInputField id="amountInput" placeholder='Ingredient Amount' value={ingredientAmount} />
+                                    <NumberInput max={1000} min={1} defaultValue={1}>
+                                        <NumberInputField id="amountInput" placeholder='Ingredient Amount' value={ingredientAmount} readOnly />
                                         <NumberInputStepper >
                                             <NumberIncrementStepper onClick={ingredientAmountChange} />
                                             <NumberDecrementStepper onClick={ingredientAmountChange} />

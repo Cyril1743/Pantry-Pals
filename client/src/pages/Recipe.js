@@ -26,7 +26,7 @@ export default function Recipe() {
         if (comment.length > 1) {
             addComment({ variables: { recipeId: recipeId, commentText: comment } });
             setComment('');
-            refetch().then(() => {console.log("Data refetched")});
+            refetch();
         }
     }
 
@@ -34,7 +34,7 @@ export default function Recipe() {
       const commentId = e.target.getAttribute("id");
       try {
         await removeComment({ variables: { recipeId: recipe._id, commentId: commentId } })
-        refetch().then(() => {console.log("Data refetched")});
+        refetch();
       } catch (err) {
         console.log(err)
       } 
