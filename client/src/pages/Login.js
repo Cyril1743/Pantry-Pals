@@ -48,7 +48,6 @@ export default function Login() {
                 Auth.login(data.login.token);
             } catch (error) {
                 alert("Log in failed. Try again.");
-                console.log(error);
             }
             setEmail('');
             setPassword('');

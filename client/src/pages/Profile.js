@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Navigate, useParams, Link } from 'react-router-dom'
-import {Accordion, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button } from '@chakra-ui/react'
+import {Accordion, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button, Spinner } from '@chakra-ui/react'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { useQuery, useMutation } from '@apollo/client'
 import RecipeForm from '../components/RecipeForm'
@@ -13,11 +13,11 @@ import Auth from '../utils/auth';
 
 
 export default function Profile() {
-    const [removeRecipe] = useMutation(REMOVE_RECIPE);
+    const [removeRecipe, {loading,}] = useMutation(REMOVE_RECIPE);
 
     const { username } = useParams();
 
-    const { data } = useQuery(
+    const { data, refetch } = useQuery(
         username ? QUERY_USER : QUERY_ME,
         {
             variables: { username: username },
@@ -45,9 +45,14 @@ export default function Profile() {
         try {
             const deleteRecipeID = e.target.getAttribute('id')
             await removeRecipe({ variables: { recipeId: deleteRecipeID } })
+            refetch()
         } catch (err) {
           console.log(err)
         } 
+      }
+
+      if (loading){
+        return <Spinner />
       }
 
     return (
@@ -99,8 +104,8 @@ export default function Profile() {
                                     <DrawerHeader className='drawerHeader'>Your Recipes</DrawerHeader>
                                     <DrawerBody>
                                         <Accordion allowToggle>
-                                            {profile.recipe.map((recipe) => {
-                                                return (<AccordionItem mb={4}>
+                                            {profile.recipe.map((recipe, index) => {
+                                                return (<AccordionItem mb={4} key={index}>
                                                     <h2 className='accordianStyling'>
                                                         <AccordionButton>
                                                             <Box flex='1' textAlign='left'>
@@ -115,7 +120,7 @@ export default function Profile() {
                                                             {recipe.ingredients.map(ingredient => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName.charAt(0).toUpperCase() + ingredient.ingredientName.slice(1)}</ListItem>)}
                                                         </UnorderedList>
                                                         <Link className='accordianStyling3' to={`/recipe/${recipe._id}`}>View Recipe</Link>
-                                                        {/* <Button className='deleteButton' id={recipe._id} onClick={handleRemoveRecipe}><TiDeleteOutline /></Button> */}
+                                                        <Button className='deleteButton' id={recipe._id} onClick={handleRemoveRecipe}><TiDeleteOutline id={recipe._id}/></Button>
                                                     </AccordionPanel>
                                                 </AccordionItem>
                                                 )
