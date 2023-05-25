@@ -4,14 +4,14 @@
       "username": "MarthaS",
       "email":"marthas@email.com",
       "password":"password123",
-      "recipe":[{"_id":"6463fc6e194dddab918762a3"}]
+      "recipe":[{"_id":"6463fc6e194dddab918762a3"}, {"_id":"6463fc6e194dddab918762c9"}]
     },
     {
       "_id": "6463f98ac8476ea0fef3f033",
       "username": "JuliaC",
       "email":"juliac@email.com",
       "password":"password123",
-      "recipe":[{"_id":"6463fc6e194dddab918762b0"}]
+      "recipe":[{"_id":"6463fc6e194dddab918762b0"}, {"_id":"6463fc6e194dddab918762a5"}, {"_id":"6463fc6e194dddab918762b1"}]
     },
     {
       "_id": "6463f98ac8476ea0fef3f034",
@@ -25,6 +25,6 @@
       "username": "GuyF",
       "email":"guyf@email.com",
       "password":"password123",
-      "recipe":[{"_id":"6463fc6e194dddab918762c0"}]
+      "recipe":[{"_id":"6463fc6e194dddab918762c0"}, {"_id":"6463fc6e194dddab918762a1"}]
     }
 ]
