@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Input, Container, UnorderedList, ListItem, Button } from '@chakra-ui/react';
+import { Input, UnorderedList, ListItem, Button } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries';
@@ -146,9 +146,9 @@ export default function Home() {
     ) : (
       <div>
         <div className='row' id='homePage'>
-          <div className='column3'>
+          <div style={{width: "60%", display: 'flex', justifyContent: "center", textAlign: "center", margin: "auto"}}>
             <form>
-            <Input id="homeInput" type='text' readOnly onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' value={searchName} />
+            <Input style={{padding: "50px", textAlign:"center", fontSize: "30px"}} id="homeInput" type='text' onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' value={searchName} onChange={() => setExpanded(!expanded)}/>
           </form>
           </div>
         </div>
