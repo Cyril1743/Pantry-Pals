@@ -8,6 +8,9 @@ export const QUERY_ME = gql`
       recipe {
         _id
         name
+        ingredients {
+          ingredientName
+        }
       }
       favorites {
         name
@@ -24,6 +27,9 @@ export const QUERY_USER = gql`
       recipe {
         _id
         name
+        ingredients {
+          ingredientName
+        }
       }
       favorites {
         name
