@@ -122,8 +122,8 @@ export default function Home() {
             ))}
           </UnorderedList>
           <UnorderedList styleType='none'>
-            {searchIngrdnts.map((ingrdnt) => (
-              <React.Fragment key={ingrdnt}>
+            {searchIngrdnts.map((ingrdnt, index) => (
+              <React.Fragment key={index}>
                 <ListItem>{ingrdnt}</ListItem>
                 <Button onClick={() => removeIngrdnt(ingrdnt)}>
                   <span role='img' aria-label='delete'>
