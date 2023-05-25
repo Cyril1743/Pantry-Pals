@@ -145,7 +145,7 @@ export default function RecipeForm() {
                                 </FormControl>
                             </div>
                             <div className='column'>
-                                <FormControl id='recipeStyling' isRequired>
+                                <FormControl isRequired>
                                     <FormLabel id='recipeLabel'>Ingredient Amount</FormLabel>
                                     <NumberInput max={1000} min={1}>
                                         <NumberInputField id="amountInput" placeholder='Ingredient Amount' value={ingredientAmount} />

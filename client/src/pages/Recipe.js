@@ -61,16 +61,16 @@ export default function Recipe() {
 
   return (
     <div>
-        <Container className="recipeHeader">
+        <div className="recipeHeader">
           <h1>{recipe.name}</h1>
           <Text>{recipe.description}</Text>
           <p>By: {recipe.recipeAuthor.username}</p>
-          {auth.loggedIn() && auth.getUser().data.username === recipe.recipeAuthor.username ? (
-            <Button className='deleteButton' onClick={handleRemoveRecipe}>✖️</Button>
+        </div>
+        {auth.loggedIn() && auth.getUser().data.username === recipe.recipeAuthor.username ? (
+            <Button id='deleteRecipe' onClick={handleRemoveRecipe}>Delete Recipe</Button>
           ) : (
-            <Link to={'/profile/'+ recipe.recipeAuthor.username}>See more recipes by this author</Link>
+            <Link className='recipeHeader2' to={'/profile/'+ recipe.recipeAuthor.username}>See more recipes by this author</Link>
           )}
-        </Container>
             <Container className="ingredientsContainer">
               <TableContainer className="measurementStyling">
                 <Table>
@@ -119,9 +119,9 @@ export default function Recipe() {
                       {comment.commentAuthor.username} at {comment.createdAt}
                     </ListItem>
                     <ListItem color={'#FF9191'}>{comment.commentText}</ListItem>
-                    {auth.loggedIn() && auth.getUser().data.username === comment.commentAuthor.username} ? (
+                    {/* {auth.loggedIn() && auth.getUser().data.username === comment.commentAuthor.username} ? (
                       <Button className='deleteButton' id={comment._id} onClick={handleRemoveComment}>✖️</Button>
-                    )
+                    ) */}
                   </UnorderedList>
                 </ListItem>
               ))}
