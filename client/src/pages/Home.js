@@ -43,7 +43,7 @@ export default function Home() {
   const [ingrdntsSuggestions, setIngrdntsSuggestions] = useState([]);
 
   useEffect(() => {
-    if (state.length > 0){
+    if (state.length > 0) {
       setSearchIngrdnts(state)
     }
   }, [state])
@@ -81,12 +81,12 @@ export default function Home() {
   const searchIngrdntsChange = () => {
     setCurrentIngrdnt('');
     setSearchIngrdnts([...searchIngrdnts, currentIngrdnt]);
-    dispatch({type: ADD_INGREDIENT, payload: currentIngrdnt})
+    dispatch({ type: ADD_INGREDIENT, payload: currentIngrdnt })
   }
 
   const removeIngrdnt = (ingrdnt) => {
     setSearchIngrdnts((prevIngrdnts) => prevIngrdnts.filter((item) => item !== ingrdnt));
-    dispatch({type: REMOVE_INGREDIENT, payload: ingrdnt})
+    dispatch({ type: REMOVE_INGREDIENT, payload: ingrdnt })
   }
 
   const currentIngrdntChange = (e) => {
@@ -97,69 +97,71 @@ export default function Home() {
     expanded ? (
       <div id='homePage'>
         <div className='row3'>
-              <div className='column5'>
-                  <form>
-                    <Input id="recipeSearch" ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
-                  </form>
+          <div className='column5'>
+            <form>
+              <Input id="recipeSearch" ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
+            </form>
+          </div>
+          <div className='column5'>
+            <form>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Input
+                  id="loginForm"
+                  placeholder="Search by an Ingredient"
+                  onChange={currentIngrdntChange}
+                  value={currentIngrdnt}
+                />
+                <Button id='searchIngredientButton' onClick={searchIngrdntsChange}>Search</Button>
               </div>
-              <div className='column5'>
-                <form>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Input
-                      id="loginForm"
-                      placeholder="Search by an Ingredient"
-                      onChange={currentIngrdntChange}
-                      value={currentIngrdnt}
-                    />
-                      <Button id='searchIngredientButton' onClick={searchIngrdntsChange}>Search</Button>
-                  </div>
-                  {/* <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt}  ></Input><Button onClick={searchIngrdntsChange}>Search By Ingredient</Button> */}
-                </form>
-              </div> 
+              {/* <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt}  ></Input><Button onClick={searchIngrdntsChange}>Search By Ingredient</Button> */}
+            </form>
+          </div>
         </div>
         <div className='row3'>
-            <div className='column5'>
-                 <UnorderedList className='searchStyling' styleType='none' id='ingrdntsRecipes'>
-                  {suggestions.map((recipe) => (
-                  <ListItem key={recipe._id}>
-                  <Link style={{color: '#02a8fa'}} to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
-                  </ListItem>
-                        ))}
-                  </UnorderedList> 
-            </div>
-            <div className='column5'>
+          <div className='column5'>
+            <UnorderedList className='searchStyling' styleType='none' id='ingrdntsRecipes'>
+              {suggestions.map((recipe) => (
+                <ListItem key={recipe._id}>
+                  <Link style={{ color: '#02a8fa' }} to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </div>
+          <div className='column5'>
             <UnorderedList className='searchStyling' styleType='none'>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
                 {searchIngrdnts.map((ingrdnt, index) => (
                   <React.Fragment key={index}>
-                  <ListItem>{ingrdnt} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
+                    <ListItem>{ingrdnt} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
                   </React.Fragment>
-                  ))}
-            </div>
-             </UnorderedList>
-             <UnorderedList className='searchStyling' styleType='none'>
-             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              {ingrdntsSuggestions.map((recipe) => (
-              <ListItem key={recipe._id}>
-                <Link id='searchResults' style={{color: '#02a8fa', marginRight: '30px'}} to={`/recipe/${recipe._id}`}>{recipe.name} </Link>
-                {/* <p> by {recipe.recipeAuthor.username}</p> */}
-              </ListItem>
-              ))}
+                ))}
               </div>
-          </UnorderedList>
+            </UnorderedList>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <UnorderedList className='searchStyling' styleType='none'>
+                {ingrdntsSuggestions.map((recipe) => (
+                  <ListItem key={recipe._id}>
+                    <Link id='searchResults' style={{ color: '#02a8fa', marginRight: '30px' }} to={`/recipe/${recipe._id}`}>
+                      {recipe.name}
+                    </Link>
+                    {/* <p> by {recipe.recipeAuthor.username}</p> */}
+                  </ListItem>
+                ))}
+              </UnorderedList>
             </div>
+          </div>
         </div>
-        </div>
+      </div>
     ) : (
-    <div>
-  <Container id='homePage'>
-    <div>
-      <form>
-        <Input className='column' style={{padding: '30px', fontSize: "30px", fontWeight: 'bolder', textAlign: 'center'}} id="homeInput" type='text' onClick={() => setExpanded(!expanded)} placeholder='Your Next Obsession' value={searchName} onChange={() => setExpanded(!expanded)}/>
-      </form>
-    </div>
-  </Container>
-</div>
+      <div>
+        <Container id='homePage'>
+          <div>
+            <form>
+              <Input className='column' style={{ padding: '30px', fontSize: "30px", fontWeight: 'bolder', textAlign: 'center' }} id="homeInput" type='text' onClick={() => setExpanded(!expanded)} placeholder='Your Next Obsession' value={searchName} onChange={() => setExpanded(!expanded)} />
+            </form>
+          </div>
+        </Container>
+      </div>
     )
   );
 }
@@ -167,4 +169,3 @@ export default function Home() {
 
 
 
- 
