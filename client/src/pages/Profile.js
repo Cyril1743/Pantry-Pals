@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { Navigate, useParams, Link } from 'react-router-dom'
-import {Accordion, Container, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button } from '@chakra-ui/react'
+import {Accordion, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button } from '@chakra-ui/react'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { useQuery, useMutation } from '@apollo/client'
 import RecipeForm from '../components/RecipeForm'
@@ -56,11 +56,11 @@ export default function Profile() {
             <div className='profileContainer'>
                 <div>
                     {username && profile.recipe.length > 0 ?
-                        <Container>
+                        <div>
                             <h1>{username}'s Recipes</h1>
-                            <Accordion>
+                            <Accordion id='accordianStyling'>
                                 {profile.recipe.map((recipe, index) => [
-                                    <AccordionItem key={index}>
+                                    <AccordionItem mb={4} key={index}>
                                         <h2>
                                             <AccordionButton>
                                                 <Box flex='1' textAlign="left">
@@ -79,29 +79,29 @@ export default function Profile() {
                                     </AccordionItem>
                                 ])}
                              </Accordion>   
-                        </Container>
+                        </div>
                         :
-                        <Container>
-                            {console.log(profile)}
-                            <h1>My Recipes</h1>
-                            <Button ref={btnRef} onClick={onOpen}>
+                        <div>
+                            <div id='recipesButton'>
+                            <Button id="myRecipes" ref={btnRef} onClick={onOpen}>
                                 My Recipes
                             </Button>
+                            </div>
+                            <h1 className='createHeader'> Create Your Own Recipe!</h1>
                             <Drawer
                                 isOpen={isOpen}
                                 placement='left'
                                 onClose={onClose}
-                                finalFocusRef={btnRef}
                             >
                                 <DrawerOverlay />
-                                <DrawerContent>
+                                <DrawerContent style={{backgroundColor: '#FFFDCA'}}>
                                     <DrawerCloseButton />
-                                    <DrawerHeader>Your Recipes</DrawerHeader>
+                                    <DrawerHeader className='drawerHeader'>Your Recipes</DrawerHeader>
                                     <DrawerBody>
-                                        <Accordion>
+                                        <Accordion allowToggle>
                                             {profile.recipe.map((recipe) => {
-                                                return (<AccordionItem>
-                                                    <h2>
+                                                return (<AccordionItem mb={4}>
+                                                    <h2 className='accordianStyling'>
                                                         <AccordionButton>
                                                             <Box flex='1' textAlign='left'>
                                                                 {recipe.name}
@@ -111,11 +111,11 @@ export default function Profile() {
                                                     </h2>
                                                     <AccordionPanel pb={4}>
                                                         {recipe.description}
-                                                        <UnorderedList listStyleType="none">
-                                                            {recipe.ingredients.map(ingredient => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName}</ListItem>)}
+                                                        <UnorderedList listStyleType={ 'none' } className='accordianStyling2'>
+                                                            {recipe.ingredients.map(ingredient => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName.charAt(0).toUpperCase() + ingredient.ingredientName.slice(1)}</ListItem>)}
                                                         </UnorderedList>
-                                                        <Link to={`/recipe/${recipe._id}`}>View Recipe</Link>
-                                                        <Button className='deleteButton' id={recipe._id} onClick={handleRemoveRecipe}><TiDeleteOutline /></Button>
+                                                        <Link className='accordianStyling3' to={`/recipe/${recipe._id}`}>View Recipe</Link>
+                                                        {/* <Button className='deleteButton' id={recipe._id} onClick={handleRemoveRecipe}><TiDeleteOutline /></Button> */}
                                                     </AccordionPanel>
                                                 </AccordionItem>
                                                 )
@@ -125,7 +125,7 @@ export default function Profile() {
                                 </DrawerContent>
                             </Drawer>
                             <RecipeForm />
-                        </Container>
+                        </div>
                     }
                 </div>
             </div>
