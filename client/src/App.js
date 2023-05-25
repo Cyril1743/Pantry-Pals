@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@ap
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
-
+import { theme } from "./styles/inputStyle"
 
 import Home from './pages/Home';
 import NavBar from './components/NavBar';
@@ -51,7 +51,7 @@ export default function App() {
   return (
     <div className='background'>
     <ApolloProvider client={client}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Router >
           <NavBar />
 
