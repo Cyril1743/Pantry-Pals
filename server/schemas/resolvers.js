@@ -126,7 +126,7 @@ const resolvers = {
                 const recipe = await Recipes.findOneAndDelete({
                     _id: recipeId,
                     recipeAuthor: context.user._id,
-                }).populate('recipeAuthor');
+                }).populate('recipeAuthor').populate('comments.commentAuthor');
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
