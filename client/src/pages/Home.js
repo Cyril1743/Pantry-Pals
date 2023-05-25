@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Input, UnorderedList, ListItem, Button, Container } from '@chakra-ui/react';
-import { FaPlus } from 'react-icons/fa'
-import { TiDeleteOutline } from 'react-icons/ti'
 import { QUERY_INGREDIENT_NAME, QUERY_RECIPE_NAME } from '../utils/queries';
 import { useLazyQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
@@ -97,8 +95,8 @@ export default function Home() {
 
   return (
     expanded ? (
-      <div>
-        <div className='row3' id='homePage'>
+      <div id='homePage'>
+        <div className='row3'>
               <div className='column5'>
                   <form>
                     <Input id="recipeSearch" ref={inputRef} placeholder='Search by name' onChange={searchNameChange} value={searchName} />
@@ -106,61 +104,53 @@ export default function Home() {
               </div>
               <div className='column5'>
                 <form>
-                  <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt} />
-                  <Button onClick={searchIngrdntsChange}>Search By Ingredient</Button>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Input
+                      id="loginForm"
+                      placeholder="Search by an Ingredient"
+                      onChange={currentIngrdntChange}
+                      value={currentIngrdnt}
+                    />
+                      <Button id='searchIngredientButton' onClick={searchIngrdntsChange}>Search</Button>
+                  </div>
+                  {/* <Input id="loginForm" placeholder='Search by an Ingredient' onChange={currentIngrdntChange} value={currentIngrdnt}  ></Input><Button onClick={searchIngrdntsChange}>Search By Ingredient</Button> */}
                 </form>
               </div> 
         </div>
         <div className='row3'>
             <div className='column5'>
-                 <UnorderedList id='ingrdntsRecipes'>
+                 <UnorderedList className='searchStyling' styleType='none' id='ingrdntsRecipes'>
                   {suggestions.map((recipe) => (
                   <ListItem key={recipe._id}>
-                  <Link to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
+                  <Link style={{color: '#02a8fa'}} to={`/recipe/${recipe._id}`}>{recipe.name} by {recipe.recipeAuthor.username}</Link>
                   </ListItem>
                         ))}
                   </UnorderedList> 
             </div>
-        </div>
-          <div className='row'>
             <div className='column5'>
-          <UnorderedList styleType='none'>
-            {searchIngrdnts.map((ingrdnt, index) => (
-              <React.Fragment key={index}>
-                <ListItem>{ingrdnt}</ListItem>
-                <Button onClick={() => removeIngrdnt(ingrdnt)}>
-                  <span role='img' aria-label='delete'>
-                    <TiDeleteOutline />
-                  </span>
-                </Button>
-              </React.Fragment>
-            ))}
-          </UnorderedList>
-          </div>
-          </div>
-          <div className='row'>
-            <div className='column5'>
-          <UnorderedList styleType='none'>
-            {ingrdntsSuggestions.map((recipe) => (
+            <UnorderedList className='searchStyling' styleType='none'>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                {searchIngrdnts.map((ingrdnt, index) => (
+                  <React.Fragment key={index}>
+                  <ListItem>{ingrdnt} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
+                  </React.Fragment>
+                  ))}
+            </div>
+             </UnorderedList>
+             <UnorderedList className='searchStyling' styleType='none'>
+             <div style={{ display: 'flex', flexDirection: 'row' }}>
+              {ingrdntsSuggestions.map((recipe) => (
               <ListItem key={recipe._id}>
-                <Link to={`/recipe/${recipe._id}`}>{recipe.name} </Link>
+                <Link id='searchResults' style={{color: '#02a8fa', marginRight: '30px'}} to={`/recipe/${recipe._id}`}>{recipe.name} </Link>
                 {/* <p> by {recipe.recipeAuthor.username}</p> */}
               </ListItem>
-            ))}
+              ))}
+              </div>
           </UnorderedList>
-          </div>
-          </div>
+            </div>
+        </div>
         </div>
     ) : (
-    //   <div>
-    //     <div id='homePage'>
-    //      <div>
-    //       <form style={{width: "50%", margin: "auto", display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-    //       <Input style={{padding: "60px", fontSize: "30px"}} id="homeInput" type='text' onClick={() => setExpanded(!expanded)} placeholder='Your next obsession' value={searchName} onChange={() => setExpanded(!expanded)}/>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
     <div>
   <Container id='homePage'>
     <div>
@@ -173,9 +163,6 @@ export default function Home() {
     )
   );
 }
-
-
-
 
 
 
