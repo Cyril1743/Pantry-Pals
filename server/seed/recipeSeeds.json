@@ -1,338 +1,592 @@
 [
     {
-      "_id":"6463fc6e194dddab918762a3",
-      "name": "Mac N Cheese",
-      "description":"Delectable mac n cheese",
-      "servings":2,
-      "ingredients":[
+        "_id": "6463fc6e194dddab918762a3",
+        "name": "Mac N Cheese",
+        "description": "Delectable mac n cheese",
+        "servings": 2,
+        "ingredients": [
             {
-                "ingredientName":"macaroni",
-                "ingredientAmount":2,
-                "ingredientUnit":"cups"
+                "ingredientName": "macaroni",
+                "ingredientAmount": 2,
+                "ingredientUnit": "cups"
             },
             {
-                "ingredientName":"butter",
-                "ingredientAmount":3,
-                "ingredientUnit":"TBS"
+                "ingredientName": "butter",
+                "ingredientAmount": 3,
+                "ingredientUnit": "TBS"
             },
             {
-                "ingredientName":"flour",
-                "ingredientAmount":2,
-                "ingredientUnit":"TBS"
+                "ingredientName": "flour",
+                "ingredientAmount": 2,
+                "ingredientUnit": "TBS"
             },
             {
-                "ingredientName":"salt",
-                "ingredientAmount":0.5,
-                "ingredientUnit":"tsp"
+                "ingredientName": "salt",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "tsp"
             },
             {
-                "ingredientName":"whole milk",
-                "ingredientAmount":1.5,
-                "ingredientUnit":"cups"
+                "ingredientName": "whole milk",
+                "ingredientAmount": 1.5,
+                "ingredientUnit": "cups"
             },
             {
-                "ingredientName":"cheddar cheese",
-                "ingredientAmount":2.5,
-                "ingredientUnit":"cups"
+                "ingredientName": "cheddar cheese",
+                "ingredientAmount": 2.5,
+                "ingredientUnit": "cups"
             }
         ],
         "steps": [
             {
-                "order":1,
-                "stepText":"Preheat oven to 350 degrees F and lightly grease a square baking dish."
+                "order": 1,
+                "stepText": "Preheat oven to 350 degrees F and lightly grease a square baking dish."
             },
             {
-                "order":2,
-                "stepText":"Add macaroni to boiling water. Cook until al dente (about 10 mins, or according to package instructions)."
+                "order": 2,
+                "stepText": "Add macaroni to boiling water. Cook until al dente (about 10 mins, or according to package instructions)."
             },
             {
-                "order":3,
-                "stepText":"Melt butter in a saucepan over medium heat. Blend in flour and salt. Cook for 2 mins."
+                "order": 3,
+                "stepText": "Melt butter in a saucepan over medium heat. Blend in flour and salt. Cook for 2 mins."
             },
             {
-                "order":4,
-                "stepText":"Reduce heat to medium low and add milk to butter mixture. Stir constantly for 2 mins. Remove from heat and stir in 1 cup of the cheddar cheese."
+                "order": 4,
+                "stepText": "Reduce heat to medium low and add milk to butter mixture. Stir constantly for 2 mins. Remove from heat and stir in 1 cup of the cheddar cheese."
             },
             {
-                "order":5,
-                "stepText":"Stir cooked macaroni in to cheese mixture. Pour in to prepared baking dish. Top with remaining cheese."
+                "order": 5,
+                "stepText": "Stir cooked macaroni in to cheese mixture. Pour in to prepared baking dish. Top with remaining cheese."
             },
             {
-                "order":6,
-                "stepText":"Bake for 15 mins. Serve."
+                "order": 6,
+                "stepText": "Bake for 15 mins. Serve."
             }
         ],
-        "recipeAuthor":"6463f98ac8476ea0fef3f032"
+        "recipeAuthor": "6463f98ac8476ea0fef3f032"
     },
     {
-      "_id":"6463fc6e194dddab918762b0",
-      "name": "Egg Fried Rice",
-      "description":"The best egg fried rice ever",
-      "servings":2,
-      "ingredients":[
+        "_id": "6463fc6e194dddab918762b0",
+        "name": "Egg Fried Rice",
+        "description": "The best egg fried rice ever",
+        "servings": 2,
+        "ingredients": [
             {
-                "ingredientName":"garlic",
-                "ingredientAmount":4,
+                "ingredientName": "garlic",
+                "ingredientAmount": 4,
                 "ingredientUnit": "cloves"
             },
             {
-                "ingredientName":"shallot",
-                "ingredientAmount":1,
-                "ingredientUnit":""
+                "ingredientName": "shallot",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
             },
             {
-                "ingredientName":"wisked egg",
-                "ingredientAmount":1,
-                "ingredientUnit":""
+                "ingredientName": "wisked egg",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
             },
             {
-                "ingredientName":"chives",
-                "ingredientAmount":3,
-                "ingredientUnit":""
+                "ingredientName": "chives",
+                "ingredientAmount": 3,
+                "ingredientUnit": ""
             },
             {
-                "ingredientName":"chili",
-                "ingredientAmount":1,
-                "ingredientUnit":""
+                "ingredientName": "chili",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
             },
             {
-                "ingredientName":"cooked rice",
-                "ingredientAmount":1,
-                "ingredientUnit":"cup"
+                "ingredientName": "cooked rice",
+                "ingredientAmount": 1,
+                "ingredientUnit": "cup"
             },
             {
-                "ingredientName":"soy sauce",
-                "ingredientAmount":1,
-                "ingredientUnit":"tsp"
+                "ingredientName": "soy sauce",
+                "ingredientAmount": 1,
+                "ingredientUnit": "tsp"
             },
             {
-                "ingredientName":"asian sesame oil",
-                "ingredientAmount":1,
-                "ingredientUnit":"tsp"
+                "ingredientName": "asian sesame oil",
+                "ingredientAmount": 1,
+                "ingredientUnit": "tsp"
             },
             {
-                "ingredientName":"peanut oil",
-                "ingredientAmount":2,
-                "ingredientUnit":"TBS"
+                "ingredientName": "peanut oil",
+                "ingredientAmount": 2,
+                "ingredientUnit": "TBS"
             },
             {
-                "ingredientName":"MSG",
-                "ingredientAmount":2,
-                "ingredientUnit":"tsp"
+                "ingredientName": "MSG",
+                "ingredientAmount": 2,
+                "ingredientUnit": "tsp"
+            }
+        ],
+        "steps": [
+            {
+                "order": 1,
+                "stepText": "Chop garlic, shallot, chives, and chili. Oil a wok with peanut oil."
+            },
+            {
+                "order": 2,
+                "stepText": "Fry garlic and shallot until fragrant."
+            },
+            {
+                "order": 3,
+                "stepText": "Add egg. Fry until fluffy."
+            },
+            {
+                "order": 4,
+                "stepText": "Add rice. Add soy sauce, sesame oil, and MSG."
+            },
+            {
+                "order": 5,
+                "stepText": "add chives and chili. Toss, then serve."
+            }
+        ],
+        "recipeAuthor": "6463f98ac8476ea0fef3f033"
+    },
+    {
+        "_id": "6463fc6e194dddab918762c0",
+        "name": "Chilaquiles",
+        "description": "Super easy chilaquiles",
+        "servings": 2,
+        "ingredients": [
+            {
+                "ingredientName": "corn tortilla chips",
+                "ingredientAmount": 3,
+                "ingredientUnit": "cups"
+            },
+            {
+                "ingredientName": "canola oil",
+                "ingredientAmount": 2,
+                "ingredientUnit": "TBS"
+            },
+            {
+                "ingredientName": "salt",
+                "ingredientAmount": 1,
+                "ingredientUnit": "tsp"
+            },
+            {
+                "ingredientName": "salsa verde",
+                "ingredientAmount": 2,
+                "ingredientUnit": "cups"
+            },
+            {
+                "ingredientName": "chopped cilantro",
+                "ingredientAmount": 1,
+                "ingredientUnit": "oz"
+            },
+            {
+                "ingredientName": "avocado",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "egg",
+                "ingredientAmount": 2,
+                "ingredientUnit": ""
+            }
+        ],
+        "steps": [
+            {
+                "order": 1,
+                "stepText": "Bring pan to high heat. Add 2 TBS oil. Add salsa and cook for 2 mins."
+            },
+            {
+                "order": 2,
+                "stepText": "Add chips to salsa and gentley coat. Cook for 2 mins."
+            },
+            {
+                "order": 3,
+                "stepText": "Pour chilaquiles in to bowls to be served. Clean out the pan, then fry the eggs over-easy or over-medium."
+            },
+            {
+                "order": 4,
+                "stepText": "Top the chilaquiles with fried egg, sliced avocado, and cilantro. Serve."
+            }
+        ],
+        "recipeAuthor": "6463db80b579cd3781edb243"
+    },
+    {
+        "_id": "6463fc6e194dddab918762cc",
+        "name": "Pan Seared Steak",
+        "description": "Perfectly cooked steak",
+        "servings": 2,
+        "ingredients": [
+            {
+                "ingredientName": "New York strip steak",
+                "ingredientAmount": 12,
+                "ingredientUnit": "oz"
+            },
+            {
+                "ingredientName": "freshly cracked black pepper",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "tsp"
+            },
+            {
+                "ingredientName": "salt",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "tsp"
+            },
+            {
+                "ingredientName": "vegetable oil",
+                "ingredientAmount": 2,
+                "ingredientUnit": "TBSP"
+            },
+            {
+                "ingredientName": "unsalted butter",
+                "ingredientAmount": 1,
+                "ingredientUnit": "TBSP"
+            }
+        ],
+        "steps": [
+            {
+                "order": 1,
+                "stepText": "Season steak with salt and pepper."
+            },
+            {
+                "order": 2,
+                "stepText": "Heat pan over medium high heat. Add oil and heat until oil shimmers."
+            },
+            {
+                "order": 3,
+                "stepText": "Add steak. Cook for about 3 mins. Flip and cook for about 4 mins. With one minute of cooking remaining, add butter to the pan. Then, serve."
+            }
+        ],
+        "recipeAuthor": "6463f98ac8476ea0fef3f034"
+    },
+    {
+        "_id": "6463fc6e194dddab918762a1",
+        "name": "Chicken Parmesan",
+        "description": "Classic Italian chicken dish with a crispy coating and melted cheese",
+        "servings": 2,
+        "ingredients": [
+            {
+                "ingredientName": "boneless skinless chicken breasts",
+                "ingredientAmount": 2,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "Salt and pepper to taste",
+                "ingredientAmount": 1,
+                "ingredientUnit": "pinch"
+            },
+            {
+                "ingredientName": "All-purpose flour",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "cups"
+            },
+            {
+                "ingredientName": "Eggs, beaten",
+                "ingredientAmount": 2,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "Breadcrumbs",
+                "ingredientAmount": 1,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "Grated Parmesan cheese",
+                "ingredientAmount": 0.25,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "Marinara sauce",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "mozzerella cheese",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "vegetable oil",
+                "ingredientAmount": 3,
+                "ingredientUnit": "cups"
+            }
+        ],
+        "steps": [
+            {
+                "order": 1,
+                "stepText": "Preheat the oven to 375 degrees F. Season the chicken breasts with salt and pepper."
+            },
+            {
+                "order": 2,
+                "stepText": "In a small bowl, beat the eggs together."
+            },
+            {
+                "order": 3,
+                "stepText": "In a seperate small bowl, combine breadcrumbs and Parmesan cheese."
+            },
+            {
+                "order": 4,
+                "stepText": "Dredge each chicken breast in flour, dip into the beaten eggs, and coat with breadcrumb/Parmesan cheese mixture."
+            },
+            {
+                "order": 5,
+                "stepText": "Heat oil in a large skillet over medium heat. Cook the chicken until golden brown on both sides."
+            },
+            {
+                "order": 6,
+                "stepText": "Transfer the chicken to a baking dish. Top each chicken breast with marinara sauce and shredded mozzarella cheese."
+            },
+            {
+                "order": 7,
+                "stepText": "Bake in the preheated oven for 20-25 mins or until the chicken is cooked to 165 degrees internal"
+            }
+        ],
+        "recipeAuthor": "6463db80b579cd3781edb243"
+    },
+    {
+        "_id": "6463fc6e194dddab918762c9",
+        "name": "Vegetable Stir-Fry",
+        "description": "Quick and healthy stir-fried vegetables with a flavorful sauce.",
+        "servings": 2,
+        "ingredients": [
+            {
+                "ingredientName": "vegetable oil",
+                "ingredientAmount": 2,
+                "ingredientUnit": "TBSP"
+            },
+            {
+                "ingredientName": "garlic",
+                "ingredientAmount": 2,
+                "ingredientUnit": "cloves"
+            },
+            {
+                "ingredientName": "onion",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "carrot, julienned",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "bell pepper, thinly sliced",
+                "ingredientAmount": 1,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "broccoli florets",
+                "ingredientAmount": 1,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "snap peas",
+                "ingredientAmount": 1,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "mushrooms, sliced",
+                "ingredientAmount": 1,
+                "ingredientUnit": "cup"
+            },
+            {
+                "ingredientName": "soy sauce",
+                "ingredientAmount": 2,
+                "ingredientUnit": "TBSP"
+            },
+            {
+                "ingredientName": "oyster sauce",
+                "ingredientAmount": 1,
+                "ingredientUnit": "TBSP"
+            },
+            {
+                "ingredientName": "asian sesame oil",
+                "ingredientAmount": 1,
+                "ingredientUnit": "TSP"
+            },
+            {
+                "ingredientName": "sugar",
+                "ingredientAmount": 0.5,
+                "ingredientUnit": "TSP"
+            },
+            {
+                "ingredientName": "Salt and pepper to taste",
+                "ingredientAmount": 1,
+                "ingredientUnit": "pinch"
+            }
+        ],
+        "steps": [
+            {
+                "order": 1,
+                "stepText": "Heat oil in a wok or large skillet over high heat. Add minced garlic and sliced onion, and stir-fry for 1-2 minutes until fragrant."
+            },
+            {
+                "order": 2,
+                "stepText": "Add julienned carrot, sliced bell pepper, broccoli florets, snap peas, and sliced mushrooms to the wok. Stir-fry for 3-4 minutes or until the vegetables are crisp-tender."
+            },
+            {
+                "order": 3,
+                "stepText": "In a small bowl, whisk together soy sauce, oyster sauce, sesame oil, sugar, salt and pepper. Pour the sauce over the vegetables and toss to coat evenly."
+            },
+            {
+                "order": 4,
+                "stepText": "Remove from heat and serve the vegetable stir-fry as a side dish or over steamed rice or noodles."
+            }
+        ],
+        "recipeAuthor": "6463f98ac8476ea0fef3f032"
+    },
+    {
+        "_id": "6463fc6e194dddab918762a5",
+        "name": "Caprese Salad",
+        "description": "A refreshing and light salad with tomatoes, mozzarella, and basil",
+        "servings": 2,
+        "ingredients": [
+            {
+                "ingredientName": "tomatoes, sliced",
+                "ingredientAmount": 2,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "mozzerella cheese, sliced",
+                "ingredientAmount": 8,
+                "ingredientUnit": "oz"
+            },
+            {
+                "ingredientName": "basil leaves",
+                "ingredientAmount": 8,
+                "ingredientUnit": ""
+            },
+            {
+                "ingredientName": "extra virgin olive oil",
+                "ingredientAmount": 8,
+                "ingredientUnit": "oz"
+            },
+            {
+                "ingredientName": "balsamic glaze",
+                "ingredientAmount": 4,
+                "ingredientUnit": "oz"
+            },
+            {
+                "ingredientName": "Salt and pepper to taste",
+                "ingredientAmount": 2,
+                "ingredientUnit": "pinches"
             }
         ],
         "steps": [
             {
                 "order":1,
-                "stepText":"Chop garlic, shallot, chives, and chili. Oil a wok with peanut oil."
+                "stepText":"Arrange the tomato and mozzarella slices on a serving plate, alternating them."
             },
             {
                 "order":2,
-                "stepText":"Fry garlic and shallot until fragrant."
+                "stepText":"Tuck fresh basil leaves in between the tomato and mozzarella slices."
             },
             {
                 "order":3,
-                "stepText":"Add egg. Fry until fluffy."
+                "stepText":"Drizzle extra virgin olive oil over the salad."
             },
             {
                 "order":4,
-                "stepText":"Add rice. Add soy sauce, sesame oil, and MSG."
+                "stepText":"Season with salt and pepper to taste."
             },
             {
                 "order":5,
-                "stepText":"add chives and chili. Toss, then serve."
+                "stepText":"Finish the salad by drizzling balsamic glaze over the top."
+            },
+            {
+                "order":6,
+                "stepText":"Serve the Caprese salad immediately as an appetizer or a light lunch."
             }
         ],
         "recipeAuthor":"6463f98ac8476ea0fef3f033"
     },
     {
-      "_id":"6463fc6e194dddab918762c0",
-      "name": "Chilaquiles",
-      "description":"Super easy chilaquiles",
-      "servings":2,
-      "ingredients":[
-            {
-                "ingredientName":"corn tortilla chips",
-                "ingredientAmount":3,
-                "ingredientUnit":"cups"
-            },
-            {
-                "ingredientName":"canola oil",
-                "ingredientAmount":2,
-                "ingredientUnit":"TBS"
-            },
-            {
-                "ingredientName":"salt",
-                "ingredientAmount":1,
-                "ingredientUnit":"tsp"
-            },
-            {
-                "ingredientName":"salsa verde",
-                "ingredientAmount":2,
-                "ingredientUnit":"cups"
-            },
-            {
-                "ingredientName":"chopped cilantro",
-                "ingredientAmount":1,
-                "ingredientUnit":"oz"
-            },
-            {
-                "ingredientName":"avocado",
-                "ingredientAmount":1,
-                "ingredientUnit":""
-            },
-            {
-                "ingredientName":"egg",
-                "ingredientAmount":2,
-                "ingredientUnit":""
-            }
-        ],
-        "steps": [
-            {
-                "order":1,
-                "stepText":"Bring pan to high heat. Add 2 TBS oil. Add salsa and cook for 2 mins."
-            },
-            {
-                "order":2,
-                "stepText":"Add chips to salsa and gentley coat. Cook for 2 mins."
-            },
-            {
-                "order":3,
-                "stepText":"Pour chilaquiles in to bowls to be served. Clean out the pan, then fry the eggs over-easy or over-medium."
-            },
-            {
-                "order":4,
-                "stepText":"Top the chilaquiles with fried egg, sliced avocado, and cilantro. Serve."
-            }
-        ],
-        "recipeAuthor":"6463db80b579cd3781edb243"
-    },
-    {
-      "_id":"6463fc6e194dddab918762cc",
-      "name": "Pan Seared Steak",
-      "description":"Perfectly cooked steak",
-      "servings":2,
-      "ingredients":[
-            {
-                "ingredientName":"New York strip steak",
-                "ingredientAmount":12,
-                "ingredientUnit":"oz"
-            },
-            {
-                "ingredientName":"freshly cracked black pepper",
-                "ingredientAmount":0.5,
-                "ingredientUnit":"tsp"
-            },
-            {
-                "ingredientName":"salt",
-                "ingredientAmount":0.5,
-                "ingredientUnit":"tsp"
-            },
-            {
-                "ingredientName":"vegetable oil",
-                "ingredientAmount":2,
-                "ingredientUnit":"TBS"
-            },
-            {
-                "ingredientName":"unsalted butter",
-                "ingredientAmount":1,
-                "ingredientUnit":"TBS"
-            }
-        ],
-        "steps": [
-            {
-                "order":1,
-                "stepText":"Season steak with salt and pepper."
-            },
-            {
-                "order":2,
-                "stepText":"Heat pan over medium high heat. Add oil and heat until oil shimmers."
-            },
-            {
-                "order":3,
-                "stepText":"Add steak. Cook for about 3 mins. Flip and cook for about 4 mins. With one minute of cooking remaining, add butter to the pan. Then, serve."
-            }
-        ],
-        "recipeAuthor":"6463f98ac8476ea0fef3f034"
-    },
-    {
-        "_id":"6463fc6e194dddab918762a1",
-        "name":"Chicken Parmesan",
-        "description":"Classic Italian chicken dish with a crispy coating and melted cheese",
-        "servings":2,
+        "_id":"6463fc6e194dddab918762b1",
+        "name":"Chicken Fajitas",
+        "description":"Flavorful and sizzling chicken fajitas with bell peppers and onions",
         "ingredients":[
             {
-                "ingredientName":"Skinless chicken breats",
+                "ingredientName":"boneless skinless chicken breasts",
                 "ingredientAmount":2,
                 "ingredientUnit":""
             },
             {
-               "ingredientName":"Salt and pepper to taste",
-               "ingredientAmount":1,
-               "ingredientUnit":"pinch" 
-            },
-            {
-                "ingredientName":"All-purpose flour",
-                "ingredientAmount":0.5,
-                "ingredientUnit":"cups"
-            },
-            {
-                "ingredientName":"Eggs, beaten",
-                "ingredientAmount":2,
-                "ingredientUnit":""
-            },
-            {
-                "ingredientName":"Breadcrumbs",
+                "ingredientName":"red bell pepper, sliced",
                 "ingredientAmount":1,
-                "ingredientUnit":"cup"
+                "ingredientUnit":""
             },
             {
-                "ingredientName":"Grated Parmesan cheese",
-                "ingredientAmount":0.25,
-                "ingredientUnit":"cup"
+                "ingredientName":"green bell pepper, sliced",
+                "ingredientAmount":1,
+                "ingredientUnit":""
             },
             {
-                "ingredientName":"Marinara sauce",
+                "ingredientName":"yellow onion, sliced",
+                "ingredientAmount":1,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"extra virgin olive oil",
+                "ingredientAmount":2,
+                "ingredientUnit":"TBSP"
+            },
+            {
+                "ingredientName":"garlic, minced",
+                "ingredientAmount":2,
+                "ingredientUnit":"cloves"
+            },
+            {
+                "ingredientName":"chili powder",
+                "ingredientAmount":1,
+                "ingredientUnit":"TSP"
+            },
+            {
+                "ingredientName":"cumin",
                 "ingredientAmount":0.5,
-                "ingredientUnit":"cup"
+                "ingredientUnit":"TSP"
             },
             {
-                "ingredientName":"mozzeralle cheese",
+                "ingredientName":"paprika",
                 "ingredientAmount":0.5,
-                "ingredientUnit":"cup"
+                "ingredientUnit":"TSP"
             },
             {
-                "ingredientName":"vegetable oil",
-                "ingredientAmount":3,
-                "ingredientUnit":"cups"
+                "ingredientName":"Salt and pepper to taste",
+                "ingredientAmount":2,
+                "ingredientUnit":"pinches"
+            },
+            {
+                "ingredientName":"flour tortillas",
+                "ingredientAmount":8,
+                "ingredientUnit":"" 
             }
         ],
-        "steps": [
+        "steps":[
             {
                 "order":1,
-                "stepText":"Preheat the oven to 375 degrees F. Season the chicken breasts with salt and pepper."
+                "stepText":"In a bowl, combine minced garlic, chili powder, cumin, paprika, salt, and pepper."
             },
             {
                 "order":2,
-                "stepText":"In a small bowl, beat the eggs together."
+                "stepText":"Season the sliced chicken breasts with the spice mixture, ensuring they are evenly coated."
             },
             {
                 "order":3,
-                "stepText":"In a seperate small bowl, combine breadcrumbs and Parmesan cheese."
+                "stepText":"Heat olive oil in a large skillet or grill pan over medium-high heat."
             },
             {
                 "order":4,
-                "stepText":"Dredge each chicken breast in flour, dip into the beaten eggs, and coat with breadcrumb/Parmesan cheese mixture."
+                "stepText":"Add the seasoned chicken slices and cook for 5-7 minutes, or until cooked through and slightly browned. Remove from the pan and set aside."
             },
             {
                 "order":5,
-                "stepText":"Heat oil in a large skillet over medium heat. Cook the chicken until golden brown on both sides."
+                "stepText":"In the same pan, add the sliced bell peppers and onions. Cook for 5-7 minutes, or until they are tender and slightly charred."
             },
             {
                 "order":6,
-                "stepText": "Eat and grow fat"
+                "stepText":"Return the cooked chicken to the pan with the peppers and onions, tossing everything together to combine."
+            },
+            {
+                "order":7,
+                "stepText":"Serve the chicken fajitas in warm flour tortillas, and add your desired toppings"
             }
-        ]
+        ],
+        "recipeAuthor":"6463f98ac8476ea0fef3f033"
     }
 ]
-  
