@@ -1,15 +1,17 @@
 import React from 'react'
 import { Navigate, useParams, Link } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
-import { Container, UnorderedList, ListItem } from '@chakra-ui/react'
+import { useQuery, useMutation } from '@apollo/client'
+import { Container, UnorderedList, ListItem, Button } from '@chakra-ui/react'
 import RecipeForm from '../components/RecipeForm'
 import '../styles/style.css'
+import {REMOVE_RECIPE } from "../utils/mutations";
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
 export default function Profile() {
+    const [removeRecipe] = useMutation(REMOVE_RECIPE);
 
     const { username } = useParams();
 
@@ -33,6 +35,16 @@ export default function Profile() {
         );
     }
 
+    const handleRemoveRecipe = async (e) => {
+        e.preventDefault()
+        try {
+            const deleteRecipeID = e.target.getAttribute('id')
+            await removeRecipe({ variables: { recipeId: deleteRecipeID } })
+        } catch (err) {
+          console.log(err)
+        } 
+      }
+
     return (
         <>
         <div className='profileContainer'>
@@ -50,12 +62,12 @@ export default function Profile() {
                     </Container>
                 : 
                     <Container>
-                        {console.log(profile)}
                         <h1>My Recipes</h1>
                         <UnorderedList styleType='none'>
                             {profile.recipe.map((recipe) => (
                                 <ListItem key={recipe._id}>
                                     <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
+                                    <Button className='deleteButton' id={`${recipe._id}`} onClick={handleRemoveRecipe}>✖️</Button>
                                 </ListItem>
                             ))}
                         </UnorderedList>

@@ -11,7 +11,7 @@ export default function Recipe() {
   const { recipeId } = useParams();
   const [comment, setComment] = useState('');
 
-const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}});
+    const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: recipeId}});
     const [addComment] = useMutation(ADD_COMMENT);
     const [removeComment] = useMutation(REMOVE_COMMENT);
     const [removeRecipe] = useMutation(REMOVE_RECIPE);
@@ -43,6 +43,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
     const handleRemoveRecipe = async () => {
       try {
         await removeRecipe({ variables: { recipeId: recipe._id } })
+        .then(window.location.href='https://pantry-pals.herokuapp.com/profile/me')
       } catch (err) {
         console.log(err)
       } 
@@ -65,7 +66,7 @@ const {data, loading, refetch} = useQuery(QUERY_RECIPE, {variables: {recipeId: r
           <Text>{recipe.description}</Text>
           <p>By: {recipe.recipeAuthor.username}</p>
           {auth.loggedIn() && auth.getUser().data.username === recipe.recipeAuthor.username ? (
-            <Button className='deleteButton' onClick={() => handleRemoveRecipe(recipe._id)}>✖️</Button>
+            <Button className='deleteButton' onClick={handleRemoveRecipe}>✖️</Button>
           ) : (
             <Link to={'/profile/'+ recipe.recipeAuthor.username}>See more recipes by this author</Link>
           )}
