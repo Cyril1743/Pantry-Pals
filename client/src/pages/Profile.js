@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import { Navigate, useParams, Link } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
 import {Accordion, Container, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button } from '@chakra-ui/react'
+import { useQuery, useMutation } from '@apollo/client'
 import RecipeForm from '../components/RecipeForm'
 import '../styles/style.css'
+import {REMOVE_RECIPE } from "../utils/mutations";
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
@@ -11,6 +12,7 @@ import Auth from '../utils/auth';
 
 
 export default function Profile() {
+    const [removeRecipe] = useMutation(REMOVE_RECIPE);
 
     const { username } = useParams();
 
@@ -37,8 +39,19 @@ export default function Profile() {
         );
     }
 
+    const handleRemoveRecipe = async (e) => {
+        e.preventDefault()
+        try {
+            const deleteRecipeID = e.target.getAttribute('id')
+            await removeRecipe({ variables: { recipeId: deleteRecipeID } })
+        } catch (err) {
+          console.log(err)
+        } 
+      }
+
     return (
         <>
+
             <div className='profileContainer'>
                 <div>
                     {username && profile.recipe.length > 0 ?
