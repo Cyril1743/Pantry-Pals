@@ -303,10 +303,12 @@ div, h1, h2, h3, h4 , h5 {
     width: 43%;
     padding: 10px;
     margin: auto;
-    margin-left:50px;
   }
 
-  
+  .searchStyling {
+    color: #ff9191;
+    font-size:20px;
+  }
   
 
   .row:after {
@@ -329,7 +331,7 @@ div, h1, h2, h3, h4 , h5 {
   }
 
   .row3{
-    
+
   }
 
   .ingredientList {
@@ -472,7 +474,7 @@ div, h1, h2, h3, h4 , h5 {
   }
 
   @media screen and (max-width: 600px) {
-    .column, .column2, .column3, .column4, #myRecipes {
+    .column, .column2, .column3, .column4, .column5, #myRecipes {
       width: 100%;
     }
   }
