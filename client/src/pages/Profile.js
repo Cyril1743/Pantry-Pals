@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Navigate, useParams, Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
-import { Container, UnorderedList, ListItem } from '@chakra-ui/react'
+import {Accordion, Container, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button } from '@chakra-ui/react'
 import RecipeForm from '../components/RecipeForm'
 import '../styles/style.css'
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 import Auth from '../utils/auth';
+
 
 export default function Profile() {
 
@@ -20,6 +21,9 @@ export default function Profile() {
         }
     )
     const profile = data?.me || data?.user || {};
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = useRef()
 
     if (Auth.loggedIn() && Auth.getUser().data.username === username) {
         return <Navigate to="/profile/me" />;
@@ -35,32 +39,76 @@ export default function Profile() {
 
     return (
         <>
-        <div className='profileContainer'>
-            <div>
-                {username && profile.recipe.length>0 ? 
-                    <Container>
-                        <h1>{username}'s Recipes</h1>
-                        <UnorderedList styleType='none'>
-                            {profile.recipe.map((recipe) => (
-                                <ListItem key={recipe._id}>
-                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
-                                </ListItem>
-                            ))}
-                        </UnorderedList>
-                    </Container>
-                : 
-                    <Container>
-                        {console.log(profile)}
-                        <h1>My Recipes</h1>
-                        <UnorderedList styleType='none'>
-                            {profile.recipe.map((recipe) => (
-                                <ListItem key={recipe._id}>
-                                    <Link to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
-                                </ListItem>
-                            ))}
-                        </UnorderedList>
-
-
+            <div className='profileContainer'>
+                <div>
+                    {username && profile.recipe.length > 0 ?
+                        <Container>
+                            <h1>{username}'s Recipes</h1>
+                            <Accordion>
+                                {profile.recipe.map((recipe, index) => [
+                                    <AccordionItem key={index}>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box flex='1' textAlign="left">
+                                                    {recipe.name}
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel>
+                                            {recipe.description}
+                                            <UnorderedList listStyleType="none">
+                                                {recipe.ingredients.map((ingredient) => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName}</ListItem>)}
+                                            </UnorderedList>
+                                            <Link to={`/recipe/${recipe._id}`} >View Recipe</Link>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                ])}
+                             </Accordion>   
+                        </Container>
+                        :
+                        <Container>
+                            {console.log(profile)}
+                            <h1>My Recipes</h1>
+                            <Button ref={btnRef} onClick={onOpen}>
+                                My Recipes
+                            </Button>
+                            <Drawer
+                                isOpen={isOpen}
+                                placement='left'
+                                onClose={onClose}
+                                finalFocusRef={btnRef}
+                            >
+                                <DrawerOverlay />
+                                <DrawerContent>
+                                    <DrawerCloseButton />
+                                    <DrawerHeader>Your Recipes</DrawerHeader>
+                                    <DrawerBody>
+                                        <Accordion>
+                                            {profile.recipe.map((recipe) => {
+                                                return (<AccordionItem>
+                                                    <h2>
+                                                        <AccordionButton>
+                                                            <Box flex='1' textAlign='left'>
+                                                                {recipe.name}
+                                                            </Box>
+                                                            <AccordionIcon />
+                                                        </AccordionButton>
+                                                    </h2>
+                                                    <AccordionPanel pb={4}>
+                                                        {recipe.description}
+                                                        <UnorderedList listStyleType="none">
+                                                            {recipe.ingredients.map(ingredient => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName}</ListItem>)}
+                                                        </UnorderedList>
+                                                        <Link to={`/recipe/${recipe._id}`}>View Recipe</Link>
+                                                    </AccordionPanel>
+                                                </AccordionItem>
+                                                )
+                                            })}
+                                        </Accordion>
+                                    </DrawerBody>
+                                </DrawerContent>
+                            </Drawer>
                             <RecipeForm />
                         </Container>
                     }
