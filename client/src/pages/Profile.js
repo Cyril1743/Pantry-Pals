@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { Navigate, useParams, Link } from 'react-router-dom'
 import {Accordion, Container, UnorderedList, ListItem, useDisclosure, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, AccordionItem, AccordionButton, Box, AccordionIcon, AccordionPanel, Button } from '@chakra-ui/react'
+import { TiDeleteOutline } from 'react-icons/ti'
 import { useQuery, useMutation } from '@apollo/client'
 import RecipeForm from '../components/RecipeForm'
 import '../styles/style.css'
@@ -114,6 +115,7 @@ export default function Profile() {
                                                             {recipe.ingredients.map(ingredient => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName}</ListItem>)}
                                                         </UnorderedList>
                                                         <Link to={`/recipe/${recipe._id}`}>View Recipe</Link>
+                                                        <Button className='deleteButton' id={recipe._id} onClick={handleRemoveRecipe}><TiDeleteOutline /></Button>
                                                     </AccordionPanel>
                                                 </AccordionItem>
                                                 )

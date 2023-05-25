@@ -254,6 +254,85 @@
             }
         ],
         "recipeAuthor":"6463f98ac8476ea0fef3f034"
+    },
+    {
+        "_id":"6463fc6e194dddab918762a1",
+        "name":"Chicken Parmesan",
+        "description":"Classic Italian chicken dish with a crispy coating and melted cheese",
+        "servings":2,
+        "ingredients":[
+            {
+                "ingredientName":"Skinless chicken breats",
+                "ingredientAmount":2,
+                "ingredientUnit":""
+            },
+            {
+               "ingredientName":"Salt and pepper to taste",
+               "ingredientAmount":1,
+               "ingredientUnit":"pinch" 
+            },
+            {
+                "ingredientName":"All-purpose flour",
+                "ingredientAmount":0.5,
+                "ingredientUnit":"cups"
+            },
+            {
+                "ingredientName":"Eggs, beaten",
+                "ingredientAmount":2,
+                "ingredientUnit":""
+            },
+            {
+                "ingredientName":"Breadcrumbs",
+                "ingredientAmount":1,
+                "ingredientUnit":"cup"
+            },
+            {
+                "ingredientName":"Grated Parmesan cheese",
+                "ingredientAmount":0.25,
+                "ingredientUnit":"cup"
+            },
+            {
+                "ingredientName":"Marinara sauce",
+                "ingredientAmount":0.5,
+                "ingredientUnit":"cup"
+            },
+            {
+                "ingredientName":"mozzeralle cheese",
+                "ingredientAmount":0.5,
+                "ingredientUnit":"cup"
+            },
+            {
+                "ingredientName":"vegetable oil",
+                "ingredientAmount":3,
+                "ingredientUnit":"cups"
+            }
+        ],
+        "steps": [
+            {
+                "order":1,
+                "stepText":"Preheat the oven to 375 degrees F. Season the chicken breasts with salt and pepper."
+            },
+            {
+                "order":2,
+                "stepText":"In a small bowl, beat the eggs together."
+            },
+            {
+                "order":3,
+                "stepText":"In a seperate small bowl, combine breadcrumbs and Parmesan cheese."
+            },
+            {
+                "order":4,
+                "stepText":"Dredge each chicken breast in flour, dip into the beaten eggs, and coat with breadcrumb/Parmesan cheese mixture."
+            },
+            {
+                "order":5,
+                "stepText":"Heat oil in a large skillet over medium heat. Cook the chicken until golden brown on both sides."
+            },
+            {
+                "order":6,
+                "stepText"
+            }
+        ]
     }
 ]
   
