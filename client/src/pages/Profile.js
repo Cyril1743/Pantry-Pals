@@ -57,13 +57,13 @@ export default function Profile() {
                 <div>
                     {username && profile.recipe.length > 0 ?
                         <div>
-                            <h1>{username}'s Recipes</h1>
-                            <Accordion id='accordianStyling'>
+                            <h1 className='recipeHeader'>{username}'s Recipes</h1>
+                            <Accordion allowToggle>
                                 {profile.recipe.map((recipe, index) => [
                                     <AccordionItem mb={4} key={index}>
-                                        <h2>
+                                        <h2 className='accordianStyling'>
                                             <AccordionButton>
-                                                <Box flex='1' textAlign="left">
+                                                <Box style={{fontSize: '20px'}} flex='1' textAlign="left">
                                                     {recipe.name}
                                                 </Box>
                                                 <AccordionIcon />
@@ -71,10 +71,10 @@ export default function Profile() {
                                         </h2>
                                         <AccordionPanel>
                                             {recipe.description}
-                                            <UnorderedList listStyleType="none">
+                                            <UnorderedList listStyleType="none" className='accordianStyling2'>
                                                 {recipe.ingredients.map((ingredient) => <ListItem key={ingredient.ingredientName}>{ingredient.ingredientName}</ListItem>)}
                                             </UnorderedList>
-                                            <Link to={`/recipe/${recipe._id}`} >View Recipe</Link>
+                                            <Link className='accordianStyling3' to={`/recipe/${recipe._id}`} >View Recipe</Link>
                                         </AccordionPanel>
                                     </AccordionItem>
                                 ])}
