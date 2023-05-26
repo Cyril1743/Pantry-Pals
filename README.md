@@ -9,7 +9,7 @@ The collaborators:
 
 Pantry Pals allows home cooks the ability to search for recipes by name, or by the specific ingredients they have on hand. 
 
-Users of the app can create, favorite, and comment on recipes. 
+Users of the app can create recipes and comments, and remove recipes and comments. 
 
 The app uses modern technologies to create a dynamic, responsive, and secure experience for users.
 
