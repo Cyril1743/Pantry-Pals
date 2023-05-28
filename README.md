@@ -40,4 +40,4 @@ JSON Web Tokens
 - Deployed on [Heroku](https://id.heroku.com/login)
 
 ## Screenshot
-![Screenshot](public/assets/screenshot.jpg)
+![Screenshot](client/public/screenshot.png)
