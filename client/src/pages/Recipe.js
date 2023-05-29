@@ -40,6 +40,14 @@ export default function Recipe() {
       } 
     }
 
+    function RemoveBtn({ username, id }){
+      if (auth.loggedIn() && auth.getUser().data.username === username) {
+        return <Button className='deleteButton' id={id} onClick={handleRemoveComment}>✖️</Button>
+      } else {
+        return null
+      }
+    }
+
     const handleRemoveRecipe = async () => {
       try {
         await removeRecipe({ variables: { recipeId: recipe._id } })
@@ -119,9 +127,7 @@ export default function Recipe() {
                       {comment.commentAuthor.username} at {comment.createdAt}
                     </ListItem>
                     <ListItem color={'#FF9191'}>{comment.commentText}</ListItem>
-                    {/* {auth.loggedIn() && auth.getUser().data.username === comment.commentAuthor.username} ? (
-                      <Button className='deleteButton' id={comment._id} onClick={handleRemoveComment}>✖️</Button>
-                    ) */}
+                    <RemoveBtn username={comment.commentAuthor.username} id={comment._id} />  
                   </UnorderedList>
                 </ListItem>
               ))}
