@@ -192,6 +192,10 @@ div, h1, h2, h3, h4 , h5 {
     background-color: #FFFDCA;
   }
 
+  #dragButton {
+    background-color: #FFFDCA;
+  }
+
   #deleteRecipe {
     align-items: center;  
     justify-content: center;
@@ -344,13 +348,7 @@ div, h1, h2, h3, h4 , h5 {
     align-items: center;
     margin-right: 10px;
     margin-bottom: 10px;
-  }
-
-  .buttonContainer {
-    display: inline;
-    align-items: center;
     font-size:20px;
-    margin-right:5px;
   }
 
   #publishRecipe {
