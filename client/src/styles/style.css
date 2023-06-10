@@ -192,10 +192,6 @@ div, h1, h2, h3, h4 , h5 {
     background-color: #FFFDCA;
   }
 
-  #dragButton {
-    background-color: #FFFDCA;
-  }
-
   #deleteRecipe {
     align-items: center;  
     justify-content: center;
@@ -391,6 +387,7 @@ div, h1, h2, h3, h4 , h5 {
 
   #itemStyling {
     color:#FF9191;
+    cursor: grab;
   }
 
 

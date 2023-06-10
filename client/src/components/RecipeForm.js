@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, IconButton, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack, Alert, AlertDescription, AlertTitle, AlertDialogCloseButton, ReactFragment } from "@chakra-ui/react";
+import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack, Alert, AlertDescription, AlertTitle, AlertDialogCloseButton, ReactFragment } from "@chakra-ui/react";
 import { useMutation } from '@apollo/client';
-import { MdDragIndicator } from "react-icons/md";
 
 import { ADD_RECIPE } from '../utils/mutations';
-import { setDragging, draggedOver, compare } from '../utils/dragDrop';
+import { setDragging, setDraggedOver, compare } from '../utils/dragDrop';
 
 import Auth from '../utils/auth';
 
@@ -40,9 +39,11 @@ export default function RecipeForm() {
     }
 
     const ReorderArray = (arr) => {
-        const newArr = arr;
-        setIngredients(newArr)
-        console.log(ingredients)
+        if (arr[0].ingredientName) {
+            setIngredients([...arr])
+        } else {
+            setSteps([...arr])
+        }
     }
 
     const handleAddStep = (e) => {
@@ -232,9 +233,8 @@ export default function RecipeForm() {
                                             return (
                                                 <ListItem key={i} index={i} id='itemStyling' className='ingredientItem' draggable="true" 
                                                 onDragStart={(e) => { dragging = setDragging(e, i, ingrdnt)}} 
-                                                onDragOver={(e) => { itemDraggedOver = draggedOver(e)} } > 
+                                                onDragOver={(e) => { itemDraggedOver = setDraggedOver(e)} } > 
                                                     {ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit} 
-                                                    <IconButton aria-label="drag to reorder" id='dragButton' icon={<MdDragIndicator />}></IconButton>
                                                     <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button>
                                                 </ListItem>
                                             )
@@ -257,12 +257,17 @@ export default function RecipeForm() {
                         </div>
                         <div id='addedSteps' className='column4'>
                             <h1 className='ingredientsTitle'>Steps Added:</h1>
-                            <OrderedList styleType='none'>
+                            <OrderedList styleType='none'
+                            onDrop={(e) => { ReorderArray(compare(e, stepsArray, dragging, itemDraggedOver)) }}
+                            onDragOver={(e) => { e.preventDefault()}} >
                                 {stepsArray.map((step, i) => {
                                     return (
                                         <div key={i}>
-                                            <ListItem id='itemStyling' className='buttonContainer'>Step {i + 1} - {step.stepText} 
-                                                <IconButton aria-label="drag to reorder" id='dragButton' icon={<MdDragIndicator />}></IconButton>
+                                            <ListItem id='itemStyling' index={i} className='buttonContainer'
+                                            draggable="true" 
+                                            onDragStart={(e) => { dragging = setDragging(e, i, step)}} 
+                                            onDragOver={(e) => { itemDraggedOver = setDraggedOver(e)} }>
+                                                Step {i + 1} - {step.stepText} 
                                                 <Button id='deleteButton' onClick={() => removeStep(step)}>✖️</Button>
                                             </ListItem>
                                         </div>)
