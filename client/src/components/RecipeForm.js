@@ -38,14 +38,6 @@ export default function RecipeForm() {
         }
     }
 
-    const ReorderArray = (arr) => {
-        if (arr[0].ingredientName) {
-            setIngredients([...arr])
-        } else {
-            setSteps([...arr])
-        }
-    }
-
     const handleAddStep = (e) => {
         if(stepText === ""){
             return setFormError("You must fill out the step description")
@@ -227,7 +219,7 @@ export default function RecipeForm() {
                                 <div id="addedIngredients" className='column4'>
                                 <h1 className="ingredientsTitle">Ingredients Added:</h1>
                                     <UnorderedList styleType='none' id="ingredientList" 
-                                    onDrop={(e) => { ReorderArray(compare(e, ingredients, dragging, itemDraggedOver)) }}
+                                    onDrop={(e) => { setIngredients([...(compare(e, ingredients, dragging, itemDraggedOver))]) }}
                                     onDragOver={(e) => { e.preventDefault()}} >
                                         {ingredients.map((ingrdnt, i) => {
                                             return (
@@ -258,7 +250,7 @@ export default function RecipeForm() {
                         <div id='addedSteps' className='column4'>
                             <h1 className='ingredientsTitle'>Steps Added:</h1>
                             <OrderedList styleType='none'
-                            onDrop={(e) => { ReorderArray(compare(e, stepsArray, dragging, itemDraggedOver)) }}
+                            onDrop={(e) => { setSteps([...(compare(e, stepsArray, dragging, itemDraggedOver))]) }}
                             onDragOver={(e) => { e.preventDefault()}} >
                                 {stepsArray.map((step, i) => {
                                     return (
