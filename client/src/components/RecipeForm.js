@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack, Alert, AlertDescription, AlertTitle, AlertDialogCloseButton } from "@chakra-ui/react";
+import React, { useState, useEffect } from 'react';
+import { FormControl, Input, FormHelperText, UnorderedList, OrderedList, ListItem, FormLabel, Button, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Stack, Alert, AlertDescription, AlertTitle, AlertDialogCloseButton, ReactFragment } from "@chakra-ui/react";
 import { useMutation } from '@apollo/client';
 
 import { ADD_RECIPE } from '../utils/mutations';
+import { setDragging, setDraggedOver, compare } from '../utils/dragDrop';
 
 import Auth from '../utils/auth';
 
@@ -24,10 +25,14 @@ export default function RecipeForm() {
 
     const handleAddIngredient = (e) => {
         if (ingredientName !== ""){
-          setIngredientName('')
-        setIngredientAmount(1)
-        setIngredientUnit('')
-        setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }])  
+            setIngredients([...ingredients, { ingredientName, ingredientAmount, ingredientUnit }]) 
+            setIngredientName('')
+            setIngredientAmount(1)
+            setIngredientUnit('')
+            const amountInput = document.getElementById('amountInput')
+            amountInput.setAttribute('aria-valuenow', "1");
+            amountInput.setAttribute('aria-vlauetext', "1");
+            amountInput.setAttribute('value', "1");
         } else {
             setFormError("You must fill out the ingredient name")
         }
@@ -51,6 +56,8 @@ export default function RecipeForm() {
     const removeStep = (step) => {
         setSteps((prevSteps) => prevSteps.filter((item) => item !== step))
     }
+
+    var dragging, itemDraggedOver;
 
     // empty array to hold final array of step objects
     const finalStepsArray = []
@@ -211,12 +218,18 @@ export default function RecipeForm() {
                                 </div>
                                 <div id="addedIngredients" className='column4'>
                                 <h1 className="ingredientsTitle">Ingredients Added:</h1>
-                                    <UnorderedList styleType='none'>
+                                    <UnorderedList styleType='none' id="ingredientList" 
+                                    onDrop={(e) => { setIngredients([...(compare(e, ingredients, dragging, itemDraggedOver))]) }}
+                                    onDragOver={(e) => { e.preventDefault()}} >
                                         {ingredients.map((ingrdnt, i) => {
                                             return (
-                                                <div key={i} className='ingredientItem'>
-                                                    <ListItem id='itemStyling' className='buttonContainer'> {ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit} <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button></ListItem>
-                                                </div>)
+                                                <ListItem key={i} index={i} id='itemStyling' className='ingredientItem' draggable="true" 
+                                                onDragStart={(e) => { dragging = setDragging(e, i, ingrdnt)}} 
+                                                onDragOver={(e) => { itemDraggedOver = setDraggedOver(e)} } > 
+                                                    {ingrdnt.ingredientName} {ingrdnt.ingredientAmount} {ingrdnt.ingredientUnit} 
+                                                    <Button id='deleteButton' onClick={() => removeIngrdnt(ingrdnt)}>✖️</Button>
+                                                </ListItem>
+                                            )
                                         })}
                                     </UnorderedList>
                                 </div>
@@ -236,11 +249,19 @@ export default function RecipeForm() {
                         </div>
                         <div id='addedSteps' className='column4'>
                             <h1 className='ingredientsTitle'>Steps Added:</h1>
-                            <OrderedList styleType='none'>
+                            <OrderedList styleType='none'
+                            onDrop={(e) => { setSteps([...(compare(e, stepsArray, dragging, itemDraggedOver))]) }}
+                            onDragOver={(e) => { e.preventDefault()}} >
                                 {stepsArray.map((step, i) => {
                                     return (
                                         <div key={i}>
-                                            <ListItem id='itemStyling' className='buttonContainer'>Step {i + 1} - {step.stepText} <Button id='deleteButton' onClick={() => removeStep(step)}>✖️</Button></ListItem>
+                                            <ListItem id='itemStyling' index={i} className='buttonContainer'
+                                            draggable="true" 
+                                            onDragStart={(e) => { dragging = setDragging(e, i, step)}} 
+                                            onDragOver={(e) => { itemDraggedOver = setDraggedOver(e)} }>
+                                                Step {i + 1} - {step.stepText} 
+                                                <Button id='deleteButton' onClick={() => removeStep(step)}>✖️</Button>
+                                            </ListItem>
                                         </div>)
                                 })}
                             </OrderedList>
